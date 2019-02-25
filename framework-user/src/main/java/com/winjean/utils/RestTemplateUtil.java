@@ -7,17 +7,6 @@ import org.springframework.web.client.RestTemplate;
 import java.util.HashMap;
 import java.util.Map;
 
-
-/**
- * Copyright (C), 2018-2088
- * FileName: DictionaryService
- * Author:   qiuyujiao
- * Date:     2018/7/12 15:51
- * Description: rest请求工具类
- * History:
- * <author>          <time>           <version>          <desc>
- * qiuyujiao        2018/7/12 15:51    v1.0               新增
- */
 @Slf4j
 public class RestTemplateUtil {
 

@@ -15,19 +15,6 @@ import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * 项目名称：
- * 类名称：JdbcTemplateConfig类
- * 类描述：<....>
- * 创建人：winjean
- * 创建时间：2018/11/15 14:00
- * 修改人：winjean
- * 修改时间：2018/11/15 14:00
- * 修改备注：
- * 版权所有权：
- *
- * @version V1.0
- */
 @Configuration
 public class DataSourceConfig {
 

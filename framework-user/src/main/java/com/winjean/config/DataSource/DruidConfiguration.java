@@ -7,20 +7,6 @@ import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-/**
- * 项目名称：
- * 类名称：JdbcTemplateConfig类
- * 类描述：<....>
- * 创建人：winjean
- * 创建时间：2018/11/15 14:00
- * 修改人：winjean
- * 修改时间：2018/11/15 14:00
- * 修改备注：
- * 版权所有权：
- *
- * @version V1.0
- */
-
 //http://localhost:8080/druid
 
 @Configuration

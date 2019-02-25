@@ -305,6 +305,12 @@
         </dependency>-->
         <!-- activiti end -->
 
+        <dependency>
+            <groupId>com.winjean</groupId>
+            <artifactId>framework-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
     </dependencies>
 
     <build>
