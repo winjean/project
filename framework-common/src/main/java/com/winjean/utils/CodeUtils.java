@@ -2,19 +2,7 @@ package com.winjean.utils;
 
 import java.util.Random;
 
-/**
- * 项目名称：工具类
- * 类名称：CodeUtils
- * 类描述：code生成类
- * 创建人：admin
- * 创建时间：2018/10/31
- * 修改人：aidun
- * 修改时间：2018/10/31
- * 修改备注：
- * 版权所有权：
- *
- * @version V1.0
- */
+
 public class CodeUtils {
 
     /**

@@ -10,19 +10,7 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.net.URLDecoder;
 
-/**
- * 项目名称：工具类
- * 类名称：CryptoUtils
- * 类描述：DES 加解密工具类
- * 创建人：aidun
- * 创建时间：2018/10/31
- * 修改人：aidun
- * 修改时间：2018/10/31
- * 修改备注：
- * 版权所有权：
- *
- * @version V1.0
- */
+
 public final class CryptoUtils {
 
 

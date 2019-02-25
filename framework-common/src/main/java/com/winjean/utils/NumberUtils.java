@@ -21,7 +21,6 @@ import java.util.Random;
  */
 public final class NumberUtils {
 
-
     /**
      * 格式化数字类型成字符串类型
      *
