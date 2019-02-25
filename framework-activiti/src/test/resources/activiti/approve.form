@@ -1,0 +1,6 @@
+<div>
+  <label for="p_pass">审批：</label>
+  <div>
+    <input type="text" id="p_pass" name="审批" required />
+  </div>
+</div>

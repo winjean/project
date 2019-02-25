@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/processdef">
+  <process id="process-external-form" name="外置表单测试" isExecutable="true">
+    <documentation>用于外置表单测试</documentation>
+    <startEvent id="start" name="开始" activiti:initiator="createUser" activiti:formKey="start.form">
+      <documentation>开始节点</documentation>
+    </startEvent>
+    <userTask id="approve" name="审核" activiti:assignee="7228C8D4C68940AA8552C8D75F3CA42E" activiti:formKey="approve.form"/>
+    <endEvent id="end" name="结束">
+    </endEvent>
+    <sequenceFlow id="sid-5BF75E5C-1BFB-4FCB-BDED-BE8DED7AFC15" sourceRef="start" targetRef="approve"/>
+    <sequenceFlow id="sid-0AF7FAF3-EC48-4765-83E1-712122576C66" sourceRef="approve" targetRef="end"/>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_process-external-form">
+    <bpmndi:BPMNPlane bpmnElement="process-external-form" id="BPMNPlane_process-external-form">
+      <bpmndi:BPMNShape bpmnElement="start" id="BPMNShape_start">
+        <omgdc:Bounds height="30.0" width="30.0" x="355.0" y="201.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="approve" id="BPMNShape_approve">
+        <omgdc:Bounds height="80.0" width="100.0" x="480.0" y="176.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="end" id="BPMNShape_end">
+        <omgdc:Bounds height="28.0" width="28.0" x="655.0" y="202.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="sid-5BF75E5C-1BFB-4FCB-BDED-BE8DED7AFC15" id="BPMNEdge_sid-5BF75E5C-1BFB-4FCB-BDED-BE8DED7AFC15">
+        <omgdi:waypoint x="385.0" y="216.0"/>
+        <omgdi:waypoint x="480.0" y="216.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-0AF7FAF3-EC48-4765-83E1-712122576C66" id="BPMNEdge_sid-0AF7FAF3-EC48-4765-83E1-712122576C66">
+        <omgdi:waypoint x="580.0" y="216.0"/>
+        <omgdi:waypoint x="655.0" y="216.0"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

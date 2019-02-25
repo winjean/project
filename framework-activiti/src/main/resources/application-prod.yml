@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: framework
+  datasource:
+    names: primary,secondary
+    primary:
+      driver-class-name: com.mysql.jdbc.Driver
+      jdbcUrl: jdbc:mysql://118.24.232.48:3306/policeInterface?useUnicode=true&characterEncoding=utf8&useSSL=false
+      username: root
+      password: LfK!v3Yo5s&mPCxu
+    secondary:
+      driver-class-name: oracle.jdbc.driver.OracleDriver
+      jdbcUrl: jdbc:oracle:thin:@10.154.207.186:1521/ysdb
+      username: TX_CX
+      password: TX_CX
+server:
+  port: 8080
+
