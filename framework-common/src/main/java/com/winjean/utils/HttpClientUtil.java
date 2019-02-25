@@ -1,6 +1,7 @@
 package com.winjean.utils;
 
 import com.alibaba.fastjson.JSONObject;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -28,7 +29,7 @@ import java.util.Set;
  * httpclient 工具类
  * Created by wangping on 2017/4/5.
  */
-//@Slf4j
+@Slf4j
 public class HttpClientUtil {
 
     // post form格式
@@ -52,7 +53,7 @@ public class HttpClientUtil {
      * @return
      */
     public static String postJson(String jsonStr,String accessUrl) {
-//        log.info("调用的接口为：" + accessUrl + " 参数为：" + jsonStr);
+        log.info("调用的接口为：" + accessUrl + " 参数为：" + jsonStr);
         StringEntity entity = new StringEntity(jsonStr, ContentType.create("application/json", "utf-8"));
         entity.setContentType("text/json");
         entity.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
