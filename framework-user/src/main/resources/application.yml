@@ -1,14 +1,6 @@
 spring:
   profiles:
     active: dev
-  activiti:
-    database-schema-update: true
-    check-process-definitions: true
-    process-definition-location-prefix: classpath:/processes/
-#        process-definition-location-suffixes:
-#          - **.bpmn
-#          - **.bpmn20.xml
-#    history-level: full
 
   #sql自动升级管理
   flyway:
@@ -36,3 +28,21 @@ spring:
     out-of-order: false
     #使用的元数据表名-->版本记录
     table: schema_version
+
+
+# logging config
+logging:
+  config: classpath:config/logback-spring.xml
+
+# actuator config
+# http://localhost:8080/actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+#  self-defined actuator info
+info:
+  author: winjean
+  version: 0.0.1-SNAPSHOT
