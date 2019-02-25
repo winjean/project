@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * 项目名称：重庆微警务（二期）
+ * 项目名称：
  * 类名称：JdbcTemplateConfig类
  * 类描述：<....>
  * 创建人：winjean

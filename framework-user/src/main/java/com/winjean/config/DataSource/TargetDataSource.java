@@ -3,7 +3,7 @@ package com.winjean.config.DataSource;
 import java.lang.annotation.*;
 
 /**
- * 项目名称：重庆微警务（一期）
+ * 项目名称：
  * 类名称：<....>
  * 类描述：<....>
  * 创建人：winjean
