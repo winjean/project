@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Configuration;
  * 修改人：winjean
  * 修改时间：2018/11/15 14:00
  * 修改备注：
- * 版权所有权：江苏艾盾网络科技有限公司
+ * 版权所有权：
  *
  * @version V1.0
  */

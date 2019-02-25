@@ -12,7 +12,7 @@ import java.io.StringWriter;
  * 修改人：winjean
  * 修改时间：2018/9/14
  * 修改备注：
- * 版权所有权：江苏艾盾网络科技有限公司
+ * 版权所有权：
  *
  * @version V1.0
  */
