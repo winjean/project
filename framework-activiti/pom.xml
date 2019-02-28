@@ -158,11 +158,65 @@
 
         <dependency>
             <groupId>org.activiti</groupId>
-            <artifactId>activiti-bpmn-model</artifactId>
+            <artifactId>activiti-spring-boot-starter-actuator</artifactId>
             <version>${activiti.version}</version>
         </dependency>
 
-        <dependency>
+                <dependency>
+                    <groupId>org.activiti</groupId>
+                    <artifactId>activiti-rest</artifactId>
+                    <version>${activiti.version}</version>
+                </dependency>
+
+                <dependency>
+                    <groupId>org.apache.xmlgraphics</groupId>
+                    <artifactId>batik-codec</artifactId>
+                    <version>1.7</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.apache.xmlgraphics</groupId>
+                    <artifactId>batik-css</artifactId>
+                    <version>1.7</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.apache.xmlgraphics</groupId>
+                    <artifactId>batik-svg-dom</artifactId>
+                    <version>1.7</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.apache.xmlgraphics</groupId>
+                    <artifactId>batik-svggen</artifactId>
+                    <version>1.7</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.activiti</groupId>
+                    <artifactId>activiti-explorer</artifactId>
+                    <version>${activiti.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.activiti</groupId>
+                    <artifactId>activiti-diagram-rest</artifactId>
+                    <version>${activiti.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.activiti</groupId>
+                    <artifactId>activiti-simple-workflow</artifactId>
+                    <version>${activiti.version}</version>
+                </dependency>
+
+                <dependency>
+                    <groupId>org.activiti</groupId>
+                    <artifactId>activiti-spring</artifactId>
+                    <version>${activiti.version}</version>
+                </dependency>
+
+
+
+
+
+
+
+        <!--<dependency>
             <groupId>org.activiti</groupId>
             <artifactId>activiti-explorer</artifactId>
             <version>5.22.0</version>
@@ -180,14 +234,14 @@
                     <groupId>org.activiti</groupId>
                 </exclusion>
             </exclusions>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>org.activiti</groupId>
             <artifactId>activiti-modeler</artifactId>
-            <version>5.22.0</version>
+            <version>${activiti.version}</version>
         </dependency>
 
-        <dependency>
+        <!--<dependency>
             <groupId>org.apache.xmlgraphics</groupId>
             <artifactId>batik-transcoder</artifactId>
             <version>1.11</version>
@@ -197,7 +251,7 @@
             <groupId>org.apache.xmlgraphics</groupId>
             <artifactId>batik-codec</artifactId>
             <version>1.11</version>
-        </dependency>
+        </dependency>-->
         <!-- activiti end -->
 
     </dependencies>
@@ -213,6 +267,7 @@
                     <include>application.yml</include>
                     <include>application-${profileActive}.yml</include>
                     <include>*.json</include>
+                    <include>static/**</include>
                     <include>**/*.properties</include>
                 </includes>
             </resource>
@@ -234,6 +289,12 @@
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>5.2.0</version>
+                <configuration>
+                    <url><![CDATA[jdbc:mysql://localhost:3306/winjean?useUnicode=true&characterEncoding=utf8&useSSL=false]]></url>
+                    <user>root</user>
+                    <password>root</password>
+                    <driver>com.mysql.jdbc.Driver</driver>
+                </configuration>
             </plugin>
 
         </plugins>

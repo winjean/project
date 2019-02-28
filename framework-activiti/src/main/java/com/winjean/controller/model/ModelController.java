@@ -1,17 +1,25 @@
-package com.winjean.controller;
+package com.winjean.controller.model;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.winjean.common.BaseResponse;
 import org.activiti.editor.constants.ModelDataJsonConstants;
 import org.activiti.engine.ProcessEngine;
 import org.activiti.engine.ProcessEngines;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.repository.Model;
-import org.springframework.stereotype.Controller;
+import org.activiti.engine.repository.ModelQuery;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author ：winjean
@@ -20,9 +28,12 @@ import javax.servlet.http.HttpServletResponse;
  * @modified By：
  * @version: $version$
  */
-@Controller
+@RestController
 @RequestMapping("model")
-public class ModelTest {
+public class ModelController {
+
+    @Autowired
+    private RepositoryService repositoryService;
 
     @RequestMapping("create")
     public void createModel(HttpServletRequest request, HttpServletResponse response){
@@ -59,6 +70,30 @@ public class ModelTest {
         }catch (Exception e){
         }
     }
+
+    @GetMapping("/list")
+    public Object list() {
+        try {
+            List list = new ArrayList<>();
+            ModelQuery query = repositoryService.createModelQuery();
+            List<Model> models = query.orderByCreateTime().desc().list();
+            for (Model model : models) {
+                Map map = new HashMap<>();
+                map.put("id", model.getId());
+                map.put("name", model.getName());
+                map.put("key", model.getKey());
+                map.put("meta", model.getMetaInfo());
+                map.put("deploymentId", model.getDeploymentId());
+                map.put("createTime", model.getCreateTime());
+                map.put("lastUpdateTime", model.getLastUpdateTime());
+                list.add(map);
+            }
+            return BaseResponse.getSuccessResponse(list);
+        } catch (Exception e) {
+            return BaseResponse.getFailureResponse();
+        }
+    }
+
 
 }
 
