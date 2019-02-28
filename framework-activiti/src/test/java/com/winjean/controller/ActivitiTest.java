@@ -4,6 +4,8 @@ import com.winjean.ActivitiApplication;
 import org.activiti.bpmn.model.Process;
 import org.activiti.bpmn.model.*;
 import org.activiti.engine.*;
+import org.activiti.engine.delegate.DelegateExecution;
+import org.activiti.engine.delegate.JavaDelegate;
 import org.activiti.engine.history.HistoricTaskInstance;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
@@ -38,7 +40,7 @@ import java.util.zip.ZipInputStream;
 @SpringBootTest(classes = ActivitiApplication.class,  webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @RunWith(SpringRunner.class)
 //@FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class ActivitiTest {
+public class ActivitiTest implements JavaDelegate {
 
     @Autowired
     private WebApplicationContext wac;
@@ -66,6 +68,9 @@ public class ActivitiTest {
 
     @Autowired
     private SpringProcessEngineConfiguration processEngineConfiguration;
+
+//    @Autowired
+//    private timeout
 
     @Test
     @Ignore
@@ -291,5 +296,10 @@ public class ActivitiTest {
         File file = new File("d:/bpmmImage.png");
         FileUtils.copyToFile(imageStream,file);
         System.out.println("image path: " + file.getPath());
+    }
+
+    @Override
+    public void execute(DelegateExecution execution) throws Exception {
+
     }
 }
