@@ -257,6 +257,7 @@
                     <include>application-${profileActive}.yml</include>
                 </includes>
             </resource>
+
             <resource>
                 <filtering>true</filtering>
                 <directory>../</directory>
@@ -267,15 +268,18 @@
         </resources>
 
         <plugins>
-            <!-- maven热启动 -->
-            <!--<plugin>
+            <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <fork>true</fork>
-                    &lt;!&ndash;<addResources>true</addResources>&ndash;&gt;
-                </configuration>
-            </plugin>-->
+                <executions>
+                    <execution>
+                        <goals>
+                            <!--服务发现与注册中心显示build信息-->
+                            <goal>build-info</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 
             <!-- sql自动升级管理 -->
             <plugin>
