@@ -53,7 +53,7 @@ public class ActivitiControllerTest implements JavaDelegate {
     public void testDeployWithModelId()throws Exception{
 
         JSONObject json = new JSONObject();
-        json.put("modelId","7501");
+        json.put("modelId","5001");
 
         MvcResult result = mockMvc.perform(post(url+"deployWithModelId")
                     .content(json.toJSONString())
@@ -63,7 +63,6 @@ public class ActivitiControllerTest implements JavaDelegate {
                 .andReturn();// 返回执行请求的结果
 
         log.info("response info : {} ",result.getResponse().getContentAsString());
-
     }
 
     @Test
@@ -127,31 +126,34 @@ public class ActivitiControllerTest implements JavaDelegate {
     }
 
     @Test
-    public void startProcessByFormServiceTest() {
-//        String processDefinitionKey = "process-external-form";
-//        identityService.setAuthenticatedUserId("winjean");
-//        Map<String, String> vars = new HashMap<>(4);
-//        vars.put("name", "win");
-//        vars.put("age", "11");
-//        vars.put("applyUser", "winjean");
-//        ProcessDefinition pd =repositoryService.createProcessDefinitionQuery().processDefinitionKey(processDefinitionKey).singleResult();
-//        ProcessInstance pi = formService.submitStartFormData(pd.getId(),vars);
-//        System.out.println(pi.getId() +" "+ pi.getName());
+    public void startProcessByFormServiceTest() throws Exception{
+        JSONObject json = new JSONObject();
+        json.put("authenticatedUserId","winjean");
+        json.put("processDefinitionId","process:1:10004");
+
+        MvcResult result = mockMvc.perform(post(url+"startProcessByFormService")
+                .content(json.toJSONString())
+                .header("content-type","application/json"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))// 预期返回值的媒体类型text/plain;charset=UTF-8
+                .andReturn();// 返回执行请求的结果
+
+        log.info("response info : {} ",result.getResponse().getContentAsString());
     }
 
     @Test
-    public void completeTaskByTaskServiceTest() {
-//        String processInstanceId = "2501";
-//        List<Task> tasks = taskService.createTaskQuery().processInstanceId(processInstanceId).list();
-//        Assert.assertTrue(tasks.size() > 0);
-//
-//        for(Task task : tasks){
-//
-//            Map<String, Object> vars = new HashMap<>(4);
-//            vars.put("p_pass", "true");
-//            taskService.complete(task.getId(), vars);
-//            System.out.println( "[" + task.getName() + "]完成!");
-//        }
+    public void completeTaskByTaskServiceTest() throws Exception{
+        JSONObject json = new JSONObject();
+        json.put("processInstanceId","20001");
+
+        MvcResult result = mockMvc.perform(post(url+"completeTaskByTaskService")
+                .content(json.toJSONString())
+                .header("content-type","application/json"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))// 预期返回值的媒体类型text/plain;charset=UTF-8
+                .andReturn();// 返回执行请求的结果
+
+        log.info("response info : {} ",result.getResponse().getContentAsString());
     }
 
     @Test

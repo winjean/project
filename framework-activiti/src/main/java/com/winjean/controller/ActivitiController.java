@@ -180,7 +180,7 @@ public class ActivitiController {
         vars.put("name", "win");
         vars.put("age", "11");
         vars.put("applyUser", "winjean");
-        ProcessDefinition pd =repositoryService.createProcessDefinitionQuery().processDefinitionKey(json.getString("processDefinitionKey")).singleResult();
+        ProcessDefinition pd =repositoryService.createProcessDefinitionQuery().processDefinitionId(json.getString("processDefinitionId")).singleResult();
         ProcessInstance pi = formService.submitStartFormData(pd.getId(),vars);
         log.info(pi.getId() +" "+ pi.getName());
 
