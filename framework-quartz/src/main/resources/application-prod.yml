@@ -14,5 +14,5 @@ spring:
       username: TX_CX
       password: TX_CX
 server:
-  port: 8081
+  port: 8082
 

@@ -5,19 +5,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
-/**
- * 项目名称：
- * 类名称：<....>
- * 类描述：<....>
- * 创建人：Administrator
- * 创建时间：2018/11/9 17:12
- * 修改人：Administrator
- * 修改时间：2018/11/9 17:12
- * 修改备注：
- * 版权所有权：
- *
- * @version V1.0
- */
+
 @Component
 @Slf4j
 public class MyApplicationListener implements ApplicationListener<ContextRefreshedEvent>{
