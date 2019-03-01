@@ -21,20 +21,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-/**
- * 项目名称：
- * 类名称：<....>
- * 类描述：<....>
- * 创建人：Administrator
- * 创建时间：2018/10/19 15:03
- * 修改人：Administrator
- * 修改时间：2018/10/19 15:03
- * 修改备注：
- * 版权所有权：
- *
- * @version V1.0
- */
-
 // 获取启动类，加载配置，确定装载 Spring 程序的装载方法，它回去寻找 主配置启动类（被 @SpringBootApplication 注解的
 @SpringBootTest
 // 让 JUnit 运行 Spring 的测试环境， 获得 Spring 环境的上下文的支持

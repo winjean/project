@@ -80,6 +80,12 @@
 
         <!-- spring jars end -->
 
+        <dependency>
+            <groupId>com.winjean</groupId>
+            <artifactId>framework-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
         <!-- database jars start -->
         <dependency>
             <groupId>mysql</groupId>

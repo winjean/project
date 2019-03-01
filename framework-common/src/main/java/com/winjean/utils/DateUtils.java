@@ -1,8 +1,6 @@
 package com.winjean.utils;
 
-import com.winjean.enums.DateEnum;
 import com.winjean.enums.DateTimeEnum;
-import com.winjean.enums.TimeEnum;
 
 import java.sql.Timestamp;
 import java.text.DateFormat;
@@ -143,13 +141,12 @@ public final class DateUtils {
      * @return
      */
     public static String formatDate(Date date) {
-        try {
-            SimpleDateFormat sformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
-            return sformat.format(date);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "";
-        }
+        return formatDate(date,DateTimeEnum.dateTime1);
+    }
+
+    public static String formatDate(Date date,DateTimeEnum dte) {
+        SimpleDateFormat format = new SimpleDateFormat(dte.getValue(), Locale.CHINA);
+        return format.format(date);
     }
 
     public static String getDatetime(String datetime, String parrent, int field, int offset) {
@@ -500,28 +497,15 @@ public final class DateUtils {
         return convertSuccess;
     }
 
-    public static boolean isValidDate(String date, DateEnum dateEnum) {
-        return isValidDateTime(date, dateEnum.getValue());
-    }
 
-    public static boolean isValidDate(String date) {
-        return isValidDate(date, DateEnum.type1);
-    }
 
     public static boolean isValidDateTime(String date, DateTimeEnum dateTimeEnum) {
         return isValidDateTime(date, dateTimeEnum.getValue());
     }
 
     public static boolean isValidDateTime(String datetime) {
-        return isValidDateTime(datetime, DateTimeEnum.type1);
+        return isValidDateTime(datetime, DateTimeEnum.dateTime1);
     }
 
-    public static boolean isValidTime(String time, TimeEnum timeEnum) {
-        return isValidDateTime(time, timeEnum.getValue());
-    }
-
-    public static boolean isValidTime(String time) {
-        return isValidTime(time, TimeEnum.type1);
-    }
 }
 

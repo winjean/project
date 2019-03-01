@@ -3,6 +3,7 @@ package com.winjean.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.winjean.utils.DateUtils;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.activiti.bpmn.converter.BpmnXMLConverter;
@@ -70,7 +71,7 @@ public class ActivitiController {
     private ProcessEngineConfiguration processEngineConfiguration;
 
 
-    @PostMapping("deploy")
+    @PostMapping("deployWithModelId")
     public Object deploy(@RequestBody JSONObject json) throws Exception{
         Model modelData = repositoryService.getModel(json.getString("modelId"));
         byte[] modelEditorSource = repositoryService.getModelEditorSource(modelData.getId());
@@ -86,13 +87,17 @@ public class ActivitiController {
                 .addString(processName, new String(bpmnBytes, "UTF-8"))
                 .deploy();
 
+        json.put("deploymentId",deployment.getId());
+        json.put("deploymentName",deployment.getName());
+        json.put("deploymentTime", DateUtils.formatDate(deployment.getDeploymentTime()));
+
         log.info("deployment id：{}, deployment name：{}, deployment time：{}", deployment.getId(),deployment.getName(), deployment.getDeploymentTime());
 
         return json;
     }
 
     @PostMapping("deploymentWithClasspathResource")
-    public Object deploymentWithClasspathResourceTest(@RequestBody JSONObject json){
+    public Object deploymentWithClasspathResource(@RequestBody JSONObject json){
         Deployment deployment = processEngine.getRepositoryService()//获取流程定义和部署对象相关的Service
                 .createDeployment()//创建部署对象
                 .name(json.getString("processName"))//声明流程的名称
@@ -105,7 +110,7 @@ public class ActivitiController {
     }
 
     @PostMapping("deploymentWithInputStream")
-    public Object deploymentWithInputStreamTest(@RequestBody JSONObject json) throws Exception{
+    public Object deploymentWithInputStream(@RequestBody JSONObject json) throws Exception{
 
         //读取资源作为一个输入流
         FileInputStream bpmnfileInputStream = new FileInputStream(json.getString("bpmnfile"));
@@ -123,7 +128,7 @@ public class ActivitiController {
     }
 
     @PostMapping("deploymentWithString")
-    public Object deploymentWithStringTest(@RequestBody JSONObject json){
+    public Object deploymentWithString(@RequestBody JSONObject json){
         //字符串
         String text = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><definitions>...</definitions>";
 
@@ -138,7 +143,7 @@ public class ActivitiController {
     }
 
     @PostMapping("deploymentWithZipInputStream")
-    public Object deploymentWithZipInputStreamTest(@RequestBody JSONObject json){
+    public Object deploymentWithZipInputStream(@RequestBody JSONObject json){
         //从classpath路径下读取资源文件
         InputStream in = this.getClass().getClassLoader().getResourceAsStream("activiti/activiti.zip");
         ZipInputStream zipInputStream = new ZipInputStream(in);
@@ -153,7 +158,7 @@ public class ActivitiController {
     }
 
     @PostMapping("startProcessByRuntimeService")
-    public Object startProcessByRuntimeServiceTest(@RequestBody JSONObject json) {
+    public Object startProcessByRuntimeService(@RequestBody JSONObject json) {
         identityService.setAuthenticatedUserId(json.getString("authenticatedUserId"));
         Map<String, Object> vars = new HashMap<>(4);
         vars.put("name", "wina");
@@ -169,7 +174,7 @@ public class ActivitiController {
     }
 
     @PostMapping("startProcessByFormService")
-    public Object startProcessByFormServiceTest(@RequestBody JSONObject json) {
+    public Object startProcessByFormService(@RequestBody JSONObject json) {
         identityService.setAuthenticatedUserId(json.getString("authenticatedUserId"));
         Map<String, String> vars = new HashMap<>(4);
         vars.put("name", "win");
@@ -183,7 +188,7 @@ public class ActivitiController {
     }
 
     @PostMapping("completeTaskByTaskService")
-    public Object completeTaskByTaskServiceTest(@RequestBody JSONObject json) {
+    public Object completeTaskByTaskService(@RequestBody JSONObject json) {
         List<Task> tasks = taskService.createTaskQuery().processInstanceId(json.getString("processInstanceId")).list();
         Assert.isTrue(tasks.size() > 0," task size should greater than 0 ");
 
@@ -199,7 +204,7 @@ public class ActivitiController {
     }
 
     @PostMapping("completeTaskByFormService")
-    public Object completeTaskByFormServiceTest(@RequestBody JSONObject json) {
+    public Object completeTaskByFormService(@RequestBody JSONObject json) {
         List<Task> tasks = taskService.createTaskQuery().processInstanceId(json.getString("processInstanceId")).list();
         Assert.isTrue(tasks.size() > 0," task size should greater than 0. ");
 
@@ -218,7 +223,7 @@ public class ActivitiController {
     }
 
     @PostMapping("getFlowElement")
-    public Object getFlowElementTest(@RequestBody JSONObject json){
+    public Object getFlowElement(@RequestBody JSONObject json){
 
         //获取BpmnModel对象
         BpmnModel bpmnModel = processEngine.getRepositoryService().getBpmnModel(json.getString("procDefId"));
@@ -256,7 +261,7 @@ public class ActivitiController {
     }
 
     @PostMapping("getFormInfo")
-    public Object getFormInfoTest(@RequestBody JSONObject json){
+    public Object getFormInfo(@RequestBody JSONObject json){
         String processDefinitionId = "process-external-form:1:10";
 
         String startFormKey = formService.getStartFormKey(processDefinitionId);
@@ -293,7 +298,7 @@ public class ActivitiController {
     }
 
     @PostMapping("getProcessResourceByProcessDefinitionId")
-    public Object getProcessResourceByProcessDefinitionIdTest(@RequestBody JSONObject json) throws Exception{
+    public Object getProcessResourceByProcessDefinitionId(@RequestBody JSONObject json) throws Exception{
 
         BpmnModel bpmnModel = repositoryService.getBpmnModel(json.getString("processDefinitionId"));
 
@@ -309,7 +314,7 @@ public class ActivitiController {
     }
 
     @PostMapping("getProcessResourceByProcessInstanceId")
-    public Object getProcessResourceByProcessInstanceIdTest(@RequestBody JSONObject json) throws Exception{
+    public Object getProcessResourceByProcessInstanceId(@RequestBody JSONObject json) throws Exception{
         String processInstanceId = json.getString("processInstanceId");
 
         ProcessInstance processInstance = runtimeService.createProcessInstanceQuery().processInstanceId(processInstanceId).singleResult();
