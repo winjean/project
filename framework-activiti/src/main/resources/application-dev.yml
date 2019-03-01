@@ -82,7 +82,7 @@ spring:
 #      password: TX_CX
 
 server:
-  port: 8080
+  port: 80
 
 # mybatis page helper
 pagehelper:
