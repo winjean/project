@@ -1,6 +1,4 @@
 spring:
-  application:
-    name: framework
   datasource:
     names: primary,secondary
     primary:
@@ -13,6 +11,5 @@ spring:
       jdbcUrl: jdbc:oracle:thin:@10.154.207.186:1521/ysdb
       username: TX_CX
       password: TX_CX
-server:
-  port: 8082
+
 

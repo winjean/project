@@ -1,6 +1,4 @@
 spring:
-  application:
-    name: framework
   datasource:
 # simple data source
     type: com.alibaba.druid.pool.DruidDataSource
@@ -81,26 +79,3 @@ spring:
 #      username: TX_CX
 #      password: TX_CX
 
-server:
-  port: 8081
-
-# mybatis page helper
-pagehelper:
-  helper-dialect: mysql
-
-# logging config
-logging:
-  config: classpath:config/logback-spring.xml
-
-# actuator config
-# http://localhost:8080/actuator
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-
-#  self-defined actuator info
-info:
-  author: winjean
-  version: 0.0.1-SNAPSHOT

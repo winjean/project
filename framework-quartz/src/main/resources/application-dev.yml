@@ -1,6 +1,4 @@
 spring:
-  application:
-    name: framework
   datasource:
 # simple data source
     type: com.alibaba.druid.pool.DruidDataSource
@@ -81,10 +79,5 @@ spring:
 #      username: TX_CX
 #      password: TX_CX
 
-server:
-  port: 8082
 
-# mybatis page helper
-pagehelper:
-  helper-dialect: mysql
 

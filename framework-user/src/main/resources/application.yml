@@ -1,6 +1,11 @@
+server:
+  port: 8082
+
 spring:
+  application:
+    name: @artifactId@
   profiles:
-    active: dev
+    active: @profileActive@
 
   #sql自动升级管理
   flyway:
@@ -30,6 +35,10 @@ spring:
     table: schema_version
 
 
+# mybatis page helper
+pagehelper:
+  helper-dialect: mysql
+
 # logging config
 logging:
   config: classpath:config/logback-spring.xml
@@ -46,3 +55,4 @@ management:
 info:
   author: winjean
   version: 0.0.1-SNAPSHOT
+

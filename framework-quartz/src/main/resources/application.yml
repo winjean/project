@@ -1,6 +1,11 @@
+server:
+  port: 8082
+
 spring:
+  application:
+    name: @artifactId@
   profiles:
-    active: dev
+    active: @profileActive@
 
   #sql自动升级管理
   flyway:
@@ -29,6 +34,9 @@ spring:
     #使用的元数据表名-->版本记录
     table: schema_version
 
+# mybatis page helper
+pagehelper:
+  helper-dialect: mysql
 
 # logging config
 logging:

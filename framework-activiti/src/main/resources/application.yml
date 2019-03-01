@@ -1,6 +1,11 @@
+server:
+  port: 8081
+
 spring:
+  application:
+    name: @artifactId@
   profiles:
-    active: dev
+    active: @profileActive@
   activiti:
     database-schema-update: true
     check-process-definitions: true
@@ -36,3 +41,24 @@ spring:
     out-of-order: false
     #使用的元数据表名-->版本记录
     table: schema_version
+
+# mybatis page helper
+pagehelper:
+  helper-dialect: mysql
+
+# logging config
+logging:
+  config: classpath:config/logback-spring.xml
+
+# actuator config
+# http://localhost:8080/actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+#  self-defined actuator info
+info:
+  author: winjean
+  version: @version@
