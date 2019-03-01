@@ -268,7 +268,6 @@
                 <filtering>true</filtering>
                 <directory>src/main/resources</directory>
                 <includes>
-                    <include>db/migration/*.sql</include>
                     <include>config/*.xml</include>
                     <include>application.yml</include>
                     <include>application-${profileActive}.yml</include>
@@ -277,18 +276,25 @@
                     <include>**/*.properties</include>
                 </includes>
             </resource>
+            <resource>
+                <filtering>true</filtering>
+                <directory>../</directory>
+                <includes>
+                    <include>db/migration/*.sql</include>
+                </includes>
+            </resource>
         </resources>
 
         <plugins>
             <!-- maven热启动 -->
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <fork>true</fork>
-                    <addResources>true</addResources>
-                </configuration>
-            </plugin>
+            <!--<plugin>-->
+                <!--<groupId>org.springframework.boot</groupId>-->
+                <!--<artifactId>spring-boot-maven-plugin</artifactId>-->
+                <!--<configuration>-->
+                    <!--<fork>true</fork>-->
+                    <!--<addResources>true</addResources>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
 
             <!-- sql自动升级管理 -->
             <plugin>

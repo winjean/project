@@ -26,14 +26,13 @@ public class ActivitiConfiguration {
         spec.setTransactionManager(platformTransactionManager);
         spec.setDatabaseSchemaUpdate("true");
 
-        spec.setActivityFontName("宋体");
-        spec.setLabelFontName("宋体");
-        spec.setAnnotationFontName("宋体");
+        spec.setActivityFontName("宋体").setLabelFontName("宋体").setAnnotationFontName("宋体");
 
 
         //记录的历史的详细级别
 //        spec.setHistoryLevel(HistoryLevel.FULL);
 
+//        自动部署流程
 //        try{
 //            Resource[] resources = new PathMatchingResourcePatternResolver().getResources("classpath*:processes/*.bpmn");
 //            spec.setDeploymentResources(resources);
