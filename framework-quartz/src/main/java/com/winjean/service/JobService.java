@@ -1,5 +1,6 @@
 package com.winjean.service;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 /**
@@ -45,4 +46,11 @@ public interface JobService {
      * @param jobGroup
      */
     void deleteJob(String jobName, String jobGroup);
+
+    /**
+     * 查询job
+     * @param jobName
+     * @param jobGroup
+     */
+    JSONArray listJob();
 }

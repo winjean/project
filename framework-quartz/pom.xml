@@ -46,47 +46,6 @@
         <java.version>1.8</java.version>
     </properties>
 
-    <build>
-        <resources>
-            <resource>
-                <filtering>true</filtering>
-                <directory>src/main/resources</directory>
-                <includes>
-                    <include>config/*.xml</include>
-                    <include>application.yml</include>
-                    <include>application-${profileActive}.yml</include>
-                    <include>*.properties</include>
-                </includes>
-            </resource>
-            <resource>
-                <filtering>true</filtering>
-                <directory>../</directory>
-                <includes>
-                    <include>db/migration/*.sql</include>
-                </includes>
-            </resource>
-        </resources>
-
-        <plugins>
-            <!-- maven热启动 -->
-            <!--<plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <fork>true</fork>
-                    <addResources>true</addResources>
-                </configuration>
-            </plugin>-->
-
-            <!-- sql自动升级管理 -->
-            <plugin>
-                <groupId>org.flywaydb</groupId>
-                <artifactId>flyway-maven-plugin</artifactId>
-                <version>5.2.0</version>
-            </plugin>
-
-        </plugins>
-    </build>
 
     <dependencies>
         <!-- spring jars start -->
@@ -226,5 +185,47 @@
         </dependency>
 
     </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <filtering>true</filtering>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>config/*.xml</include>
+                    <include>application.yml</include>
+                    <include>application-${profileActive}.yml</include>
+                    <include>*.properties</include>
+                </includes>
+            </resource>
+            <resource>
+                <filtering>true</filtering>
+                <directory>../</directory>
+                <includes>
+                    <include>db/migration/*.sql</include>
+                </includes>
+            </resource>
+        </resources>
+
+        <plugins>
+            <!-- maven热启动 -->
+            <!--<plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <fork>true</fork>
+                    <addResources>true</addResources>
+                </configuration>
+            </plugin>-->
+
+            <!-- sql自动升级管理 -->
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>5.2.0</version>
+            </plugin>
+
+        </plugins>
+    </build>
 
 </project>

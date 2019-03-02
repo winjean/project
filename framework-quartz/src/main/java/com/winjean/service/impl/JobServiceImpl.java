@@ -1,14 +1,18 @@
 package com.winjean.service.impl;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.winjean.job.CronJob;
 import com.winjean.service.JobService;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.*;
+import org.quartz.impl.matchers.GroupMatcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+
+import java.util.Set;
 
 /**
  * @author ：winjean
@@ -20,7 +24,7 @@ import org.springframework.util.Assert;
 @Service
 @Slf4j
 public class JobServiceImpl implements JobService {
-    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+
     @Autowired
     private SchedulerFactoryBean schedulerFactoryBean;
 
@@ -46,7 +50,7 @@ public class JobServiceImpl implements JobService {
                 jobDetail.getJobDataMap().put("msg", json.getString("msg"));
 
                 //表达式调度构建器
-                String cronExpression = "0/5 * * * * ?";
+                String cronExpression = "0/30 * * * * ?";
                 CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(cronExpression);
 
                 //按新的cronExpression表达式构建一个新的trigger
@@ -55,6 +59,7 @@ public class JobServiceImpl implements JobService {
                         .withIdentity(jobName + "_trigger", jobGroup + "_trigger")
                         .withSchedule(scheduleBuilder)
                         .build();
+
                 scheduler.scheduleJob(jobDetail, trigger);
             }
         } catch (Exception e) {
@@ -120,6 +125,32 @@ public class JobServiceImpl implements JobService {
         } catch (SchedulerException e) {
             e.printStackTrace();
         }
+    }
 
+    @Override
+    public JSONArray listJob()  {
+        JSONArray array = new JSONArray();
+        try {
+            Scheduler scheduler = schedulerFactoryBean.getScheduler();
+
+            Set<JobKey> jobKeys = scheduler.getJobKeys(GroupMatcher.anyGroup());
+
+            for(JobKey jobKey : jobKeys){
+                String jobName = jobKey.getName();
+                String jobGroup = jobKey.getName();
+
+                JSONObject json = new JSONObject();
+                json.put("jobName",jobName);
+                json.put("jobGroup",jobGroup);
+
+                array.add(json);
+            }
+            log.info(" job count: {}, jobs: {} ",array.size(), array);
+
+        } catch (SchedulerException e) {
+            e.printStackTrace();
+        }
+
+        return array;
     }
 }
