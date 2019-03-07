@@ -1,7 +1,7 @@
 package com.winjean.controller;
 
 import com.winjean.common.BaseResponse;
-import com.winjean.model.po.ConfigEntity;
+import com.winjean.model.entity.ConfigEntity;
 import com.winjean.service.ConfigService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

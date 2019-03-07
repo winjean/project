@@ -1,9 +1,9 @@
 package com.winjean.controller;
 
 import com.winjean.common.BaseResponse;
-import com.winjean.model.po.UserEntity;
-import com.winjean.model.vo.SearchUsersRequest;
-import com.winjean.model.vo.SearchUsersResponse;
+import com.winjean.common.PageResponse;
+import com.winjean.model.entity.UserEntity;
+import com.winjean.model.request.UserQueryRequest;
 import com.winjean.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -25,7 +25,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping(value = "insert"/*, consumes = "application/json"*/)
+    @PostMapping(value = "insert")
     @ApiOperation("新增用户信息")
     public Object insert(@RequestBody UserEntity user) {
         try {
@@ -87,10 +87,10 @@ public class UserController {
 
     @PostMapping(value = {"searchUsers","xxx"})
     @ApiOperation("查询批量用户信息")
-    public Object searchUsers(@RequestBody SearchUsersRequest req) {
+    public Object searchUsers(@RequestBody UserQueryRequest req) {
         try {
             log.info("receive value : " + req);
-            SearchUsersResponse response = userService.searchUsers(req);
+            PageResponse<UserQueryRequest> response = userService.searchUsers(req);
             return BaseResponse.getSuccessResponse(response);
         }catch (Exception e){
             return BaseResponse.getFailureResponse(e.getMessage());

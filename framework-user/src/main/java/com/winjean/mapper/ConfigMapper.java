@@ -1,7 +1,7 @@
 package com.winjean.mapper;
 
 import com.github.pagehelper.Page;
-import com.winjean.model.po.ConfigEntity;
+import com.winjean.model.entity.ConfigEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 

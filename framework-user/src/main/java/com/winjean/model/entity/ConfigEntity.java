@@ -1,4 +1,4 @@
-package com.winjean.model.po;
+package com.winjean.model.entity;
 
 import com.winjean.common.BaseEntity;
 import lombok.Data;

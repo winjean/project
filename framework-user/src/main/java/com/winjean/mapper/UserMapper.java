@@ -1,7 +1,7 @@
 package com.winjean.mapper;
 
 import com.github.pagehelper.Page;
-import com.winjean.model.po.UserEntity;
+import com.winjean.model.entity.UserEntity;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;

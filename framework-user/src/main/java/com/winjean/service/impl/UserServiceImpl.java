@@ -2,10 +2,11 @@ package com.winjean.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.winjean.common.PageResponse;
 import com.winjean.mapper.UserMapper;
-import com.winjean.model.po.UserEntity;
-import com.winjean.model.vo.SearchUsersRequest;
-import com.winjean.model.vo.SearchUsersResponse;
+import com.winjean.model.entity.UserEntity;
+import com.winjean.model.request.UserQueryRequest;
+import com.winjean.model.response.UserQueryResponse;
 import com.winjean.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,16 +61,16 @@ public class UserServiceImpl implements UserService{
     **/
     @Override
     @Transactional(readOnly = true)
-    public SearchUsersResponse searchUsers(SearchUsersRequest req) {
+    public PageResponse<UserQueryResponse> searchUsers(UserQueryRequest req) {
         PageHelper.startPage(req.getPageNum(),req.getPageSize());
         Page<UserEntity> users = userMapper.searchUsers();
 
-        SearchUsersResponse response = new SearchUsersResponse();
-        response.setPageNum(req.getPageNum());
-        response.setPageSize(req.getPageSize());
-
-        response.setTotal(users.getTotal());
-        response.setUsers(users);
+        PageResponse response = new PageResponse();
+//        response.setPageNum(req.getPageNum());
+//        response.setPageSize(req.getPageSize());
+//
+//        response.setTotal(users.getTotal());
+//        response.setUsers(users);
         return response;
     }
 

@@ -5,7 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.winjean.config.DataSource.DataSourceConstant;
 import com.winjean.config.DataSource.TargetDataSource;
 import com.winjean.mapper.ConfigMapper;
-import com.winjean.model.po.ConfigEntity;
+import com.winjean.model.entity.ConfigEntity;
 import com.winjean.service.ConfigService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

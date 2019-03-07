@@ -1,6 +1,6 @@
 package com.winjean.service;
 
-import com.winjean.model.po.ConfigEntity;
+import com.winjean.model.entity.ConfigEntity;
 
 import java.util.List;
 

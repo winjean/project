@@ -3,6 +3,7 @@ package com.winjean.common;
 import com.alibaba.fastjson.JSONObject;
 
 public class BaseResponse {
+
     //返回给调用服务的状态码
     private static final String INVOKE_SUCCESS_CODE = "200";
     private static final String INVOKE_ERROR_CODE = "400";

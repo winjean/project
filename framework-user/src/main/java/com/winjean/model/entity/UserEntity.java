@@ -1,4 +1,4 @@
-package com.winjean.model.po;
+package com.winjean.model.entity;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.winjean.common.BaseEntity;
@@ -8,11 +8,11 @@ import lombok.Data;
 @Data
 public class UserEntity extends BaseEntity {
 
-    @JSONField(name = "userId")
-    private String user_id;
+    @JSONField(name = "user_id")
+    private String id;
 
-    @JSONField(name = "userName")
-    private String user_name;
+    @JSONField(name = "user_name")
+    private String name;
 
     private String birthdate;
 

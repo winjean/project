@@ -1,8 +1,9 @@
 package com.winjean.service;
 
-import com.winjean.model.po.UserEntity;
-import com.winjean.model.vo.SearchUsersRequest;
-import com.winjean.model.vo.SearchUsersResponse;
+import com.winjean.common.PageResponse;
+import com.winjean.model.entity.UserEntity;
+import com.winjean.model.request.UserQueryRequest;
+import com.winjean.model.response.UserQueryResponse;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ public interface UserService {
 
     void delete(List<UserEntity> users);
 
-    SearchUsersResponse searchUsers(SearchUsersRequest req);
+    PageResponse<UserQueryResponse> searchUsers(UserQueryRequest req);
 
     UserEntity searchUser(UserEntity user);
 
