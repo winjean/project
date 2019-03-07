@@ -4,6 +4,7 @@ import com.winjean.common.BaseResponse;
 import com.winjean.common.PageResponse;
 import com.winjean.model.entity.UserEntity;
 import com.winjean.model.request.UserQueryRequest;
+import com.winjean.model.response.UserQueryResponse;
 import com.winjean.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -90,7 +91,7 @@ public class UserController {
     public Object searchUsers(@RequestBody UserQueryRequest req) {
         try {
             log.info("receive value : " + req);
-            PageResponse<UserQueryRequest> response = userService.searchUsers(req);
+            PageResponse<UserQueryResponse> response = userService.searchUsers(req);
             return BaseResponse.getSuccessResponse(response);
         }catch (Exception e){
             return BaseResponse.getFailureResponse(e.getMessage());
