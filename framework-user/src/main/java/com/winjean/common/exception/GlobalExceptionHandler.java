@@ -2,7 +2,6 @@ package com.winjean.common.exception;
 
 import com.winjean.common.BaseResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
@@ -11,10 +10,9 @@ import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 import javax.validation.ConstraintViolation;
@@ -23,21 +21,26 @@ import javax.validation.ValidationException;
 import java.util.Set;
 
 
-@ControllerAdvice
+@RestControllerAdvice
 @ResponseBody
 @Slf4j
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(value=Exception.class)
+    @ExceptionHandler(Exception.class)
     public Object globalExceptionHandler(Exception e) throws Exception {
-        ExceptionUtil.getTrace(e);
+        log.error(ExceptionUtil.getTrace(e));
         return e.getMessage();
     }
 
+    /*@ExceptionHandler(ReflectionException.class)
+    public Object reflectionExceptionHandler(ReflectionException e) throws Exception {
+        log.error(ExceptionUtil.getTrace(e));
+        return BaseResponse.getFailureResponse("数据操作反射异常:" + e.getMessage());
+    }*/
+
     @ExceptionHandler(BindException.class)
     public Object bindExceptionHandler(BindException e) {
-        ExceptionUtil.getTrace(e);
-        log.error("参数绑定失败", e);
+        log.error(ExceptionUtil.getTrace(e));
         BindingResult result = e.getBindingResult();
         FieldError error = result.getFieldError();
         String field = error.getField();
@@ -96,14 +99,15 @@ public class GlobalExceptionHandler {
         return "content_type_not_supported";
     }
 
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    /*@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(ServiceException.class)
     public String handleServiceException(ServiceException e) {
         return "业务逻辑异常：" + e.getMessage();
     }
+
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(DaoException.class)
     public String handleException(DaoException e) {
         return "操作数据库出现异常：字段重复、有外键关联等";
-    }
+    }*/
 }

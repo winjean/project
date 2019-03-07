@@ -4,6 +4,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.winjean.common.BaseService;
 import com.winjean.common.PageResponse;
+import com.winjean.common.exception.ServiceException;
 import com.winjean.mapper.UserMapper;
 import com.winjean.model.entity.UserEntity;
 import com.winjean.model.request.UserInsertRequest;
@@ -27,7 +28,7 @@ public class UserServiceImpl extends BaseService implements UserService{
 
     @Override
     @Transactional
-    public void insert(UserInsertRequest user) {
+    public void insert(UserInsertRequest user) throws ServiceException {
         userMapper.insert(user);
     }
 
