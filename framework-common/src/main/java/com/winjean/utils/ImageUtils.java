@@ -12,15 +12,6 @@ import java.net.URLConnection;
 import java.util.Arrays;
 import java.util.Iterator;
 
-/**
- * 项目名称：工具类
- * 类名称：ImageUtils
- * 类描述：图片处理工具类
- * 创建人：aidun
- * ：2018/10/31
- *
- * 修改时间：2018/10/31
- */
 public class ImageUtils {
 
     /**

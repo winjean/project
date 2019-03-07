@@ -5,15 +5,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * 项目名称：工具类
- * 类名称：CopyUtils
- * 类描述：两个实体类属性之间的复制工具类
- * 创建人：admin
- * ：2018/10/31
- *
- * 修改时间：2018/10/31
- */
 public class CopyUtils {
 
     public static void Copy(Object source, Object dest) throws Exception {

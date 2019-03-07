@@ -23,15 +23,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-/**
- * 项目名称：工具类
- * 类名称：HttpUtils
- * 类描述：HTTP请求工具类
- * 创建人：admin
- * ：2018/10/31
- *
- * 修改时间：2018/10/31
- */
 public class HttpUtils {
     /**
      * 发送get请求

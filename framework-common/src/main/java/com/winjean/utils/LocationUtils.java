@@ -1,14 +1,5 @@
 package com.winjean.utils;
 
-/**
- * 项目名称：工具类
- * 类名称：LocationUtils
- * 类描述：地理坐标处理WGS-84坐标转换成百度坐标工具类
- * 创建人：admin
- * ：2018/10/31
- * 修改人：
- * 修改时间：2018/10/31
- */
 public final class LocationUtils {
 
     private LocationUtils() {

@@ -9,15 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * 项目名称：工具类
- * 类名称：CookieUtils
- * 类描述：cookie工具类
- * 创建人：aidun
- * ：2018/10/31
- *
- * 修改时间：2018/10/31
- */
+
 @Slf4j
 public final class CookieUtils {
 
