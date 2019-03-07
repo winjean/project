@@ -3,6 +3,7 @@ package com.winjean.controller;
 import com.winjean.common.BaseResponse;
 import com.winjean.common.PageResponse;
 import com.winjean.model.entity.UserEntity;
+import com.winjean.model.request.UserInsertRequest;
 import com.winjean.model.request.UserQueryRequest;
 import com.winjean.model.response.UserQueryResponse;
 import com.winjean.service.UserService;
@@ -10,6 +11,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +30,7 @@ public class UserController {
 
     @PostMapping(value = "insert")
     @ApiOperation("新增用户信息")
-    public Object insert(@RequestBody UserEntity user) {
+    public Object insert(@Validated @RequestBody UserInsertRequest user) {
         try {
             log.info("receive value : " + user);
             userService.insert(user);

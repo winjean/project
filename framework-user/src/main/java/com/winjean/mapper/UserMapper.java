@@ -2,6 +2,7 @@ package com.winjean.mapper;
 
 import com.github.pagehelper.Page;
 import com.winjean.model.entity.UserEntity;
+import com.winjean.model.request.UserInsertRequest;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public interface UserMapper {
     @Insert("insert into t_user(user_id,user_name,birthdate,sex,create_user,create_time,update_user,update_time)" +
             "values "+
             "(#{user_id},#{user_name},#{birthdate},#{sex},#{create_user},#{create_time},#{update_user},#{update_time})")
-    int insert(UserEntity user);
+    int insert(UserInsertRequest user);
 
     @Insert("<script> " +
                 "insert into t_user(user_id,user_name,birthdate,sex,create_user,create_time,update_user,update_time)" +

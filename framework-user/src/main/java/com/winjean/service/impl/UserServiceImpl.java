@@ -2,9 +2,11 @@ package com.winjean.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.winjean.common.BaseService;
 import com.winjean.common.PageResponse;
 import com.winjean.mapper.UserMapper;
 import com.winjean.model.entity.UserEntity;
+import com.winjean.model.request.UserInsertRequest;
 import com.winjean.model.request.UserQueryRequest;
 import com.winjean.model.response.UserQueryResponse;
 import com.winjean.service.UserService;
@@ -18,14 +20,14 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl extends BaseService implements UserService{
 
     @Autowired
     private UserMapper userMapper;
 
     @Override
     @Transactional
-    public void insert(UserEntity user) {
+    public void insert(UserInsertRequest user) {
         userMapper.insert(user);
     }
 

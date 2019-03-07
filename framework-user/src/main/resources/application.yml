@@ -1,6 +1,7 @@
 server:
   port: 8080
 
+
 spring:
   application:
     name: @artifactId@
@@ -33,6 +34,10 @@ spring:
     out-of-order: false
     #使用的元数据表名-->版本记录
     table: schema_version
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources:
+    add-mappings: false
 
 
 # mybatis page helper

@@ -2,6 +2,7 @@ package com.winjean.service;
 
 import com.winjean.common.PageResponse;
 import com.winjean.model.entity.UserEntity;
+import com.winjean.model.request.UserInsertRequest;
 import com.winjean.model.request.UserQueryRequest;
 import com.winjean.model.response.UserQueryResponse;
 
@@ -10,7 +11,7 @@ import java.util.List;
 
 public interface UserService {
 
-    void insert(UserEntity user);
+    void insert(UserInsertRequest user);
 
     void insert(List<UserEntity> users);
 
