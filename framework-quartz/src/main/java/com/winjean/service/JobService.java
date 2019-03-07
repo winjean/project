@@ -49,8 +49,6 @@ public interface JobService {
 
     /**
      * 查询job
-     * @param jobName
-     * @param jobGroup
      */
     JSONArray listJob();
 }

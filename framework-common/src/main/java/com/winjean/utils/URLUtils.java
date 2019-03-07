@@ -2,19 +2,6 @@ package com.winjean.utils;
 
 import org.apache.commons.lang3.StringUtils;
 
-/**
- * 项目名称：工具类
- * 类名称：URLUtils
- * 类描述：URI帮助类
- * 创建人：admin
- * 创建时间：2018/10/31
- * 修改人：aidun
- * 修改时间：2018/10/31
- * 修改备注：
- * 版权所有权：
- *
- * @version V1.0
- */
 public class URLUtils {
 
     private static final String HTTP_SCHEME = "http://";

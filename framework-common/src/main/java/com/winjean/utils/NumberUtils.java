@@ -6,19 +6,7 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.Random;
 
-/**
- * 项目名称：工具类
- * 类名称：NumberUtils
- * 类描述：数字操作相关的工具类
- * 创建人：admin
- * 创建时间：2018/10/31
- * 修改人：aidun
- * 修改时间：2018/10/31
- * 修改备注：
- * 版权所有权：
- *
- * @version V1.0
- */
+
 public final class NumberUtils {
 
     /**

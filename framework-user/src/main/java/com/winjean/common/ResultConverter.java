@@ -2,13 +2,7 @@ package com.winjean.common;
 
 import com.alibaba.fastjson.JSONObject;
 
-/**
- * 类描述：
- * 创建人：winjean
- * 创建时间：2018/10/9 10:49
- *
- * @version V 1.0
- */
+
 public class ResultConverter {
     //返回给调用服务的状态码
     public static final String INVOKE_SUCCESS_CODE = "200";

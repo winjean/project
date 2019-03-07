@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * 用户登录拦截器
- * @auther wangping
- * @created by 18/5/10 下午3:46
  */
 @Slf4j
 public class UserLoginInterceptor implements HandlerInterceptor {

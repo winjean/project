@@ -28,13 +28,9 @@ import java.util.Map;
  * 类名称：HttpUtils
  * 类描述：HTTP请求工具类
  * 创建人：admin
- * 创建时间：2018/10/31
- * 修改人：aidun
- * 修改时间：2018/10/31
- * 修改备注：
- * 版权所有权：
+ * ：2018/10/31
  *
- * @version V1.0
+ * 修改时间：2018/10/31
  */
 public class HttpUtils {
     /**

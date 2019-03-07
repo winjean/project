@@ -10,13 +10,9 @@ import java.util.List;
  * 类名称：CopyUtils
  * 类描述：两个实体类属性之间的复制工具类
  * 创建人：admin
- * 创建时间：2018/10/31
- * 修改人：aidun
- * 修改时间：2018/10/31
- * 修改备注：
- * 版权所有权：
+ * ：2018/10/31
  *
- * @version V1.0
+ * 修改时间：2018/10/31
  */
 public class CopyUtils {
 

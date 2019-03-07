@@ -14,19 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-/**
- * 项目名称：
- * 类名称：<....>
- * 类描述：<....>
- * 创建人：Administrator
- * 创建时间：2018/10/18 14:28
- * 修改人：Administrator
- * 修改时间：2018/10/18 14:28
- * 修改备注：
- * 版权所有权：
- *
- * @version V1.0
- */
+
 
 @RestController
 @Api("配置信息")

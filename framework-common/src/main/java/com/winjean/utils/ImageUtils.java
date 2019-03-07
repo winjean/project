@@ -17,13 +17,9 @@ import java.util.Iterator;
  * 类名称：ImageUtils
  * 类描述：图片处理工具类
  * 创建人：aidun
- * 创建时间：2018/10/31
- * 修改人：aidun
- * 修改时间：2018/10/31
- * 修改备注：
- * 版权所有权：
+ * ：2018/10/31
  *
- * @version V1.0
+ * 修改时间：2018/10/31
  */
 public class ImageUtils {
 

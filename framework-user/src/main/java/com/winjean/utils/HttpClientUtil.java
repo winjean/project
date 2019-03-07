@@ -27,7 +27,6 @@ import java.util.Set;
 
 /**
  * httpclient 工具类
- * Created by wangping on 2017/4/5.
  */
 @Slf4j
 public class HttpClientUtil {

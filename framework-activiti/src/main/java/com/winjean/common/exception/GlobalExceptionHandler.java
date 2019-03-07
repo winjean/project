@@ -7,17 +7,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 /**
- * 项目名称：
- * 类名称：<....>
- * 类描述：<....>
- * 创建人：winjean
- * 创建时间：2018/11/16 16:21
- * 修改人：winjean
- * 修改时间：2018/11/16 16:21
- * 修改备注：
- * 版权所有权：
+ * ：2018/11/16 16:21
  *
- * @version V1.0
+ * 6 16:21
  */
 
 @ControllerAdvice

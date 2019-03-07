@@ -8,13 +8,9 @@ import java.io.StringWriter;
  * 类名称：<ExceptionUtil>
  * 类描述：<输出完整的堆栈信息>
  * 创建人：winjean
- * 创建时间：2018/9/14
- * 修改人：winjean
- * 修改时间：2018/9/14
- * 修改备注：
- * 版权所有权：
+ * ：2018/9/14
  *
- * @version V1.0
+ * 修改时间：2018/9/14
  */
 
 public class ExceptionUtil {

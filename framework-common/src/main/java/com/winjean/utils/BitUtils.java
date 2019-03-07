@@ -1,18 +1,5 @@
 package com.winjean.utils;
 
-/**
- * 项目名称：工具类
- * 类名称：BitUtils
- * 类描述：位运算方法工具类
- * 创建人：admin
- * 创建时间：2018/10/31
- * 修改人：aidun
- * 修改时间：2018/10/31
- * 修改备注：
- * 版权所有权：
- *
- * @version V1.0
- */
 public final class BitUtils {
 
     private BitUtils() {

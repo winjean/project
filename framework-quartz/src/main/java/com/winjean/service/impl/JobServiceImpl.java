@@ -50,7 +50,7 @@ public class JobServiceImpl implements JobService {
                 jobDetail.getJobDataMap().put("msg", json.getString("msg"));
 
                 //表达式调度构建器
-                String cronExpression = "0/30 * * * * ?";
+                String cronExpression = "0 0/10 * * * ?";
                 CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(cronExpression);
 
                 //按新的cronExpression表达式构建一个新的trigger
