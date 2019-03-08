@@ -49,9 +49,6 @@
     <dependencies>
         <!-- spring jars start -->
 
-
-
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
@@ -82,6 +79,12 @@
         <!--</dependency>-->
 
         <!-- spring jars end -->
+
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring</artifactId>
+            <version>1.4.0</version>
+        </dependency>
 
         <!-- database jars start -->
         <dependency>

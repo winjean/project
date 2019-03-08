@@ -21,12 +21,36 @@ import java.util.List;
 
 @RestController
 @Api("用户基本信息")
-@RequestMapping("/user")
+@RequestMapping("user")
 @Slf4j
 public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @PostMapping(value = "index")
+    @ApiOperation("index")
+    public Object index(@Validated @RequestBody UserInsertRequest user) {
+        try {
+            log.info("index  : " + user);
+
+            return BaseResponse.getSuccessResponse();
+        }catch (Exception e){
+            return BaseResponse.getFailureResponse(e.getMessage());
+        }
+    }
+
+    @PostMapping(value = "login")
+    @ApiOperation("用户登录")
+    public Object login(@Validated @RequestBody UserInsertRequest user) {
+        try {
+            log.info("login  : " + user);
+
+            return BaseResponse.getSuccessResponse();
+        }catch (Exception e){
+            return BaseResponse.getFailureResponse(e.getMessage());
+        }
+    }
 
     @PostMapping(value = "insert")
     @ApiOperation("新增用户信息")

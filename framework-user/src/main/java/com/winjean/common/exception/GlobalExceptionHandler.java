@@ -90,14 +90,21 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-    public String handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
-        return "request_method_not_supported";
+    public Object handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
+        log.error(ExceptionUtil.getTrace(e));
+        e.printStackTrace();
+        return BaseResponse.getFailureResponse("request_method_not_supported:"+e.getMethod());
     }
 
     @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
     public String handleHttpMediaTypeNotSupportedException(HttpMediaTypeNotSupportedException e) {
         return "content_type_not_supported";
     }
+
+//    @ExceptionHandler(NoHandlerFoundException.class)
+//    public String noHandlerFoundExceptionHandler(NoHandlerFoundException e) {
+//        return "NoHandlerFoundException : "+e.getMessage();
+//    }
 
     /*@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(ServiceException.class)
