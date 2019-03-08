@@ -6,7 +6,7 @@
     <property name="log.lever" value="info" />
     <property name="log.maxHistory" value="60" />
     <property name="log.maxFileSize" value="50MB" />
-    <property name="log.filePath" value="../logs/"></property>
+    <property name="log.filePath" value="logs/"></property>
 
     <contextName>logback</contextName>
 
