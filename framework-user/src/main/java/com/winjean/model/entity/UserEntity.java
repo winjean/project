@@ -3,12 +3,19 @@ package com.winjean.model.entity;
 import com.winjean.common.BaseEntity;
 import lombok.Data;
 
+import javax.persistence.*;
+
 
 @Data
+@Entity(name = "t_user")
 public class UserEntity extends BaseEntity {
 
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    @Column(name="user_id")
     private String id;
 
+    @Column(name = "user_name")
     private String name;
 
     private String password;
@@ -26,5 +33,5 @@ public class UserEntity extends BaseEntity {
 
     private String email;
 
-    private byte state;
+    private byte state = 1;
 }

@@ -11,9 +11,9 @@ import java.util.List;
 @Mapper
 public interface UserMapper {
 
-    @Insert("insert into t_user(user_id,user_name,birthdate,sex,create_user,create_time,update_user,update_time)" +
+    @Insert("insert into t_user(id,user_name,birthday,sex,state)" +
             "values "+
-            "(#{user_id},#{user_name},#{birthdate},#{sex},#{create_user},#{create_time},#{update_user},#{update_time})")
+            "(#{id},#{name},#{birthday},#{sex},#{state})")
     int insert(UserInsertRequest user) throws DaoException;
 
     @Insert("<script> " +
@@ -46,6 +46,6 @@ public interface UserMapper {
     @Select("select * from t_user")
     Page<UserEntity> searchUsers();
 
-    @Select("select * from t_user where user_id=#{user_id}")
+    @Select("select * from t_user where id=#{id}")
     UserEntity searchUser(UserEntity user);
 }

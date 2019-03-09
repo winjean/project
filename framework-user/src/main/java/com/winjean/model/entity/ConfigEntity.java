@@ -1,11 +1,10 @@
 package com.winjean.model.entity;
 
-import com.winjean.common.BaseEntity;
 import lombok.Data;
 
 
 @Data
-public class ConfigEntity extends BaseEntity {
+public class ConfigEntity /*extends BaseEntity*/ {
 
     private String routeKey;
 

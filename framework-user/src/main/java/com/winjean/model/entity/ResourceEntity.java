@@ -1,7 +1,8 @@
 package com.winjean.model.entity;
 
-import com.winjean.common.BaseEntity;
 import lombok.Data;
+
+import javax.persistence.*;
 
 /**
  * @author ：winjean
@@ -11,11 +12,15 @@ import lombok.Data;
  * @version: $version$
  */
 @Data
-public class ResourceEntity extends BaseEntity {
+//@Entity
+public class ResourceEntity /*extends BaseEntity*/ {
 
     /**
      * 主键Id
      */
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    @Column(name="resource_id")
     private String id;
 
     /**
