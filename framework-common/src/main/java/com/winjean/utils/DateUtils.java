@@ -40,6 +40,8 @@ public final class DateUtils {
         return calendar.getTime();
     }
 
+
+
     /**
      * 用指定的年、月、日构造日期对象
      *
@@ -113,25 +115,19 @@ public final class DateUtils {
         return maxDate;
     }
 
+    public static String getDateTime(Date date,String parrent) {
+        SimpleDateFormat format = new SimpleDateFormat(parrent, Locale.CHINA);
+        return format.format(date);
+    }
 
-    /**
-     * 返回给定格式的服务器时间
-     *
-     * @param parrent String 默认返回yyyy-MM-dd HH:mm:ss格式的时间
-     * @return
-     */
-    public static String getServerTime(String parrent) {
-        if (parrent == null || parrent.equals("")) {
-            parrent = "yyyy-MM-dd HH:mm:ss";
-        }
-        try {
-            Calendar c = Calendar.getInstance(Locale.CHINESE);
-            SimpleDateFormat sformat = new SimpleDateFormat(parrent, Locale.CHINA);
-            return sformat.format(c.getTime());
-        } catch (Exception e) {
-            e.printStackTrace();
-            return (new Timestamp(System.currentTimeMillis()) + "").substring(0, 19);
-        }
+    public static String getDateTime(Date date) {
+        SimpleDateFormat format = new SimpleDateFormat(DateTimeEnum.dateTime1.getValue(), Locale.CHINA);
+        return format.format(date);
+    }
+
+    public static String getDateTime(String parrent) {
+        Calendar c = Calendar.getInstance(Locale.CHINESE);
+        return getDateTime(c.getTime(),parrent);
     }
 
     /**
@@ -198,7 +194,7 @@ public final class DateUtils {
         SimpleDateFormat sformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
             Date d = sformat.parse(date + " 00:00:00");
-            Date now = sformat.parse(getServerTime("yyyy-MM-dd") + " 00:00:00");
+            Date now = sformat.parse(getDateTime("yyyy-MM-dd") + " 00:00:00");
             return d.before(now);
         } catch (ParseException e) {
             e.printStackTrace();
@@ -216,7 +212,7 @@ public final class DateUtils {
         SimpleDateFormat sformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
             Date d = sformat.parse(date + " 00:00:00");
-            Date now = sformat.parse(getServerTime("yyyy-MM-dd") + " 00:00:00");
+            Date now = sformat.parse(getDateTime("yyyy-MM-dd") + " 00:00:00");
             return d.after(now);
         } catch (ParseException e) {
             e.printStackTrace();
@@ -227,8 +223,6 @@ public final class DateUtils {
 
     /**
      * 是否是当天(工作日)
-     *
-     * @param date yyyy-MM-dd
      * @return
      */
     @SuppressWarnings("deprecation")
@@ -261,7 +255,7 @@ public final class DateUtils {
         if (endTime.length() == 4) {
             endTime = endTime + "00";
         }
-        int now = Integer.parseInt(getServerTime("HHmmss"));
+        int now = Integer.parseInt(getDateTime("HHmmss"));
         if (now >= Integer.parseInt(startTime) && now <= Integer.parseInt(endTime)) {
             return true;
         }
@@ -279,7 +273,7 @@ public final class DateUtils {
         if (time.length() == 4) {
             time = time + "00";
         }
-        int now = Integer.parseInt(getServerTime("HHmmss"));
+        int now = Integer.parseInt(getDateTime("HHmmss"));
         if (Integer.parseInt(time) < now) {
             return true;
         }
@@ -297,7 +291,7 @@ public final class DateUtils {
         if (time.length() == 4) {
             time = time + "00";
         }
-        int now = Integer.parseInt(getServerTime("HHmmss"));
+        int now = Integer.parseInt(getDateTime("HHmmss"));
         if (Integer.parseInt(time) > now) {
             return true;
         }
@@ -369,7 +363,7 @@ public final class DateUtils {
         } else if (datetime.matches("\\d{4}-\\d{2}-\\d{2}")) {
             datetime = datetime + " 00:00:00";
         } else if (datetime.matches("\\d{2}:\\d{2}:\\d{2}(.\\d+)?")) {
-            datetime = getServerTime("yyyy-MM-dd") + " " + datetime;
+            datetime = getDateTime("yyyy-MM-dd") + " " + datetime;
         } else if (!datetime.matches("\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}(.\\d+)?")) {
             try {
                 return new Date(datetime);
@@ -474,13 +468,13 @@ public final class DateUtils {
             SimpleDateFormat sformat = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
             // SimpleDateFormat show_date_format = new SimpleDateFormat("d/M",
             // Locale.CHINA);
-            now.setTime(sformat.parse(getServerTime("yyyy-MM-dd")));
+            now.setTime(sformat.parse(getDateTime("yyyy-MM-dd")));
             now.set(Calendar.DATE, now.get(Calendar.DATE) - day - 1);
             return sformat.format(now.getTime());
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return getServerTime("yyyy-MM-dd");
+        return getDateTime("yyyy-MM-dd");
     }
 
 

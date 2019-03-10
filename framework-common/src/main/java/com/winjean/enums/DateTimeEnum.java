@@ -96,6 +96,11 @@ public enum DateTimeEnum {
     dateTime10("yyyy年MM月dd日 HH:mm"),
 
     /**
+     * yyyy-MM-dd HH:mm:ss:SSS
+     */
+    dateTime11("yyyy-MM-dd HH:mm:ss:SSS"),
+
+    /**
      * "HH:mm:ss"
      */
     time1("HH:mm:ss"),
