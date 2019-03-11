@@ -13,7 +13,6 @@ import org.springframework.context.annotation.ComponentScan;
 @Slf4j
 public class UserApplication {
     public static void main(String[] args) {
-        log.info("-------main log------------");
         SpringApplication.run(UserApplication.class,args);
     }
 }
