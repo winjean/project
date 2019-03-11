@@ -26,7 +26,6 @@ import java.util.List;
 
 @Controller
 @Api("用户基本信息")
-//@RequestMapping("user")
 @Slf4j
 public class UserController {
 
