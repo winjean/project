@@ -30,7 +30,6 @@ public class ShiroConfig {
         //拦截器.
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap();
         // 配置不会被拦截的链接 顺序判断
-//        filterChainDefinitionMap.put("/", "anon");
         filterChainDefinitionMap.put("/user/login", "anon");
         filterChainDefinitionMap.put("/static/**", "anon");
         filterChainDefinitionMap.put("/templates/**", "anon");
@@ -49,8 +48,7 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setSuccessUrl("/");
 
         //未授权界面;
-        shiroFilterFactoryBean.setUnauthorizedUrl("/403");
-//        shiroFilterFactoryBean.setUnauthorizedUrl("/templates/login.html");
+        shiroFilterFactoryBean.setUnauthorizedUrl("/templates/403.html");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 //        Map<String, Filter> filterMap = new LinkedHashMap<>();
 //        filterMap.put("/user/logout",logoutFilter());
