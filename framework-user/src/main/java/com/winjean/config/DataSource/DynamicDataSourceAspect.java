@@ -1,14 +1,11 @@
 package com.winjean.config.DataSource;
 
 import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
-import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
 
-@Aspect
-@Component
-@Order(10)
+//@Aspect
+//@Component
+//@Order(10)
 public class DynamicDataSourceAspect {
 
     @Before("@annotation(targetDataSource))")

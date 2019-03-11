@@ -47,6 +47,17 @@
     </properties>
 
     <dependencies>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-spring</artifactId>
@@ -206,6 +217,8 @@
                 <directory>src/main/resources</directory>
                 <includes>
                     <include>config/*.xml</include>
+                    <include>templates/*</include>
+                    <include>static/*</include>
                     <include>application.yml</include>
                     <include>application-${profileActive}.yml</include>
                 </includes>
