@@ -29,7 +29,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping({"/","/index"})
+    @GetMapping({"/","user/index"})
     @ApiOperation("index")
     public Object index() {
         try {
@@ -152,6 +152,7 @@ public class UserController {
     public Object query(@RequestBody UserEntity user) {
         try {
             log.info("receive value : " + user);
+
             UserEntity u = userService.searchUser(user);
             if(u == null){
                 return BaseResponse.getSuccessResponse("未找到相应的用户信息");

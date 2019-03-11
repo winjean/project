@@ -1,9 +1,6 @@
 package com.winjean.shiro;
 
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -48,9 +45,14 @@ public class ShiroRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         System.out.println("MyShiroRealm.doGetAuthenticationInfo()");
         //获取用户的输入的账号.
-        String username = (String)token.getPrincipal();
+        String userName = (String)token.getPrincipal();
 
-        System.out.println(token.getCredentials());
+//        System.out.println(token.getCredentials());
+
+        if (null == userName) {
+//            throw new AccountException("帐号或密码不正确！");
+            return null;
+        }
         //通过username从数据库中查找 User对象，如果找到，没找到.
         //实际项目中，这里可以根据实际情况做缓存，如果不做，Shiro自己也是有时间间隔机制，2分钟内不会重复执行该方法
 //        UserInfo userInfo = userInfoService.findByUsername(username);
@@ -65,7 +67,7 @@ public class ShiroRealm extends AuthorizingRealm {
 //                getName()  //realm name
 //        );
 
-        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(username,"123456",null,getName());
+        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo("winjean","123456",null,getName());
         return authenticationInfo;
 
     }
