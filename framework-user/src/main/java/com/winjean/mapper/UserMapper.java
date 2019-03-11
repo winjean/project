@@ -1,9 +1,10 @@
 package com.winjean.mapper;
 
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.Page;
 import com.winjean.common.exception.DaoException;
 import com.winjean.model.entity.UserEntity;
-import com.winjean.model.request.UserInsertRequest;
+import com.winjean.model.response.UserQueryResponse;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -11,41 +12,42 @@ import java.util.List;
 @Mapper
 public interface UserMapper {
 
-    @Insert("insert into t_user(id,user_name,birthday,sex,state)" +
+    @Insert("insert into t_user(id,user_name,birthday,email,telephone,sex,password,state,create_user,create_time,update_user,update_time)" +
             "values "+
-            "(#{id},#{name},#{birthday},#{sex},#{state})")
-    int insert(UserInsertRequest user) throws DaoException;
+            "(#{id},#{name},#{birthday},#{email},#{telephone},#{sex},#{password},#{state},#{createUser},#{createTime},#{updateUser},#{updateTime})")
+    int insert(JSONObject user) throws DaoException;
+
 
     @Insert("<script> " +
-                "insert into t_user(user_id,user_name,birthdate,sex,create_user,create_time,update_user,update_time)" +
+                "insert into t_user(id,user_name,birthday,email,telephone,sex,password,state,create_user,create_time,update_user,update_time)" +
                 "values "+
                     "<foreach collection=\"users\" item=\"user\" separator=\",\" >" +
-                        "(#{user.user_id},#{user.user_name},#{user.birthdate},#{user.sex},#{user.create_user},#{user.create_time},#{user.update_user},#{user.update_time})"+
+                        "(#{id},#{name},#{birthday},#{email},#{telephone},#{sex},#{password},#{state},#{createUser},#{createTime},#{updateUser},#{updateTime})"+
                     "</foreach>" +
             "</script>")
-    int insertUsers(@Param("users") List<UserEntity> users);
+    int insertUsers(@Param("users") List<JSONObject> users);
 
     @Update("update t_user set " +
-                "user_name=#{user_name},birthdate= #{birthdate},sex=#{sex}," +
-                "create_user=#{create_user},create_time=#{create_time}," +
-                "update_user=#{update_user},update_time=#{update_time} " +
-            "where user_id =#{user_id}")
-    int update(UserEntity user);
+                "user_name=#{name},birthday= #{birthday},sex=#{sex}," +
+                "telephone=#{telephone},email=#{email},state=#{state}," +
+                "update_user=#{updateUser},update_time=#{updateTime} " +
+            "where id =#{id}")
+    int update(JSONObject user);
 
-    @Delete("delete from t_user where user_id=#{user_id}")
-    int delete(UserEntity user);
+    @Delete("delete from t_user where id=#{id}")
+    int delete(String id);
 
     @Delete("<script> " +
-            "delete from t_user where user_id in " +
-            "<foreach collection=\"users\" item=\"user\" open=\"(\" close=\")\" separator=\",\" >" +
-            "#{user.user_id}"+
+            "delete from t_user where id in " +
+            "<foreach collection=\"jsons\" item=\"json\" open=\"(\" close=\")\" separator=\",\" >" +
+                "#{json.id}"+
             "</foreach>" +
             "</script>")
-    int deleteUsers(@Param("users") List<UserEntity> users);
+    int deleteUsers(@Param("jsons") List<JSONObject> jsons);
 
-    @Select("select * from t_user")
-    Page<UserEntity> searchUsers();
+    @Select("select id,user_name as name,birthday,email,sex,telephone,create_user as createUser,create_time as createTime from t_user")
+    Page<UserQueryResponse> searchUsers();
 
-    @Select("select * from t_user where id=#{id}")
-    UserEntity searchUser(UserEntity user);
+    @Select("select id,user_name as name,birthday,email,sex,telephone,create_user as createUser,create_time as createTime from t_user where id=#{id}")
+    JSONObject searchUser(UserEntity user);
 }

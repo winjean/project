@@ -1,5 +1,6 @@
 package com.winjean.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.winjean.common.BaseService;
@@ -8,14 +9,15 @@ import com.winjean.common.exception.ServiceException;
 import com.winjean.mapper.UserMapper;
 import com.winjean.model.entity.UserEntity;
 import com.winjean.model.request.UserInsertRequest;
-import com.winjean.model.request.UserQueryRequest;
 import com.winjean.model.response.UserQueryResponse;
 import com.winjean.service.UserService;
+import com.winjean.utils.BeanUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -29,31 +31,40 @@ public class UserServiceImpl extends BaseService implements UserService{
     @Override
     @Transactional
     public void insert(UserInsertRequest user) throws ServiceException {
-        userMapper.insert(user);
+
+        JSONObject json = BeanUtils.appendBeanInfo(user,"winjean");
+        userMapper.insert(json);
     }
 
     @Override
     @Transactional
-    public void insert(List<UserEntity> users) {
-        userMapper.insertUsers(users);
+    public void insert(List<UserInsertRequest> users) {
+        List<JSONObject> list = new ArrayList<>();
+        for(UserInsertRequest user: users){
+            JSONObject json = BeanUtils.appendBeanInfo(user,"winjean");
+            list.add(json);
+        }
+
+        userMapper.insertUsers(list);
     }
 
     @Override
     @Transactional
     public void update(UserEntity user) {
-        userMapper.update(user);
+        JSONObject json = BeanUtils.updateBeanInfo(user,"winjean");
+        userMapper.update(json);
     }
 
     @Override
     @Transactional
-    public void delete(UserEntity user) {
-        userMapper.delete(user);
+    public void delete(String id) {
+        userMapper.delete(id);
     }
 
     @Override
     @Transactional
-    public void delete(List<UserEntity> users) {
-        userMapper.deleteUsers(users);
+    public void delete(List<JSONObject> users) {
+         userMapper.deleteUsers(users);
     }
 
     /**
@@ -64,22 +75,25 @@ public class UserServiceImpl extends BaseService implements UserService{
     **/
     @Override
     @Transactional(readOnly = true)
-    public PageResponse<UserQueryResponse> searchUsers(UserQueryRequest req) {
-        PageHelper.startPage(req.getPageNum(),req.getPageSize());
-        Page<UserEntity> users = userMapper.searchUsers();
+    public PageResponse<UserQueryResponse> searchUsers(JSONObject req) {
+        int pageNum =req.getInteger("pageNum");
+        int pageSize =req.getInteger("pageSize");
 
-        PageResponse response = new PageResponse();
-//        response.setPageNum(req.getPageNum());
-//        response.setPageSize(req.getPageSize());
-//
-//        response.setTotal(users.getTotal());
-//        response.setUsers(users);
+        PageHelper.startPage(pageNum,pageSize);
+        Page<UserQueryResponse> users = userMapper.searchUsers();
+
+        PageResponse response = new PageResponse<UserQueryResponse>();
+        response.setPageNum(pageNum);
+        response.setPageSize(pageSize);
+
+        response.setTotal(users.getTotal());
+        response.setList(users);
         return response;
     }
 
     @Override
     @Transactional(readOnly = true)
-    public UserEntity searchUser(UserEntity user) {
+    public JSONObject searchUser(UserEntity user) {
         return userMapper.searchUser(user);
     }
 }

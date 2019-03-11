@@ -50,6 +50,10 @@ pagehelper:
 # logging config
 logging:
   config: classpath:config/logback-spring.xml
+  level:
+    com:
+      winjean:
+        mapper: debug
 
 # actuator config
 # http://localhost:8080/actuator

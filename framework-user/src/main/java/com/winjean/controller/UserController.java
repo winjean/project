@@ -5,7 +5,6 @@ import com.winjean.common.BaseResponse;
 import com.winjean.common.PageResponse;
 import com.winjean.model.entity.UserEntity;
 import com.winjean.model.request.UserInsertRequest;
-import com.winjean.model.request.UserQueryRequest;
 import com.winjean.model.response.UserQueryResponse;
 import com.winjean.service.UserService;
 import io.swagger.annotations.Api;
@@ -17,10 +16,7 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -88,7 +84,7 @@ public class UserController {
     @PostMapping("user/insertUsers")
     @ResponseBody
     @ApiOperation("批量新增用户信息")
-    public Object insert(@RequestBody List<UserEntity> users) {
+    public Object insert(@RequestBody List<UserInsertRequest> users) {
         try {
             userService.insert(users);
             return BaseResponse.getSuccessResponse();
@@ -109,12 +105,12 @@ public class UserController {
         }
     }
 
-    @PostMapping("user/delete")
+    @GetMapping("user/delete")
     @ResponseBody
     @ApiOperation("删除用户信息")
-    public Object deleteUser(@RequestBody UserEntity user) {
+    public Object deleteUser(@RequestParam("id") String id ) {
         try {
-            userService.delete(user);
+            userService.delete(id);
             return BaseResponse.getSuccessResponse();
         }catch (Exception e){
             return BaseResponse.getFailureResponse(e.getMessage());
@@ -124,7 +120,7 @@ public class UserController {
     @PostMapping("user/deleteUsers")
     @ResponseBody
     @ApiOperation("批量删除用户信息")
-    public Object deleteUsers(@RequestBody List<UserEntity> users) {
+    public Object deleteUsers(@RequestBody List<JSONObject> users) {
         try {
             userService.delete(users);
             return BaseResponse.getSuccessResponse();
@@ -136,7 +132,7 @@ public class UserController {
     @PostMapping({"user/searchUsers"})
     @ResponseBody
     @ApiOperation("查询批量用户信息")
-    public Object searchUsers(@RequestBody UserQueryRequest req) {
+    public Object searchUsers(@RequestBody JSONObject req) {
         try {
             PageResponse<UserQueryResponse> response = userService.searchUsers(req);
             return BaseResponse.getSuccessResponse(response);
@@ -151,7 +147,7 @@ public class UserController {
     public Object query(@RequestBody UserEntity user) {
         try {
 
-            UserEntity u = userService.searchUser(user);
+            JSONObject u = userService.searchUser(user);
             if(u == null){
                 return BaseResponse.getSuccessResponse("未找到相应的用户信息");
             }

@@ -20,13 +20,13 @@ public class BaseEntity implements Serializable {
     private String createUser;
 
     @Column(name = "create_time")
-    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyyMMdd HH:mm:ss")
+    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
     @Column(name = "update_user")
     private String updateUser;
 
     @Column(name = "update_time")
-    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyyMMdd HH:mm:ss")
+    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 }

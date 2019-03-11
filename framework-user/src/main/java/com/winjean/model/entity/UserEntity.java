@@ -1,9 +1,11 @@
 package com.winjean.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.winjean.common.BaseEntity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Date;
 
 
 @Data
@@ -25,7 +27,8 @@ public class UserEntity extends BaseEntity {
      */
     private String salt;
 
-    private String birthday;
+    @JsonFormat(/*locale="zh", timezone="GMT+8",*/ pattern="yyyy-MM-dd")
+    private Date birthday;
 
     private String telephone;
 
