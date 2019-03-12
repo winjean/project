@@ -68,3 +68,6 @@ info:
   author: winjean
   version: 0.0.1-SNAPSHOT
 
+jasypt:
+  encryptor:
+    password: winjean
