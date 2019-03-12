@@ -43,8 +43,8 @@ spring:
     table: schema_version
 
 # mybatis page helper
-pagehelper:
-  helper-dialect: mysql
+#pagehelper:
+#  helper-dialect: mysql
 
 # logging config
 logging:

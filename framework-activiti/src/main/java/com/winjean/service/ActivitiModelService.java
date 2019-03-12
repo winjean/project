@@ -10,6 +10,9 @@ import org.activiti.bpmn.model.Process;
 import org.activiti.bpmn.model.*;
 import org.activiti.editor.constants.ModelDataJsonConstants;
 import org.activiti.engine.RepositoryService;
+import org.activiti.engine.delegate.DelegateTask;
+import org.activiti.engine.delegate.TaskListener;
+import org.activiti.engine.delegate.event.ActivitiEventType;
 import org.activiti.engine.repository.Model;
 import org.activiti.validation.ProcessValidator;
 import org.activiti.validation.ProcessValidatorFactory;
@@ -17,6 +20,7 @@ import org.activiti.validation.ValidationError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,9 +40,10 @@ public class ActivitiModelService {
 
     public BpmnModel getBpmnModel(JSONObject json) throws Exception{
         //创建bpmn模型
-        BpmnModel model = new BpmnModel();
+        BpmnModel bpmnModel = new BpmnModel();
         Process process = new Process();
-        model.addProcess(process);
+        bpmnModel.addProcess(process);
+
         process.setId(json.getString("proc-def-key"));
         process.setName(json.getString("proc-def-name"));
 
@@ -55,18 +60,22 @@ public class ActivitiModelService {
 
 
         // 2.生成BPMN自动布局
-        new BpmnAutoLayout(model).execute();
+        new BpmnAutoLayout(bpmnModel).execute();
 
-        if(validateBpmnModel(model)){
+        BpmnXMLConverter xmlConverter = new BpmnXMLConverter();
+        byte[] bpmnBytes = xmlConverter.convertToXML(bpmnModel);
+        System.out.println(new String(bpmnBytes, "utf-8"));
+
+        if(validateBpmnModel(bpmnModel)){
             log.info("success!");
         }else{
             log.error("validateBpmnModel error!");
             return null;
         }
 
-        saveModel(model);
+//        saveModel(bpmnModel);
 
-        return model;
+        return bpmnModel;
     }
 
     public boolean validateBpmnModel(BpmnModel bpmnModel){
@@ -89,6 +98,21 @@ public class ActivitiModelService {
         userTask.setName(name);
         userTask.setId(id);
         userTask.setAssignee(assignee);
+        userTask.setCandidateUsers(null);
+        userTask.setCandidateGroups(null);
+        userTask.setCategory(null);
+
+        List<ActivitiListener> list = new ArrayList<>();
+
+        ActivitiListener listener = new ActivitiListener();
+
+        listener.setImplementation("TaskListenerImpl");
+        listener.setImplementationType(ImplementationType.IMPLEMENTATION_TYPE_CLASS);
+        listener.setEvent(ActivitiEventType.TASK_COMPLETED.name());
+
+        list.add(listener);
+        userTask.setTaskListeners(list);
+
         return userTask;
     }
 
@@ -135,4 +159,15 @@ public class ActivitiModelService {
         byte[] bpmnBytes = new BpmnXMLConverter().convertToXML(bpmnModel,"utf-8");
         repositoryService.addModelEditorSource(modelData.getId(), bpmnBytes);
     }
+
+    public class TaskListenerImpl implements TaskListener {
+
+        @Override
+        public void notify(DelegateTask delegateTask) {
+            String assignee = "winjean";
+            delegateTask.setAssignee(assignee);
+        }
+
+    }
+
 }

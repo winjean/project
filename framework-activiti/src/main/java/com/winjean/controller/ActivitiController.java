@@ -44,9 +44,9 @@ public class ActivitiController {
 
         BpmnModel bpmnModel = modelService.getBpmnModel(json);
 
-        Deployment deployment = activitiDeployService.deployWithBpmnModel(json, bpmnModel);
-
-        appendDeploymentInfo(json, deployment);
+//        Deployment deployment = activitiDeployService.deployWithBpmnModel(json, bpmnModel);
+//
+//        appendDeploymentInfo(json, deployment);
 
         return json;
     }
@@ -159,7 +159,6 @@ public class ActivitiController {
 
         return json;
     }
-
 
     private void appendDeploymentInfo(JSONObject json, Deployment deployment){
         json.put("deploymentId",deployment.getId());
