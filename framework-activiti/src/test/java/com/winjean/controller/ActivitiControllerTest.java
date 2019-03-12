@@ -49,6 +49,26 @@ public class ActivitiControllerTest implements JavaDelegate {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
     }
 
+
+    @Test
+    public void testCreateModel()throws Exception{
+
+        JSONObject json = new JSONObject();
+        json.put("proc-def-key","proc-def-key");
+        json.put("proc-def-name","proc-def-name");
+        json.put("proc-deployment-name","proc-deployment-name");
+        json.put("resourceName","resourceName");
+
+        MvcResult result = mockMvc.perform(post(url+"createModel")
+                .content(json.toJSONString())
+                .header("content-type","application/json"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))// 预期返回值的媒体类型text/plain;charset=UTF-8
+                .andReturn();// 返回执行请求的结果
+
+        log.info("response info : {} ",result.getResponse().getContentAsString());
+    }
+
     @Test
     public void testDeployWithModelId()throws Exception{
 
@@ -129,7 +149,7 @@ public class ActivitiControllerTest implements JavaDelegate {
     public void startProcessByFormServiceTest() throws Exception{
         JSONObject json = new JSONObject();
         json.put("authenticatedUserId","winjean");
-        json.put("processDefinitionId","process:1:10004");
+        json.put("processDefinitionId","my-process:1:4");
 
         MvcResult result = mockMvc.perform(post(url+"startProcessByFormService")
                 .content(json.toJSONString())
@@ -251,35 +271,35 @@ public class ActivitiControllerTest implements JavaDelegate {
     @Ignore
     public void getProcessResourceByProcessDefinitionIdTest() throws Exception{
 
-//        String processDefinitionId = "process-external-form:1:10";
-//
-//        BpmnModel bpmnModel = repositoryService.getBpmnModel(processDefinitionId);
-//
-//        ProcessDiagramGenerator diagramGenerator = processEngineConfiguration.getProcessDiagramGenerator();
-//        InputStream imageStream = diagramGenerator.generateDiagram(
-//                bpmnModel,"png", new ArrayList<>(), new ArrayList<>(),"宋体","宋体","宋体",null,1.0);
-//        File file = new File("d:/image.png");
-//        FileUtils.copyToFile(imageStream,file);
-//
-//        System.out.println("image path: " + file.getPath());
+        JSONObject json = new JSONObject();
+        json.put("processInstanceId","2501");
+        json.put("fileName","d:/a.png");
+
+        MvcResult result = mockMvc.perform(post(url+"getProcessResourceByProcessDefinitionId")
+                .content(json.toJSONString())
+                .header("content-type","application/json"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))// 预期返回值的媒体类型text/plain;charset=UTF-8
+                .andReturn();// 返回执行请求的结果
+
+        log.info("response info : {} ",result.getResponse().getContentAsString());
     }
 
     @Test
-    @Ignore
     public void getProcessResourceByProcessInstanceIdTest() throws Exception{
-//        String processInstanceId = "7501";
-//
-//        ProcessInstance processInstance = runtimeService.createProcessInstanceQuery().processInstanceId(processInstanceId).singleResult();
-//        BpmnModel bpmnModel = repositoryService.getBpmnModel(processInstance.getProcessDefinitionId());
-//        List<String> activeActivityIds = runtimeService.getActiveActivityIds(processInstanceId);
-//
-//        ProcessDiagramGenerator diagramGenerator = processEngineConfiguration.getProcessDiagramGenerator();
-//        InputStream imageStream = diagramGenerator.generateDiagram(
-//                bpmnModel,"png", activeActivityIds, new ArrayList<String>(),"宋体","宋体","宋体",null,1.0);
-//
-//        File file = new File("d:/bpmmImage.png");
-//        FileUtils.copyToFile(imageStream,file);
-//        System.out.println("image path: " + file.getPath());
+
+        JSONObject json = new JSONObject();
+        json.put("processInstanceId","2501");
+        json.put("fileName","d:/a.png");
+
+        MvcResult result = mockMvc.perform(post(url+"getProcessResourceByProcessInstanceId")
+                .content(json.toJSONString())
+                .header("content-type","application/json"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))// 预期返回值的媒体类型text/plain;charset=UTF-8
+                .andReturn();// 返回执行请求的结果
+
+        log.info("response info : {} ",result.getResponse().getContentAsString());
     }
 
     @Override

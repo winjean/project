@@ -57,11 +57,11 @@ logging:
 
 # actuator config
 # http://localhost:8080/actuator
-#management:
-#  endpoints:
-#    web:
-#      exposure:
-#        include: "*"
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 
 #  self-defined actuator info
 info:
