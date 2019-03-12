@@ -1,12 +1,16 @@
 package com.winjean.service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.extern.slf4j.Slf4j;
 import org.activiti.bpmn.BpmnAutoLayout;
+import org.activiti.bpmn.converter.BpmnXMLConverter;
 import org.activiti.bpmn.model.Process;
 import org.activiti.bpmn.model.*;
+import org.activiti.editor.constants.ModelDataJsonConstants;
 import org.activiti.engine.RepositoryService;
-import org.activiti.engine.repository.Deployment;
+import org.activiti.engine.repository.Model;
 import org.activiti.validation.ProcessValidator;
 import org.activiti.validation.ProcessValidatorFactory;
 import org.activiti.validation.ValidationError;
@@ -30,7 +34,7 @@ public class ActivitiModelService {
     @Autowired
     private  RepositoryService repositoryService;
 
-    public Deployment getBpmnModel(JSONObject json) throws Exception{
+    public BpmnModel getBpmnModel(JSONObject json) throws Exception{
         //创建bpmn模型
         BpmnModel model = new BpmnModel();
         Process process = new Process();
@@ -60,15 +64,9 @@ public class ActivitiModelService {
             return null;
         }
 
-//        byte[] bpmnBytes = new BpmnXMLConverter().convertToXML(model,"utf-8");
+        saveModel(model);
 
-        Deployment deployment = repositoryService.createDeployment()
-                .name(json.getString("proc-deployment-name"))
-//                .addString(json.getString("resourceName")+".bpmn20.xml", new String(bpmnBytes, "UTF-8"))
-                .addBpmnModel(json.getString("resourceName")+".bpmn20.xml",model)
-                .deploy();
-
-        return deployment;
+        return model;
     }
 
     public boolean validateBpmnModel(BpmnModel bpmnModel){
@@ -94,7 +92,6 @@ public class ActivitiModelService {
         return userTask;
     }
 
-
     //创建箭头
     private SequenceFlow createSequenceFlow(String from, String to) {
         SequenceFlow flow = new SequenceFlow();
@@ -103,10 +100,10 @@ public class ActivitiModelService {
         return flow;
     }
 
-
     private StartEvent createStartEvent() {
         StartEvent startEvent = new StartEvent();
         startEvent.setId("start");
+        startEvent.setName("开始");
         return startEvent;
     }
 
@@ -114,6 +111,28 @@ public class ActivitiModelService {
     private EndEvent createEndEvent() {
         EndEvent endEvent = new EndEvent();
         endEvent.setId("end");
+        endEvent.setName("结束");
         return endEvent;
+    }
+
+    public void saveModel(BpmnModel bpmnModel){
+
+        String processName = bpmnModel.getMainProcess().getName();
+        if (processName == null || processName.isEmpty()){
+            processName = bpmnModel.getMainProcess().getId();
+        }
+
+        Model modelData = repositoryService.newModel();
+        ObjectNode modelObjectNode = new ObjectMapper().createObjectNode();
+        modelObjectNode.put(ModelDataJsonConstants.MODEL_NAME, processName);
+        modelObjectNode.put(ModelDataJsonConstants.MODEL_REVISION, 1);
+        modelData.setMetaInfo(modelObjectNode.toString());
+        modelData.setName(processName);
+        modelData.setKey("modelKey");
+
+        repositoryService.saveModel(modelData);
+
+        byte[] bpmnBytes = new BpmnXMLConverter().convertToXML(bpmnModel,"utf-8");
+        repositoryService.addModelEditorSource(modelData.getId(), bpmnBytes);
     }
 }

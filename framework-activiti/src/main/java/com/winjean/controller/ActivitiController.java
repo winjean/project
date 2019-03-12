@@ -1,12 +1,13 @@
 package com.winjean.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.winjean.service.ActivitiDeployService;
 import com.winjean.service.ActivitiModelService;
 import com.winjean.service.ActivitiService;
 import com.winjean.utils.DateUtils;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
-import org.activiti.engine.*;
+import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,42 +31,22 @@ import org.springframework.web.bind.annotation.RestController;
 public class ActivitiController {
 
     @Autowired
-    private ProcessEngine processEngine;
-
-    @Autowired
-    private RepositoryService repositoryService;
-
-    @Autowired
-    private FormService formService;
-
-    @Autowired
-    private IdentityService identityService;
-
-    @Autowired
-    private TaskService taskService;
-
-    @Autowired
-    private HistoryService historyService;
-
-    @Autowired
-    private RuntimeService runtimeService;
-
-    @Autowired
-    private ProcessEngineConfiguration processEngineConfiguration;
-
-    @Autowired
     private ActivitiModelService modelService;
 
     @Autowired
     private ActivitiService activitiService;
 
+    @Autowired
+    private ActivitiDeployService activitiDeployService;
+
     @PostMapping("createModel")
     public Object createModel1(@RequestBody JSONObject json) throws Exception{
-        Deployment deployment = modelService.getBpmnModel(json);
 
-        json.put("deploymentId",deployment.getId());
-        json.put("deploymentName",deployment.getName());
-        json.put("deploymentTime", DateUtils.formatDate(deployment.getDeploymentTime()));
+        BpmnModel bpmnModel = modelService.getBpmnModel(json);
+
+        Deployment deployment = activitiDeployService.deployWithBpmnModel(json, bpmnModel);
+
+        appendDeploymentInfo(json, deployment);
 
         return json;
     }
@@ -73,12 +54,9 @@ public class ActivitiController {
     @PostMapping("deployWithModelId")
     public Object deploy(@RequestBody JSONObject json) throws Exception{
 
-        Deployment deployment = activitiService.deploy(json);
+        Deployment deployment = activitiDeployService.deploy(json);
 
-        json.put("deploymentId",deployment.getId());
-        json.put("deploymentName",deployment.getName());
-        json.put("deploymentTime", DateUtils.formatDate(deployment.getDeploymentTime()));
-
+        appendDeploymentInfo(json, deployment);
 
         return json;
     }
@@ -86,11 +64,9 @@ public class ActivitiController {
     @PostMapping("deploymentWithClasspathResource")
     public Object deploymentWithClasspathResource(@RequestBody JSONObject json){
 
-        Deployment deployment = activitiService.deploymentWithClasspathResource(json);
+        Deployment deployment = activitiDeployService.deploymentWithClasspathResource(json);
 
-        json.put("deploymentId",deployment.getId());
-        json.put("deploymentName",deployment.getName());
-        json.put("deploymentTime", DateUtils.formatDate(deployment.getDeploymentTime()));
+        appendDeploymentInfo(json, deployment);
 
         return json;
     }
@@ -98,22 +74,18 @@ public class ActivitiController {
     @PostMapping("deploymentWithInputStream")
     public Object deploymentWithInputStream(@RequestBody JSONObject json) throws Exception{
 
-        Deployment deployment = activitiService.deploymentWithInputStream(json);
+        Deployment deployment = activitiDeployService.deploymentWithInputStream(json);
 
-        json.put("deploymentId",deployment.getId());
-        json.put("deploymentName",deployment.getName());
-        json.put("deploymentTime", DateUtils.formatDate(deployment.getDeploymentTime()));
+        appendDeploymentInfo(json, deployment);
 
         return json;
     }
 
     @PostMapping("deploymentWithString")
     public Object deploymentWithString(@RequestBody JSONObject json){
-        Deployment deployment = activitiService.deploymentWithString(json);
+        Deployment deployment = activitiDeployService.deploymentWithString(json);
 
-        json.put("deploymentId",deployment.getId());
-        json.put("deploymentName",deployment.getName());
-        json.put("deploymentTime", DateUtils.formatDate(deployment.getDeploymentTime()));
+        appendDeploymentInfo(json, deployment);
 
         return json;
     }
@@ -121,13 +93,9 @@ public class ActivitiController {
     @PostMapping("deploymentWithZipInputStream")
     public Object deploymentWithZipInputStream(@RequestBody JSONObject json){
 
-        Deployment deployment = activitiService.deploymentWithZipInputStream(json);
+        Deployment deployment = activitiDeployService.deploymentWithZipInputStream(json);
 
-        json.put("deploymentId",deployment.getId());
-        json.put("deploymentName",deployment.getName());
-        json.put("deploymentTime", DateUtils.formatDate(deployment.getDeploymentTime()));
-
-        log.info("deployment id：{}, deployment name：{}, deployment time：{}", deployment.getId(),deployment.getName(), deployment.getDeploymentTime());
+        appendDeploymentInfo(json, deployment);
 
         return json;
     }
@@ -136,9 +104,7 @@ public class ActivitiController {
     public Object startProcessByRuntimeService(@RequestBody JSONObject json) {
 
         ProcessInstance processInstance = activitiService.startProcessByRuntimeService(json);
-        json.put("processInstanceId",processInstance.getId());
-        json.put("processInstanceName",processInstance.getName());
-
+        appendProcessInstanceInfo(json, processInstance);
         return json;
     }
 
@@ -146,8 +112,7 @@ public class ActivitiController {
     public Object startProcessByFormService(@RequestBody JSONObject json) {
 
         ProcessInstance processInstance = activitiService.startProcessByFormService(json);
-        json.put("processInstanceId",processInstance.getId());
-        json.put("processInstanceName",processInstance.getName());
+        appendProcessInstanceInfo(json, processInstance);
         return json;
     }
 
@@ -195,4 +160,15 @@ public class ActivitiController {
         return json;
     }
 
+
+    private void appendDeploymentInfo(JSONObject json, Deployment deployment){
+        json.put("deploymentId",deployment.getId());
+        json.put("deploymentName",deployment.getName());
+        json.put("deploymentTime", DateUtils.formatDate(deployment.getDeploymentTime()));
+    }
+
+    private void appendProcessInstanceInfo(JSONObject json, ProcessInstance processInstance){
+        json.put("processInstanceId",processInstance.getId());
+        json.put("processInstanceName",processInstance.getName());
+    }
 }
