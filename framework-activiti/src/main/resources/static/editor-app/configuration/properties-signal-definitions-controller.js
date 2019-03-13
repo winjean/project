@@ -21,7 +21,7 @@ angular.module('activitiModeler').controller('ActivitiSignalDefinitionsCtrl', ['
 
     // Config for the modal window
     var opts = {
-        template: 'editor-app/configuration/properties/signal-definitions-popup.html?version=' + Date.now(),
+        template: '/static/editor-app/configuration/properties/signal-definitions-popup.html?version=' + Date.now(),
         scope: $scope
     };
 

@@ -66,7 +66,7 @@ public class ModelController {
             //保存模型
             repositoryService.saveModel(modelData);
             repositoryService.addModelEditorSource(modelData.getId(), editorNode.toString().getBytes("utf-8"));
-            response.sendRedirect(request.getContextPath() + "/modeler.html?modelId=" + modelData.getId());
+            response.sendRedirect(request.getContextPath() + "/static/modeler.html?modelId=" + modelData.getId());
         }catch (Exception e){
         }
     }

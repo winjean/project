@@ -25,7 +25,7 @@ var KisBpmFormPropertiesCtrl = [ '$scope', '$modal', '$timeout', '$translate', f
 
     // Config for the modal window
     var opts = {
-        template:  'editor-app/configuration/properties/form-properties-popup.html?version=' + Date.now(),
+        template:  '/static/editor-app/configuration/properties/form-properties-popup.html?version=' + Date.now(),
         scope: $scope
     };
 

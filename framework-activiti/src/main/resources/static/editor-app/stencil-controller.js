@@ -509,7 +509,7 @@ angular.module('activitiModeler')
                             $modal({
                                 backdrop: false,
                                 keyboard: true,
-                                template: 'editor-app/popups/select-shape.html?version=' + Date.now()
+                                template: '/static/editor-app/popups/select-shape.html?version=' + Date.now()
                             });
                         };
 

@@ -25,7 +25,7 @@ var KisBpmInParametersCtrl = [ '$scope', '$modal', '$timeout', '$translate', fun
 
     // Config for the modal window
     var opts = {
-        template:  'editor-app/configuration/properties/in-parameters-popup.html?version=' + Date.now(),
+        template:  '/static/editor-app/configuration/properties/in-parameters-popup.html?version=' + Date.now(),
         scope: $scope
     };
 

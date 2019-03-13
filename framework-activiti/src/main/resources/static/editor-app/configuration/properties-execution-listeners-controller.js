@@ -25,7 +25,7 @@ var KisBpmExecutionListenersCtrl = [ '$scope', '$modal', '$timeout', '$translate
 
     // Config for the modal window
     var opts = {
-        template:  'editor-app/configuration/properties/execution-listeners-popup.html?version=' + Date.now(),
+        template:  '/static/editor-app/configuration/properties/execution-listeners-popup.html?version=' + Date.now(),
         scope: $scope
     };
 
