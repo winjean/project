@@ -1,18 +1,12 @@
 package com.winjean.service;
 
 import com.alibaba.fastjson.JSONObject;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
-import org.activiti.bpmn.converter.BpmnXMLConverter;
 import org.activiti.bpmn.model.Process;
 import org.activiti.bpmn.model.*;
-import org.activiti.editor.language.json.converter.BpmnJsonConverter;
 import org.activiti.engine.*;
 import org.activiti.engine.history.HistoricTaskInstance;
-import org.activiti.engine.repository.Deployment;
-import org.activiti.engine.repository.Model;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
@@ -23,10 +17,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.*;
-import java.util.zip.ZipInputStream;
 
 /**
  * @author ：winjean
@@ -203,6 +195,12 @@ public class ActivitiService {
 
         BpmnModel bpmnModel = repositoryService.getBpmnModel(json.getString("processDefinitionId"));
 
+//        ProcessDefinitionEntity processDefinitionEntity=(ProcessDefinitionEntity) repositoryService.getProcessDefinition("");
+//        List<ActivityImpl> list = processDefinitionEntity.getActivities();
+//        for(ActivityImpl activity : list){
+////            activity.get
+//        }
+
         ProcessDiagramGenerator diagramGenerator = processEngineConfiguration.getProcessDiagramGenerator();
         InputStream imageStream = diagramGenerator.generateDiagram(
                 bpmnModel,"png", new ArrayList<>(), new ArrayList<>(),"宋体","宋体","宋体",null,1.0);
@@ -215,10 +213,17 @@ public class ActivitiService {
     }
 
     public Object getProcessResourceByProcessInstanceId(JSONObject json) throws Exception{
+        // TODO 已结束流程
+
         String processInstanceId = json.getString("processInstanceId");
 
         ProcessInstance processInstance = runtimeService.createProcessInstanceQuery().processInstanceId(processInstanceId).singleResult();
         BpmnModel bpmnModel = repositoryService.getBpmnModel(processInstance.getProcessDefinitionId());
+
+//        repositoryService.get
+//        processEngine.
+//        processDefinitionEntity.findActivity
+
         List<String> activeActivityIds = runtimeService.getActiveActivityIds(processInstanceId);
 
         ProcessDiagramGenerator diagramGenerator = processEngineConfiguration.getProcessDiagramGenerator();

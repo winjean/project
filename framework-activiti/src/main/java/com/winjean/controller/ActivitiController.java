@@ -37,24 +37,25 @@ public class ActivitiController {
     private ActivitiService activitiService;
 
     @Autowired
-    private ActivitiDeployService activitiDeployService;
+    private ActivitiDeployService deployService;
 
-    @PostMapping("createModel")
+    @PostMapping("createModelAndDeploy")
     public Object createModel1(@RequestBody JSONObject json) throws Exception{
 
         BpmnModel bpmnModel = modelService.getBpmnModel(json);
 
-//        Deployment deployment = activitiDeployService.deployWithBpmnModel(json, bpmnModel);
-//
-//        appendDeploymentInfo(json, deployment);
+        json.put("process-id",bpmnModel.getMainProcess().getId());
+        json.put("process-name",bpmnModel.getMainProcess().getName());
 
+        Deployment deployment = deployService.deployWithBpmnModel(json,bpmnModel);
+        appendDeploymentInfo(json, deployment);
         return json;
     }
 
     @PostMapping("deployWithModelId")
-    public Object deploy(@RequestBody JSONObject json) throws Exception{
+    public Object deployWithModelId(@RequestBody JSONObject json) throws Exception{
 
-        Deployment deployment = activitiDeployService.deploy(json);
+        Deployment deployment = deployService.deployWithModelId(json);
 
         appendDeploymentInfo(json, deployment);
 
@@ -64,7 +65,7 @@ public class ActivitiController {
     @PostMapping("deploymentWithClasspathResource")
     public Object deploymentWithClasspathResource(@RequestBody JSONObject json){
 
-        Deployment deployment = activitiDeployService.deploymentWithClasspathResource(json);
+        Deployment deployment = deployService.deploymentWithClasspathResource(json);
 
         appendDeploymentInfo(json, deployment);
 
@@ -74,7 +75,7 @@ public class ActivitiController {
     @PostMapping("deploymentWithInputStream")
     public Object deploymentWithInputStream(@RequestBody JSONObject json) throws Exception{
 
-        Deployment deployment = activitiDeployService.deploymentWithInputStream(json);
+        Deployment deployment = deployService.deploymentWithInputStream(json);
 
         appendDeploymentInfo(json, deployment);
 
@@ -83,7 +84,7 @@ public class ActivitiController {
 
     @PostMapping("deploymentWithString")
     public Object deploymentWithString(@RequestBody JSONObject json){
-        Deployment deployment = activitiDeployService.deploymentWithString(json);
+        Deployment deployment = deployService.deploymentWithString(json);
 
         appendDeploymentInfo(json, deployment);
 
@@ -93,7 +94,7 @@ public class ActivitiController {
     @PostMapping("deploymentWithZipInputStream")
     public Object deploymentWithZipInputStream(@RequestBody JSONObject json){
 
-        Deployment deployment = activitiDeployService.deploymentWithZipInputStream(json);
+        Deployment deployment = deployService.deploymentWithZipInputStream(json);
 
         appendDeploymentInfo(json, deployment);
 

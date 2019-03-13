@@ -1,7 +1,6 @@
 package com.winjean.service;
 
 import com.alibaba.fastjson.JSONObject;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.extern.slf4j.Slf4j;
 import org.activiti.bpmn.BpmnAutoLayout;
@@ -9,18 +8,18 @@ import org.activiti.bpmn.converter.BpmnXMLConverter;
 import org.activiti.bpmn.model.Process;
 import org.activiti.bpmn.model.*;
 import org.activiti.editor.constants.ModelDataJsonConstants;
+import org.activiti.editor.language.json.converter.BpmnJsonConverter;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.delegate.DelegateTask;
 import org.activiti.engine.delegate.TaskListener;
-import org.activiti.engine.delegate.event.ActivitiEventType;
 import org.activiti.engine.repository.Model;
 import org.activiti.validation.ProcessValidator;
 import org.activiti.validation.ProcessValidatorFactory;
 import org.activiti.validation.ValidationError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,6 +37,9 @@ public class ActivitiModelService {
     @Autowired
     private  RepositoryService repositoryService;
 
+    @Autowired
+    private ActivitiDeployService deployService;
+
     public BpmnModel getBpmnModel(JSONObject json) throws Exception{
         //创建bpmn模型
         BpmnModel bpmnModel = new BpmnModel();
@@ -52,19 +54,25 @@ public class ActivitiModelService {
         process.addFlowElement(createUserTask("task1", "First task", "fred"));
         process.addFlowElement(createUserTask("task2", "Second task", "john"));
         process.addFlowElement(createEndEvent());
+//        process.addFlowElement(createEventGateway());
 
-
-        process.addFlowElement(createSequenceFlow("start", "task1"));
-        process.addFlowElement(createSequenceFlow("task1", "task2"));
-        process.addFlowElement(createSequenceFlow("task2", "end"));
+        process.addFlowElement(createSequenceFlow("1","start", "task1"));
+//        process.addFlowElement(createSequenceFlow("2","task1", "gateway"));
+//        process.addFlowElement(createSequenceFlow("3","gateway", "task2"));
+//        process.addFlowElement(createSequenceFlow("4","gateway", "end"));
+        process.addFlowElement(createSequenceFlow("5","task1", "task2"));
+        process.addFlowElement(createSequenceFlow("6","task2", "end"));
 
 
         // 2.生成BPMN自动布局
         new BpmnAutoLayout(bpmnModel).execute();
 
-        BpmnXMLConverter xmlConverter = new BpmnXMLConverter();
-        byte[] bpmnBytes = xmlConverter.convertToXML(bpmnModel);
-        System.out.println(new String(bpmnBytes, "utf-8"));
+//        byte[] bpmnBytes  = new BpmnXMLConverter().convertToXML(bpmnModel,"utf-8");
+//        System.out.println(new String(bpmnBytes, "utf-8"));
+//
+//        ObjectNode objectNode = new BpmnJsonConverter().convertToJson(bpmnModel);
+//        System.out.println("------------------------------------------------------");
+//        System.out.println(objectNode.toString());
 
         if(validateBpmnModel(bpmnModel)){
             log.info("success!");
@@ -73,7 +81,7 @@ public class ActivitiModelService {
             return null;
         }
 
-//        saveModel(bpmnModel);
+        saveModel(bpmnModel);
 
         return bpmnModel;
     }
@@ -98,27 +106,29 @@ public class ActivitiModelService {
         userTask.setName(name);
         userTask.setId(id);
         userTask.setAssignee(assignee);
-        userTask.setCandidateUsers(null);
-        userTask.setCandidateGroups(null);
-        userTask.setCategory(null);
 
-        List<ActivitiListener> list = new ArrayList<>();
+//        userTask.setCandidateUsers(null);
+//        userTask.setCandidateGroups(null);
+//        userTask.setCategory(null);
 
-        ActivitiListener listener = new ActivitiListener();
-
-        listener.setImplementation("TaskListenerImpl");
-        listener.setImplementationType(ImplementationType.IMPLEMENTATION_TYPE_CLASS);
-        listener.setEvent(ActivitiEventType.TASK_COMPLETED.name());
-
-        list.add(listener);
-        userTask.setTaskListeners(list);
+//        List<ActivitiListener> list = new ArrayList<>();
+//
+//        ActivitiListener listener = new ActivitiListener();
+//
+//        listener.setImplementation("TaskListenerImpl");
+//        listener.setImplementationType(ImplementationType.IMPLEMENTATION_TYPE_CLASS);
+//        listener.setEvent(ActivitiEventType.TASK_COMPLETED.name());
+//
+//        list.add(listener);
+//        userTask.setTaskListeners(list);
 
         return userTask;
     }
 
     //创建箭头
-    private SequenceFlow createSequenceFlow(String from, String to) {
+    private SequenceFlow createSequenceFlow(String name,String from, String to) {
         SequenceFlow flow = new SequenceFlow();
+        flow.setName(name);
         flow.setSourceRef(from);
         flow.setTargetRef(to);
         return flow;
@@ -131,7 +141,6 @@ public class ActivitiModelService {
         return startEvent;
     }
 
-
     private EndEvent createEndEvent() {
         EndEvent endEvent = new EndEvent();
         endEvent.setId("end");
@@ -139,25 +148,44 @@ public class ActivitiModelService {
         return endEvent;
     }
 
-    public void saveModel(BpmnModel bpmnModel){
+    private ExclusiveGateway createEventGateway() {
+        ExclusiveGateway gateway = new ExclusiveGateway();
+        gateway.setId("gateway");
+        gateway.setName("网关");
+//        gateway.setDefaultFlow("end");
+
+//        gateway.setOutgoingFlows();
+//        gateway.setIncomingFlows(null);
+
+        return gateway;
+    }
+
+    public void saveModel(BpmnModel bpmnModel) throws Exception{
 
         String processName = bpmnModel.getMainProcess().getName();
-        if (processName == null || processName.isEmpty()){
+        if (StringUtils.isEmpty(processName)){
             processName = bpmnModel.getMainProcess().getId();
         }
 
         Model modelData = repositoryService.newModel();
-        ObjectNode modelObjectNode = new ObjectMapper().createObjectNode();
-        modelObjectNode.put(ModelDataJsonConstants.MODEL_NAME, processName);
-        modelObjectNode.put(ModelDataJsonConstants.MODEL_REVISION, 1);
-        modelData.setMetaInfo(modelObjectNode.toString());
         modelData.setName(processName);
         modelData.setKey("modelKey");
-
         repositoryService.saveModel(modelData);
 
-        byte[] bpmnBytes = new BpmnXMLConverter().convertToXML(bpmnModel,"utf-8");
-        repositoryService.addModelEditorSource(modelData.getId(), bpmnBytes);
+        ObjectNode modelObjectNode = new BpmnJsonConverter().convertToJson(bpmnModel);
+        modelObjectNode.put(ModelDataJsonConstants.MODEL_NAME, processName);
+        modelObjectNode.put(ModelDataJsonConstants.MODEL_REVISION, 1);
+        modelObjectNode.put(ModelDataJsonConstants.MODEL_DESCRIPTION, "MODEL_DESCRIPTION");
+
+
+        String id = modelData.getId();
+        byte[] bytes = new BpmnXMLConverter().convertToXML(bpmnModel, "utf-8");
+
+        System.out.println(new String(bytes, "utf-8"));
+
+        repositoryService.addModelEditorSource(id,bytes);
+//        repositoryService.addModelEditorSource(id,modelObjectNode.toString().getBytes("utf-8"));
+//        repositoryService.addModelEditorSourceExtra("");
     }
 
     public class TaskListenerImpl implements TaskListener {
@@ -167,7 +195,5 @@ public class ActivitiModelService {
             String assignee = "winjean";
             delegateTask.setAssignee(assignee);
         }
-
     }
-
 }

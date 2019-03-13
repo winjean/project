@@ -49,7 +49,6 @@ public class ActivitiControllerTest implements JavaDelegate {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
     }
 
-
     @Test
     public void testCreateModel()throws Exception{
 
@@ -59,7 +58,7 @@ public class ActivitiControllerTest implements JavaDelegate {
         json.put("proc-deployment-name","proc-deployment-name");
         json.put("resourceName","resourceName");
 
-        MvcResult result = mockMvc.perform(post(url+"createModel")
+        MvcResult result = mockMvc.perform(post(url+"createModelAndDeploy")
                 .content(json.toJSONString())
                 .header("content-type","application/json"))
                 .andExpect(status().isOk())
@@ -73,7 +72,7 @@ public class ActivitiControllerTest implements JavaDelegate {
     public void testDeployWithModelId()throws Exception{
 
         JSONObject json = new JSONObject();
-        json.put("modelId","5001");
+        json.put("modelId","15001");
 
         MvcResult result = mockMvc.perform(post(url+"deployWithModelId")
                     .content(json.toJSONString())
@@ -149,7 +148,7 @@ public class ActivitiControllerTest implements JavaDelegate {
     public void startProcessByFormServiceTest() throws Exception{
         JSONObject json = new JSONObject();
         json.put("authenticatedUserId","winjean");
-        json.put("processDefinitionId","my-process:1:4");
+        json.put("processDefinitionId","proc-def-key:1:30006");
 
         MvcResult result = mockMvc.perform(post(url+"startProcessByFormService")
                 .content(json.toJSONString())
@@ -164,7 +163,7 @@ public class ActivitiControllerTest implements JavaDelegate {
     @Test
     public void completeTaskByTaskServiceTest() throws Exception{
         JSONObject json = new JSONObject();
-        json.put("processInstanceId","20001");
+        json.put("processInstanceId","32501");
 
         MvcResult result = mockMvc.perform(post(url+"completeTaskByTaskService")
                 .content(json.toJSONString())
@@ -177,21 +176,18 @@ public class ActivitiControllerTest implements JavaDelegate {
     }
 
     @Test
-    public void completeTaskByFormServiceTest() {
-//        String processInstanceId = "2501";
-//        List<Task> tasks = taskService.createTaskQuery().processInstanceId(processInstanceId).list();
-//        Assert.assertTrue(tasks.size() > 0);
-//
-//        for(Task task : tasks){
-//            taskService.unclaim(task.getId());
-//            taskService.claim(task.getId(),"winjean");
-//            System.out.println( "[" + task.getName() + "]签收完成!");
-//
-//            Map<String, String> vars = new HashMap<>(4);
-//            vars.put("p_pass", "true");
-//            formService.submitTaskFormData(task.getId(), vars);
-//            System.out.println( "[" + task.getName() + "]完成!");
-//        }
+    public void completeTaskByFormServiceTest() throws Exception{
+        JSONObject json = new JSONObject();
+        json.put("processInstanceId","32501");
+
+        MvcResult result = mockMvc.perform(post(url+"completeTaskByFormService")
+                .content(json.toJSONString())
+                .header("content-type","application/json"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))// 预期返回值的媒体类型text/plain;charset=UTF-8
+                .andReturn();// 返回执行请求的结果
+
+        log.info("response info : {} ",result.getResponse().getContentAsString());
     }
 
     @Test
@@ -268,11 +264,10 @@ public class ActivitiControllerTest implements JavaDelegate {
     }
 
     @Test
-    @Ignore
     public void getProcessResourceByProcessDefinitionIdTest() throws Exception{
 
         JSONObject json = new JSONObject();
-        json.put("processInstanceId","2501");
+        json.put("processDefinitionId","proc-def-key:1:30006");
         json.put("fileName","d:/a.png");
 
         MvcResult result = mockMvc.perform(post(url+"getProcessResourceByProcessDefinitionId")
@@ -289,8 +284,8 @@ public class ActivitiControllerTest implements JavaDelegate {
     public void getProcessResourceByProcessInstanceIdTest() throws Exception{
 
         JSONObject json = new JSONObject();
-        json.put("processInstanceId","2501");
-        json.put("fileName","d:/a.png");
+        json.put("processInstanceId","32501");
+        json.put("fileName","d:/b.png");
 
         MvcResult result = mockMvc.perform(post(url+"getProcessResourceByProcessInstanceId")
                 .content(json.toJSONString())
