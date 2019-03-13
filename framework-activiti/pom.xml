@@ -168,58 +168,53 @@
             <version>${activiti.version}</version>
         </dependency>
 
-                <dependency>
-                    <groupId>org.activiti</groupId>
-                    <artifactId>activiti-rest</artifactId>
-                    <version>${activiti.version}</version>
-                </dependency>
+        <dependency>
+            <groupId>org.activiti</groupId>
+            <artifactId>activiti-rest</artifactId>
+            <version>${activiti.version}</version>
+        </dependency>
 
-                <dependency>
-                    <groupId>org.apache.xmlgraphics</groupId>
-                    <artifactId>batik-codec</artifactId>
-                    <version>1.7</version>
-                </dependency>
-                <dependency>
-                    <groupId>org.apache.xmlgraphics</groupId>
-                    <artifactId>batik-css</artifactId>
-                    <version>1.7</version>
-                </dependency>
-                <dependency>
-                    <groupId>org.apache.xmlgraphics</groupId>
-                    <artifactId>batik-svg-dom</artifactId>
-                    <version>1.7</version>
-                </dependency>
-                <dependency>
-                    <groupId>org.apache.xmlgraphics</groupId>
-                    <artifactId>batik-svggen</artifactId>
-                    <version>1.7</version>
-                </dependency>
-                <dependency>
-                    <groupId>org.activiti</groupId>
-                    <artifactId>activiti-explorer</artifactId>
-                    <version>${activiti.version}</version>
-                </dependency>
-                <dependency>
-                    <groupId>org.activiti</groupId>
-                    <artifactId>activiti-diagram-rest</artifactId>
-                    <version>${activiti.version}</version>
-                </dependency>
-                <dependency>
-                    <groupId>org.activiti</groupId>
-                    <artifactId>activiti-simple-workflow</artifactId>
-                    <version>${activiti.version}</version>
-                </dependency>
+        <dependency>
+            <groupId>org.apache.xmlgraphics</groupId>
+            <artifactId>batik-codec</artifactId>
+            <version>1.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.xmlgraphics</groupId>
+            <artifactId>batik-css</artifactId>
+            <version>1.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.xmlgraphics</groupId>
+            <artifactId>batik-svg-dom</artifactId>
+            <version>1.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.xmlgraphics</groupId>
+            <artifactId>batik-svggen</artifactId>
+            <version>1.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.activiti</groupId>
+            <artifactId>activiti-explorer</artifactId>
+            <version>${activiti.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.activiti</groupId>
+            <artifactId>activiti-diagram-rest</artifactId>
+            <version>${activiti.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.activiti</groupId>
+            <artifactId>activiti-simple-workflow</artifactId>
+            <version>${activiti.version}</version>
+        </dependency>
 
-                <dependency>
-                    <groupId>org.activiti</groupId>
-                    <artifactId>activiti-spring</artifactId>
-                    <version>${activiti.version}</version>
-                </dependency>
-
-
-
-
-
+        <dependency>
+            <groupId>org.activiti</groupId>
+            <artifactId>activiti-spring</artifactId>
+            <version>${activiti.version}</version>
+        </dependency>
 
 
         <!--<dependency>
@@ -260,6 +255,12 @@
         </dependency>-->
         <!-- activiti end -->
 
+        <dependency>
+            <groupId>com.winjean</groupId>
+            <artifactId>framework-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -269,14 +270,14 @@
                 <directory>src/main/resources</directory>
                 <includes>
                     <include>config/*.xml</include>
+                    <include>static/**</include>
                     <include>application.yml</include>
                     <include>application-${profileActive}.yml</include>
-                    <include>*.json</include>
-                    <include>static/**</include>
                     <include>favicon.ico</include>
-                    <include>**/*.properties</include>
+                    <include>*.json</include>
                 </includes>
             </resource>-->
+
             <!--<resource>
                 <filtering>true</filtering>
                 <directory>../</directory>
@@ -289,12 +290,12 @@
         <plugins>
             <!-- maven热启动 -->
             <!--<plugin>-->
-                <!--<groupId>org.springframework.boot</groupId>-->
-                <!--<artifactId>spring-boot-maven-plugin</artifactId>-->
-                <!--<configuration>-->
-                    <!--<fork>true</fork>-->
-                    <!--<addResources>true</addResources>-->
-                <!--</configuration>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-maven-plugin</artifactId>-->
+            <!--<configuration>-->
+            <!--<fork>true</fork>-->
+            <!--<addResources>true</addResources>-->
+            <!--</configuration>-->
             <!--</plugin>-->
 
             <!-- sql自动升级管理 -->
