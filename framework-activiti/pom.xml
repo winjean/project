@@ -264,7 +264,7 @@
 
     <build>
         <resources>
-            <resource>
+            <!--<resource>
                 <filtering>true</filtering>
                 <directory>src/main/resources</directory>
                 <includes>
@@ -276,7 +276,7 @@
                     <include>favicon.ico</include>
                     <include>**/*.properties</include>
                 </includes>
-            </resource>
+            </resource>-->
             <!--<resource>
                 <filtering>true</filtering>
                 <directory>../</directory>
