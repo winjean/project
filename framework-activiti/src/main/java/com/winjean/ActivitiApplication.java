@@ -12,6 +12,8 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan({"com.winjean.*"})
 @MapperScan("com.winjean.mapper.*")
 
+// http://localhost:8081/model/create
+
 public class ActivitiApplication {
     public static void main(String[] args) {
         SpringApplication.run(ActivitiApplication.class,args);
