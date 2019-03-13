@@ -32,13 +32,13 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class ActivitiModelService {
+public class ModelService {
 
     @Autowired
     private  RepositoryService repositoryService;
 
     @Autowired
-    private ActivitiDeployService deployService;
+    private DeployService deployService;
 
     public BpmnModel getBpmnModel(JSONObject json) throws Exception{
         //创建bpmn模型

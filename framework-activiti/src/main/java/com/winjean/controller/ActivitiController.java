@@ -1,9 +1,10 @@
 package com.winjean.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.winjean.service.ActivitiDeployService;
-import com.winjean.service.ActivitiModelService;
+import com.winjean.service.DeployService;
+import com.winjean.service.ModelService;
 import com.winjean.service.ActivitiService;
+import com.winjean.service.ProcessResourceService;
 import com.winjean.utils.DateUtils;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
@@ -31,13 +32,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class ActivitiController {
 
     @Autowired
-    private ActivitiModelService modelService;
+    private ModelService modelService;
 
     @Autowired
     private ActivitiService activitiService;
 
     @Autowired
-    private ActivitiDeployService deployService;
+    private DeployService deployService;
+
+    @Autowired
+    private ProcessResourceService processResourceService;
 
     @PostMapping("createModelAndDeploy")
     public Object createModel1(@RequestBody JSONObject json) throws Exception{
@@ -149,14 +153,14 @@ public class ActivitiController {
     @PostMapping("getProcessResourceByProcessDefinitionId")
     public Object getProcessResourceByProcessDefinitionId(@RequestBody JSONObject json) throws Exception{
 
-        activitiService.getProcessResourceByProcessDefinitionId(json);
+        processResourceService.getProcessResourceByProcessDefinitionId(json);
 
         return json;
     }
 
     @PostMapping("getProcessResourceByProcessInstanceId")
     public Object getProcessResourceByProcessInstanceId(@RequestBody JSONObject json) throws Exception{
-        activitiService.getProcessResourceByProcessInstanceId(json);
+        processResourceService.getProcessResourceByProcessInstanceId(json);
 
         return json;
     }

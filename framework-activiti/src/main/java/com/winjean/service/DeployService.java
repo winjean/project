@@ -29,7 +29,7 @@ import java.util.zip.ZipInputStream;
 @Api("activiti ")
 @Slf4j
 @Service
-public class ActivitiDeployService {
+public class DeployService {
 
     @Autowired
     private ProcessEngine processEngine;
