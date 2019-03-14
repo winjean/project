@@ -107,6 +107,13 @@ public class ModelService {
         userTask.setId(id);
         userTask.setAssignee(assignee);
 
+//        MultiInstanceLoopCharacteristics m = new MultiInstanceLoopCharacteristics();
+//        m.setSequential(true);
+//        m.setElementVariable("");
+//        m.setExtensionElements(null);
+//        m.setLoopCardinality("2");
+//        userTask.setLoopCharacteristics(m);
+
 //        userTask.setCandidateUsers(null);
 //        userTask.setCandidateGroups(null);
 //        userTask.setCategory(null);

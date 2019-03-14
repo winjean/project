@@ -28,7 +28,6 @@ public class ActivitiConfiguration {
 
         spec.setActivityFontName("宋体").setLabelFontName("宋体").setAnnotationFontName("宋体");
 
-
         //记录的历史的详细级别
 //        spec.setHistoryLevel(HistoryLevel.FULL);
 

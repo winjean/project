@@ -1,6 +1,7 @@
 package com.winjean.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.winjean.config.ConfigProperties;
 import com.winjean.service.DeployService;
 import com.winjean.service.ModelService;
 import com.winjean.service.ActivitiService;
@@ -43,8 +44,14 @@ public class ActivitiController {
     @Autowired
     private ProcessResourceService processResourceService;
 
+    @Autowired
+    private ConfigProperties configProperties;
+
     @PostMapping("createModelAndDeploy")
     public Object createModel1(@RequestBody JSONObject json) throws Exception{
+
+        int a =configProperties.getAge();
+        System.out.println(a);
 
         BpmnModel bpmnModel = modelService.getBpmnModel(json);
 
@@ -150,6 +157,14 @@ public class ActivitiController {
         return json;
     }
 
+    @PostMapping("getProcessResourceByModelId")
+    public Object getProcessResourceByModelId(@RequestBody JSONObject json) throws Exception{
+
+        processResourceService.getProcessResourceByModelId(json);
+
+        return json;
+    }
+
     @PostMapping("getProcessResourceByProcessDefinitionId")
     public Object getProcessResourceByProcessDefinitionId(@RequestBody JSONObject json) throws Exception{
 
@@ -165,6 +180,13 @@ public class ActivitiController {
         return json;
     }
 
+    @PostMapping("getBpmnByModelId")
+    public Object getBpmnByModelId(@RequestBody JSONObject json) throws Exception{
+        processResourceService.getBpmnByModelId(json);
+
+        return json;
+    }
+
     private void appendDeploymentInfo(JSONObject json, Deployment deployment){
         json.put("deploymentId",deployment.getId());
         json.put("deploymentName",deployment.getName());
@@ -175,4 +197,6 @@ public class ActivitiController {
         json.put("processInstanceId",processInstance.getId());
         json.put("processInstanceName",processInstance.getName());
     }
+
+
 }

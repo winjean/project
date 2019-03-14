@@ -264,6 +264,23 @@ public class ActivitiControllerTest implements JavaDelegate {
     }
 
     @Test
+    public void getProcessResourceByModelIdTest() throws Exception{
+
+        JSONObject json = new JSONObject();
+        json.put("modelId","7503");
+        json.put("fileName","d:/a.png");
+
+        MvcResult result = mockMvc.perform(post(url+"getProcessResourceByModelId")
+                .content(json.toJSONString())
+                .header("content-type","application/json"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))// 预期返回值的媒体类型text/plain;charset=UTF-8
+                .andReturn();// 返回执行请求的结果
+
+        log.info("response info : {} ",result.getResponse().getContentAsString());
+    }
+
+    @Test
     public void getProcessResourceByProcessDefinitionIdTest() throws Exception{
 
         JSONObject json = new JSONObject();
@@ -296,6 +313,23 @@ public class ActivitiControllerTest implements JavaDelegate {
 
         log.info("response info : {} ",result.getResponse().getContentAsString());
     }
+
+    @Test
+    public void getBpmnByModelIdTest() throws Exception{
+
+        JSONObject json = new JSONObject();
+        json.put("modelId","7503");
+
+        MvcResult result = mockMvc.perform(post(url+"getBpmnByModelId")
+                .content(json.toJSONString())
+                .header("content-type","application/json"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))// 预期返回值的媒体类型text/plain;charset=UTF-8
+                .andReturn();// 返回执行请求的结果
+
+        log.info("response info : {} ",result.getResponse().getContentAsString());
+    }
+
 
     @Override
     public void execute(DelegateExecution execution) throws Exception {

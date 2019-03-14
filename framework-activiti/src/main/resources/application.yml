@@ -7,13 +7,11 @@ spring:
   profiles:
     active: @profileActive@
 #  activiti:
-#    database-schema-update: true
 #    check-process-definitions: true
 #    process-definition-location-prefix: classpath:/processes/
 #        process-definition-location-suffixes:
 #          - **.bpmn
 #          - **.bpmn20.xml
-#    history-level: full
 
   #sql自动升级管理
   flyway:
@@ -62,3 +60,6 @@ management:
 info:
   author: winjean
   version: @version@
+config:
+  winjean:
+    age: 33

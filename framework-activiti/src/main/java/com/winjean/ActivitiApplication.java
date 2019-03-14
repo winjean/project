@@ -12,6 +12,8 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan({"com.winjean.*"})
 @MapperScan("com.winjean.mapper.*")
 
+//@EnableConfigurationProperties({ConfigProperties.class})
+
 // http://localhost:8081/model/create
 
 public class ActivitiApplication {

@@ -1,9 +1,13 @@
 package com.winjean.service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
+import org.activiti.bpmn.converter.BpmnXMLConverter;
 import org.activiti.bpmn.model.BpmnModel;
+import org.activiti.editor.language.json.converter.BpmnJsonConverter;
 import org.activiti.engine.*;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.image.ProcessDiagramGenerator;
@@ -53,6 +57,30 @@ public class ProcessResourceService {
     @Autowired
     private ProcessEngineConfiguration processEngineConfiguration;
 
+    public Object getProcessResourceByModelId(JSONObject json) throws Exception{
+        String modelId = json.getString("modelId");
+
+        JsonNode editorNode = new ObjectMapper().readTree(repositoryService.getModelEditorSource(modelId));
+        BpmnJsonConverter jsonConverter = new BpmnJsonConverter();
+        BpmnModel bpmnModel = jsonConverter.convertToBpmnModel(editorNode);
+
+//        ProcessDefinitionEntity processDefinitionEntity=(ProcessDefinitionEntity) repositoryService.getProcessDefinition("");
+//        List<ActivityImpl> list = processDefinitionEntity.getActivities();
+//        for(ActivityImpl activity : list){
+////            activity.get
+//        }
+
+        ProcessDiagramGenerator diagramGenerator = processEngineConfiguration.getProcessDiagramGenerator();
+        InputStream imageStream = diagramGenerator.generateDiagram(
+                bpmnModel,"png", new ArrayList<>(), new ArrayList<>(),"宋体","宋体","宋体",null,1.0);
+        File file = new File(json.getString("fileName"));
+        FileUtils.copyToFile(imageStream,file);
+
+        log.info("image path: {}", file.getPath());
+
+        return json;
+    }
+
     public Object getProcessResourceByProcessDefinitionId(JSONObject json) throws Exception{
 
         BpmnModel bpmnModel = repositoryService.getBpmnModel(json.getString("processDefinitionId"));
@@ -96,6 +124,19 @@ public class ProcessResourceService {
         FileUtils.copyToFile(imageStream,file);
 
         log.info("image path: {}", file.getPath());
+
+        return json;
+    }
+
+    public Object getBpmnByModelId(JSONObject json) throws Exception{
+        String modelId = json.getString("modelId");
+
+        JsonNode editorNode = new ObjectMapper().readTree(repositoryService.getModelEditorSource(modelId));
+        BpmnJsonConverter jsonConverter = new BpmnJsonConverter();
+        BpmnModel model = jsonConverter.convertToBpmnModel(editorNode);
+        String filename = model.getMainProcess().getId() + ".bpmn20.xml";
+        byte[] bpmnBytes = new BpmnXMLConverter().convertToXML(model);
+        System.out.println(new String(bpmnBytes, "utf-8"));
 
         return json;
     }
