@@ -1,10 +1,9 @@
 package com.winjean.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.winjean.config.ConfigProperties;
+import com.winjean.service.ActivitiService;
 import com.winjean.service.DeployService;
 import com.winjean.service.ModelService;
-import com.winjean.service.ActivitiService;
 import com.winjean.service.ProcessResourceService;
 import com.winjean.utils.DateUtils;
 import io.swagger.annotations.Api;
@@ -44,14 +43,14 @@ public class ActivitiController {
     @Autowired
     private ProcessResourceService processResourceService;
 
-    @Autowired
-    private ConfigProperties configProperties;
-
+    /**
+     * 自定义model,然后部署创建的bpmnModel
+     * @param json
+     * @return
+     * @throws Exception
+     */
     @PostMapping("createModelAndDeploy")
     public Object createModel1(@RequestBody JSONObject json) throws Exception{
-
-        int a =configProperties.getAge();
-        System.out.println(a);
 
         BpmnModel bpmnModel = modelService.getBpmnModel(json);
 

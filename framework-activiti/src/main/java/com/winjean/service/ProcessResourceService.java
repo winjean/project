@@ -8,7 +8,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.activiti.bpmn.converter.BpmnXMLConverter;
 import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.editor.language.json.converter.BpmnJsonConverter;
-import org.activiti.engine.*;
+import org.activiti.engine.ProcessEngineConfiguration;
+import org.activiti.engine.RepositoryService;
+import org.activiti.engine.RuntimeService;
+import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
+import org.activiti.engine.impl.pvm.process.ActivityImpl;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.image.ProcessDiagramGenerator;
 import org.apache.commons.io.FileUtils;
@@ -34,22 +38,7 @@ import java.util.List;
 public class ProcessResourceService {
 
     @Autowired
-    private ProcessEngine processEngine;
-
-    @Autowired
     private RepositoryService repositoryService;
-
-    @Autowired
-    private FormService formService;
-
-    @Autowired
-    private IdentityService identityService;
-
-    @Autowired
-    private TaskService taskService;
-
-    @Autowired
-    private HistoryService historyService;
 
     @Autowired
     private RuntimeService runtimeService;
@@ -57,6 +46,12 @@ public class ProcessResourceService {
     @Autowired
     private ProcessEngineConfiguration processEngineConfiguration;
 
+    /**
+     * 根据流程model编码查询流程图
+     * @param json
+     * @return
+     * @throws Exception
+     */
     public Object getProcessResourceByModelId(JSONObject json) throws Exception{
         String modelId = json.getString("modelId");
 
@@ -85,11 +80,14 @@ public class ProcessResourceService {
 
         BpmnModel bpmnModel = repositoryService.getBpmnModel(json.getString("processDefinitionId"));
 
-//        ProcessDefinitionEntity processDefinitionEntity=(ProcessDefinitionEntity) repositoryService.getProcessDefinition("");
-//        List<ActivityImpl> list = processDefinitionEntity.getActivities();
-//        for(ActivityImpl activity : list){
-////            activity.get
-//        }
+        ProcessDefinitionEntity processDefinitionEntity=(ProcessDefinitionEntity) repositoryService.getProcessDefinition("");
+        List<ActivityImpl> list = processDefinitionEntity.getActivities();
+        for(ActivityImpl activity : list){
+
+//            activity
+
+            activity.getId();
+        }
 
         ProcessDiagramGenerator diagramGenerator = processEngineConfiguration.getProcessDiagramGenerator();
         InputStream imageStream = diagramGenerator.generateDiagram(

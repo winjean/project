@@ -10,15 +10,14 @@ import org.activiti.engine.history.HistoricTaskInstance;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
-import org.activiti.image.ProcessDiagramGenerator;
-import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import java.io.File;
-import java.io.InputStream;
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author ：winjean
@@ -68,6 +67,9 @@ public class ActivitiService {
         System.out.println(pi.getId() +" "+ pi.getName());
 
         log.info("processInstance Id：{}, processInstance name：{}", pi.getId(),pi.getName());
+
+//        ProcessDefinitionEntity processDefinition = (ProcessDefinitionEntity) ((RepositoryServiceImpl) repositoryService)
+//                .getDeployedProcessDefinition("");
 
         return pi;
     }

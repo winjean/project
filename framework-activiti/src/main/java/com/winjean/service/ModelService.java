@@ -63,7 +63,6 @@ public class ModelService {
         process.addFlowElement(createSequenceFlow("5","task1", "task2"));
         process.addFlowElement(createSequenceFlow("6","task2", "end"));
 
-
         // 2.生成BPMN自动布局
         new BpmnAutoLayout(bpmnModel).execute();
 
@@ -165,6 +164,14 @@ public class ModelService {
 //        gateway.setIncomingFlows(null);
 
         return gateway;
+    }
+
+    private SubProcess createSubProcess() {
+        SubProcess subProcess = new SubProcess();
+//        subProcess.clone();
+
+
+        return subProcess;
     }
 
     public void saveModel(BpmnModel bpmnModel) throws Exception{
