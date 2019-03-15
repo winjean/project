@@ -318,7 +318,7 @@ public class ActivitiControllerTest implements JavaDelegate {
     public void getBpmnByModelIdTest() throws Exception{
 
         JSONObject json = new JSONObject();
-        json.put("modelId","7503");
+        json.put("modelId","5095");
 
         MvcResult result = mockMvc.perform(post(url+"getBpmnByModelId")
                 .content(json.toJSONString())

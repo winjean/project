@@ -1,5 +1,6 @@
 package com.winjean.service;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -51,17 +53,36 @@ public class ModelService {
 
         //创建bpmn元素
         process.addFlowElement(createStartEvent());
-        process.addFlowElement(createUserTask("task1", "First task", "fred"));
-        process.addFlowElement(createUserTask("task2", "Second task", "john"));
+        JSONArray tasks = json.getJSONArray("userTasks");
+
+        Iterator<Object> it = tasks.iterator();
+
+        while (it.hasNext()){
+            JSONObject task = (JSONObject)it.next();
+            UserTask userTask = createUserTask(task.getString("id"),task.getString("name"), task.getString("assignee"));
+            process.addFlowElement(userTask);
+        }
+
         process.addFlowElement(createEndEvent());
+
+        JSONArray flowElements = json.getJSONArray("sequenceFlows");
+
+        Iterator<Object> feit = flowElements.iterator();
+
+        while (feit.hasNext()){
+            JSONObject sequence = (JSONObject)feit.next();
+            SequenceFlow sequenceFlow = createSequenceFlow(sequence.getString("id"),sequence.getString("from"), sequence.getString("to"));
+            process.addFlowElement(sequenceFlow);
+        }
+
 //        process.addFlowElement(createEventGateway());
 
-        process.addFlowElement(createSequenceFlow("1","start", "task1"));
-//        process.addFlowElement(createSequenceFlow("2","task1", "gateway"));
-//        process.addFlowElement(createSequenceFlow("3","gateway", "task2"));
-//        process.addFlowElement(createSequenceFlow("4","gateway", "end"));
-        process.addFlowElement(createSequenceFlow("5","task1", "task2"));
-        process.addFlowElement(createSequenceFlow("6","task2", "end"));
+//        process.addFlowElement(createSequenceFlow("1","start", "task1"));
+////        process.addFlowElement(createSequenceFlow("2","task1", "gateway"));
+////        process.addFlowElement(createSequenceFlow("3","gateway", "task2"));
+////        process.addFlowElement(createSequenceFlow("4","gateway", "end"));
+//        process.addFlowElement(createSequenceFlow("5","task1", "task2"));
+//        process.addFlowElement(createSequenceFlow("6","task2", "end"));
 
         // 2.生成BPMN自动布局
         new BpmnAutoLayout(bpmnModel).execute();
@@ -106,6 +127,13 @@ public class ModelService {
         userTask.setId(id);
         userTask.setAssignee(assignee);
 
+//        FormProperty formProperty = new FormProperty();
+//        formProperty.setType("enmu");
+//        FormValue formValue = new FormValue();
+////        formValue.setValue;
+//        formProperty.setFormValues(null);
+
+//        userTask.setFormProperties(null);
 //        MultiInstanceLoopCharacteristics m = new MultiInstanceLoopCharacteristics();
 //        m.setSequential(true);
 //        m.setElementVariable("");
@@ -195,7 +223,7 @@ public class ModelService {
         String id = modelData.getId();
         byte[] bytes = new BpmnXMLConverter().convertToXML(bpmnModel, "utf-8");
 
-        System.out.println(new String(bytes, "utf-8"));
+//        System.out.println(new String(bytes, "utf-8"));
 
         repositoryService.addModelEditorSource(id,bytes);
 //        repositoryService.addModelEditorSource(id,modelObjectNode.toString().getBytes("utf-8"));
