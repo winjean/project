@@ -5,10 +5,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
-import org.activiti.bpmn.converter.BpmnXMLConverter;
 import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.editor.language.json.converter.BpmnJsonConverter;
-import org.activiti.engine.*;
+import org.activiti.engine.ProcessEngine;
+import org.activiti.engine.RepositoryService;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.Model;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,18 +55,36 @@ public class DeployService {
         ObjectNode modelNode = (ObjectNode) new ObjectMapper().readTree(modelEditorSource);
 
         BpmnModel model = new BpmnJsonConverter().convertToBpmnModel(modelNode);
-        byte[] bpmnBytes = new BpmnXMLConverter().convertToXML(model);
+//        byte[] bpmnBytes = new BpmnXMLConverter().convertToXML(model);
 
         String processName = modelData.getName() + ".bpmn20.xml";
-        Deployment deployment = repositoryService.createDeployment()
-                .name(modelData.getName())
-                .addString(processName, new String(bpmnBytes, "UTF-8"))
+        Deployment deployment = repositoryService.createDeployment().addBpmnModel(modelData.getName(),model)
+//                .name(modelData.getName())
+//                .addString(processName, new String(bpmnBytes, "UTF-8"))
                 .deploy();
 
         log.info("deployment id：{}, deployment name：{}, deployment time：{}", deployment.getId(),deployment.getName(), deployment.getDeploymentTime());
-
         return deployment;
     }
+
+//    public Deployment deployWithModelId(JSONObject json) throws Exception{
+//        Model modelData = repositoryService.getModel(json.getString("modelId"));
+//        byte[] modelEditorSource = repositoryService.getModelEditorSource(modelData.getId());
+//
+//        ObjectNode modelNode = (ObjectNode) new ObjectMapper().readTree(modelEditorSource);
+//
+//        BpmnModel model = new BpmnJsonConverter().convertToBpmnModel(modelNode);
+//        byte[] bpmnBytes = new BpmnXMLConverter().convertToXML(model);
+//
+//        String processName = modelData.getName() + ".bpmn20.xml";
+//        Deployment deployment = repositoryService.createDeployment()
+//                .name(modelData.getName())
+//                .addString(processName, new String(bpmnBytes, "UTF-8"))
+//                .deploy();
+//
+//        log.info("deployment id：{}, deployment name：{}, deployment time：{}", deployment.getId(),deployment.getName(), deployment.getDeploymentTime());
+//        return deployment;
+//    }
 
     public Deployment deploymentWithClasspathResource(JSONObject json){
         Deployment deployment = processEngine.getRepositoryService()//获取流程定义和部署对象相关的Service

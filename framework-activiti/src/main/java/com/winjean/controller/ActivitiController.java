@@ -10,12 +10,15 @@ import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.engine.repository.Deployment;
+import org.activiti.engine.repository.Model;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * @author ：winjean
@@ -49,16 +52,32 @@ public class ActivitiController {
      * @return
      * @throws Exception
      */
-    @PostMapping("createModelAndDeploy")
-    public Object createModel1(@RequestBody JSONObject json) throws Exception{
+    @PostMapping("establishModel")
+    public Object createModel(@RequestBody JSONObject json) throws Exception{
 
         BpmnModel bpmnModel = modelService.getBpmnModel(json);
 
-        json.put("process-id",bpmnModel.getMainProcess().getId());
-        json.put("process-name",bpmnModel.getMainProcess().getName());
+//        json.put("process-id",bpmnModel.getMainProcess().getId());
+//        json.put("process-name",bpmnModel.getMainProcess().getName());
+//
+//        Deployment deployment = deployService.deployWithBpmnModel(json,bpmnModel);
+//        appendDeploymentInfo(json, deployment);
+//        bpmnModel.
+        json.clear();
+//bpmnModel.getMainProcess().
 
-        Deployment deployment = deployService.deployWithBpmnModel(json,bpmnModel);
-        appendDeploymentInfo(json, deployment);
+        json.put("process_id", bpmnModel.getMainProcess().getId());
+
+        return json;
+    }
+
+    @PostMapping("queryModel")
+    public Object queryModel(@RequestBody JSONObject json) throws Exception{
+
+        List<Model> models = modelService.queryModel(json);
+
+        json.put("models",models);
+
         return json;
     }
 

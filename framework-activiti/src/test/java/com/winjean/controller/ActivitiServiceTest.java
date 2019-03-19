@@ -82,10 +82,16 @@ public class ActivitiServiceTest {
         json.put("proc-def-name","proc-def-key");
         StringBuffer sb = new StringBuffer();
         sb.append("[")
-                .append("{\"id\":\"user_task_1\",\"name\":\"用户任务1\",\"assignee\":\"winjean\"},")
-                .append("{\"id\":\"user_task_2\",\"name\":\"用户任务2\",\"assignee\":\"winjean\"},")
+                .append("{\"id\":\"user_task_1\",\"name\":\"用户任务1\",\"assignee\":\"winjean\"")
+                    .append(",\"formProperties\" :[{\"id\":\"title\",\"name\":\"标题\",\"type\":\"string\",\"writable\":\"true\"}]")
+                .append("},")
+
+                .append("{\"id\":\"user_task_2\",\"name\":\"用户任务2\",\"assignee\":\"winjean\"")
+                    .append(",\"formProperties\" :[{\"id\":\"title\",\"name\":\"标题\",\"type\":\"string\",\"writable\":\"true\"}]")
+                .append("},")
+
                 .append("{\"id\":\"user_task_3\",\"name\":\"用户任务3\",\"assignee\":\"winjean\"}")
-//                .append("{\"id\":\"title\",\"name\":\"标题\",\"type\":\"string\",\"writable\":\"true\"}")
+//                .append("")
                 .append("]");
         List<JSONObject> tasks = JSONArray.parseArray(sb.toString(), JSONObject.class);
         json.put("userTasks",tasks);
@@ -124,6 +130,9 @@ public class ActivitiServiceTest {
 
         //根据流程实例编号生成流程图
         List<String> activeActivityIds = runtimeService.getActiveActivityIds(processInstanceId);
+
+        String procDefId = runtimeService.createProcessInstanceQuery().processInstanceId(processInstanceId).singleResult().getProcessDefinitionId();
+        bpmnModel = processEngine.getRepositoryService().getBpmnModel(procDefId);
 
         ProcessDiagramGenerator diagramGenerator = processEngineConfiguration.getProcessDiagramGenerator();
         InputStream imageStream = diagramGenerator.generateDiagram(
@@ -219,6 +228,7 @@ public class ActivitiServiceTest {
 
         File file = new File("d:/a.png");
         FileUtils.copyToFile(imageStream,file);
+
     }
 
 

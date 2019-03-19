@@ -1,5 +1,6 @@
 package com.winjean.config;
 
+import com.winjean.form.UsersFormType;
 import org.activiti.engine.*;
 import org.activiti.spring.ProcessEngineFactoryBean;
 import org.activiti.spring.SpringProcessEngineConfiguration;
@@ -9,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
+import java.util.Arrays;
 
 @Configuration
 public class ActivitiConfiguration {
@@ -28,6 +30,8 @@ public class ActivitiConfiguration {
 
         spec.setActivityFontName("宋体").setLabelFontName("宋体").setAnnotationFontName("宋体");
 
+        spec.setCustomFormTypes(Arrays.asList(new UsersFormType()));
+
         //记录的历史的详细级别
 //        spec.setHistoryLevel(HistoryLevel.FULL);
 
@@ -44,7 +48,7 @@ public class ActivitiConfiguration {
 
     @Bean
     public ProcessEngineFactoryBean processEngine(){
-        ProcessEngines.getDefaultProcessEngine();
+//        ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
 
         ProcessEngineFactoryBean processEngineFactoryBean = new ProcessEngineFactoryBean();
         processEngineFactoryBean.setProcessEngineConfiguration(springProcessEngineConfiguration());
@@ -80,4 +84,28 @@ public class ActivitiConfiguration {
     public FormService formService() throws Exception{
         return processEngine().getObject().getFormService();
     }
+
+//    @Bean
+//    public BeanPostProcessor activitiConfigurer() {
+//        return new BeanPostProcessor() {
+//
+//            @Override
+//            public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+//                if (bean instanceof SpringProcessEngineConfiguration) {
+//                    List<AbstractFormType> customFormTypes = Arrays.asList(new UsersFormType());
+//                    ((SpringProcessEngineConfiguration)bean).setCustomFormTypes(customFormTypes);
+//                }
+//                return bean;
+//            }
+//
+//            @Override
+//            public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+//                if (bean instanceof SpringProcessEngineConfiguration) {
+//                    List<AbstractFormType> customFormTypes = Arrays.asList(new UsersFormType());
+//                    ((SpringProcessEngineConfiguration)bean).setCustomFormTypes(customFormTypes);
+//                }
+//                return bean;
+//            }
+//        };
+//    }
 }

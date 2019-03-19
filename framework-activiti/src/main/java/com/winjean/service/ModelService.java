@@ -2,25 +2,24 @@ package com.winjean.service;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.extern.slf4j.Slf4j;
 import org.activiti.bpmn.BpmnAutoLayout;
-import org.activiti.bpmn.converter.BpmnXMLConverter;
 import org.activiti.bpmn.model.Process;
 import org.activiti.bpmn.model.*;
 import org.activiti.editor.constants.ModelDataJsonConstants;
 import org.activiti.editor.language.json.converter.BpmnJsonConverter;
 import org.activiti.engine.RepositoryService;
-import org.activiti.engine.delegate.DelegateTask;
-import org.activiti.engine.delegate.TaskListener;
 import org.activiti.engine.repository.Model;
 import org.activiti.validation.ProcessValidator;
 import org.activiti.validation.ProcessValidatorFactory;
 import org.activiti.validation.ValidationError;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -42,6 +41,13 @@ public class ModelService {
     @Autowired
     private DeployService deployService;
 
+    public List<Model> queryModel(JSONObject json){
+
+        List<Model> models = repositoryService.createModelQuery().orderByCreateTime().desc().list();
+
+        return models;
+    }
+
     public BpmnModel getBpmnModel(JSONObject json) throws Exception{
         //创建bpmn模型
         BpmnModel bpmnModel = new BpmnModel();
@@ -60,6 +66,12 @@ public class ModelService {
         while (it.hasNext()){
             JSONObject task = (JSONObject)it.next();
             UserTask userTask = createUserTask(task.getString("id"),task.getString("name"), task.getString("assignee"));
+            JSONArray _fps = task.getJSONArray("formProperties");
+            if(_fps != null){
+                List<FormProperty> formProperties = establishFormProperty(_fps);
+                userTask.setFormProperties(formProperties);
+            }
+
             process.addFlowElement(userTask);
         }
 
@@ -118,6 +130,42 @@ public class ModelService {
         }
 
         return errors.size() == 0;
+    }
+
+    private List<FormProperty> establishFormProperty(JSONArray _array){
+        List<FormProperty> list = new ArrayList<>();
+
+        _array.forEach((fp) -> {
+            JSONObject json = (JSONObject)fp;
+            FormProperty formProperty = new FormProperty();
+            String id = json.getString("id");
+            if(StringUtils.isNotEmpty(id)) formProperty.setId(id);
+
+            String name = json.getString("name");
+            if(StringUtils.isNotEmpty(name)) formProperty.setName(name);
+
+            String type = json.getString("type");
+            if(StringUtils.isNotEmpty(type)) formProperty.setType(type);
+
+            String writable = json.getString("writable");
+            if(StringUtils.isNotEmpty(writable)) formProperty.setWriteable(Boolean.valueOf(writable));
+
+            String readable = json.getString("readable");
+            if(StringUtils.isNotEmpty(readable)) formProperty.setReadable(Boolean.valueOf(readable));
+
+            String required = json.getString("required");
+            if(StringUtils.isNotEmpty(required)) formProperty.setRequired(Boolean.valueOf(required));
+
+            String expression = json.getString("expression");
+            if(StringUtils.isNotEmpty(expression)) formProperty.setExpression(expression);
+
+            String variable = json.getString("variable");
+            if(StringUtils.isNotEmpty(variable)) formProperty.setVariable(variable);
+
+            list.add(formProperty);
+        });
+
+        return list;
     }
 
     //  创建task
@@ -204,7 +252,7 @@ public class ModelService {
 
     public void saveModel(BpmnModel bpmnModel) throws Exception{
 
-        String processName = bpmnModel.getMainProcess().getName();
+        /*String processName = bpmnModel.getMainProcess().getName();
         if (StringUtils.isEmpty(processName)){
             processName = bpmnModel.getMainProcess().getId();
         }
@@ -212,6 +260,7 @@ public class ModelService {
         Model modelData = repositoryService.newModel();
         modelData.setName(processName);
         modelData.setKey("modelKey");
+//        modelData.set
         repositoryService.saveModel(modelData);
 
         ObjectNode modelObjectNode = new BpmnJsonConverter().convertToJson(bpmnModel);
@@ -221,21 +270,48 @@ public class ModelService {
 
 
         String id = modelData.getId();
-        byte[] bytes = new BpmnXMLConverter().convertToXML(bpmnModel, "utf-8");
+//        byte[] bytes = new BpmnXMLConverter().convertToXML(bpmnModel, "utf-8");
 
 //        System.out.println(new String(bytes, "utf-8"));
 
-        repositoryService.addModelEditorSource(id,bytes);
-//        repositoryService.addModelEditorSource(id,modelObjectNode.toString().getBytes("utf-8"));
-//        repositoryService.addModelEditorSourceExtra("");
+//        repositoryService.addModelEditorSource(id,bytes);
+        repositoryService.addModelEditorSource(id,modelObjectNode.toString().getBytes("utf-8"));
+//        repositoryService.addModelEditorSourceExtra("");*/
+
+
+
+        ObjectNode editorNode = new BpmnJsonConverter().convertToJson(bpmnModel);// objectMapper.createObjectNode();
+        ObjectMapper objectMapper = new ObjectMapper();
+//        ObjectNode editorNode = objectMapper.createObjectNode();
+        editorNode.put("id", "canvas");
+        editorNode.put("resourceId", "canvas");
+        ObjectNode stencilSetNode = objectMapper.createObjectNode();
+        stencilSetNode.put("namespace", "http://b3mn.org/stencilset/bpmn2.0#");
+        editorNode.set("stencilset", stencilSetNode);
+
+        Model modelData = repositoryService.newModel();
+        ObjectNode modelObjectNode = objectMapper.createObjectNode();
+        modelObjectNode.put(ModelDataJsonConstants.MODEL_NAME, "MODEL_NAME");
+        modelObjectNode.put(ModelDataJsonConstants.MODEL_REVISION, 1);
+        String description = StringUtils.defaultString("Description");
+        modelObjectNode.put(ModelDataJsonConstants.MODEL_DESCRIPTION, description);
+        modelData.setMetaInfo(modelObjectNode.toString());
+        modelData.setName("MODEL_NAME");
+        modelData.setKey(StringUtils.defaultString("model.getKey()"));
+
+        repositoryService.saveModel(modelData);
+        repositoryService.addModelEditorSource(modelData.getId(), editorNode.toString().getBytes("utf-8"));
+
+
+
     }
 
-    public class TaskListenerImpl implements TaskListener {
-
-        @Override
-        public void notify(DelegateTask delegateTask) {
-            String assignee = "winjean";
-            delegateTask.setAssignee(assignee);
-        }
-    }
+//    public class TaskListenerImpl implements TaskListener {
+//
+//        @Override
+//        public void notify(DelegateTask delegateTask) {
+//            String assignee = "winjean";
+//            delegateTask.setAssignee(assignee);
+//        }
+//    }
 }
