@@ -1,0 +1,832 @@
+{
+	"info": {
+		"_postman_id": "5a363fb4-f831-4305-b008-4e2555f40ed6",
+		"name": "framework",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "USER",
+			"item": [
+				{
+					"name": "user-insert",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"11\",\n\t\"sex\":\"true\",\n\t\"birthday\":\"2019-01-01\",\n\t\"password\":11111111,\n\t\"telephone\":\"13855554562\",\n\t\"email\":\"1a@qq.com\",\n\t\"state\":1\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/user/insert",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"insert"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user-delete",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/user/delete?id=6FA8F3D1BD114A868DE78B40F7ECE6F7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "6FA8F3D1BD114A868DE78B40F7ECE6F7"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user-update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\t\n\t\"id\":\"1A56C8DA4E734E0592FC2AF410ED6BBD\",\n\t\"name\":\"11\",\n\t\"sex\":\"false\",\n\t\"birthday\":\"2019-04-04\",\n\t\"password\":\"11111122\",\n\t\"telephone\":\"13855554562\",\n\t\"email\":\"1a@qq.com\",\n\t\"state\":1\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/user/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user-delete-users",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[{\n\t\"id\":\"0EFEC7F82E5F4532A37033101FAFF08D\"\t\n},{\n\t\"id\":\"51201626216F44E894E0B1DAF9641D40\"\t\n}]"
+						},
+						"url": {
+							"raw": "http://localhost:8080/user/deleteUsers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"deleteUsers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user-query",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":\"6FA8F3D1BD114A868DE78B40F7ECE6F7\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/user/query",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"query"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user-query-users",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"pageNum\":1,\n\t\"pageSize\":8\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/user/searchUsers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"searchUsers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user-login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"userName\":\"winjean\",\n\t\"password\":\"123456\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/user/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user-logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"userName\":\"winjean\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/user/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user-index",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/actuator",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"actuator"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "activiti",
+			"item": [
+				{
+					"name": "establishModel",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"proc-def-key\":\"proc-def-key\",\r\n\t\"proc-def-name\":\"proc-def-name\",\r\n\t\"userTasks\":[\r\n\t\t{\"id\":\"user_task_1\",\"name\":\"用户任务1\",\"assignee\":\"winjean\",\"formProperties\":\r\n\t\t\t[\r\n\t\t\t\t{\"id\":\"title\",\"name\":\"标题\",\"type\":\"string\",\"writable\":\"true\"},\r\n\t\t\t\t{\"id\":\"level\",\"name\":\"优先级\",\"type\":\"string\",\"writable\":\"false\"},\r\n\t\t\t\t{\"id\":\"description\",\"name\":\"问题描述\",\"type\":\"string\",\"writable\":\"false\"},\r\n\t\t\t\t{\"id\":\"creater\",\"name\":\"问题申报人\",\"type\":\"string\",\"writable\":\"false\"}\r\n\t\t\t\t\r\n\t\t\t\t\r\n\t\t\t\t\r\n\t\t\t]\r\n\t\t},\r\n\t\t{\"id\":\"user_task_2\",\"name\":\"用户任务2\",\"assignee\":\"winjean\",\"formProperties\":\r\n\t\t\t[\r\n\t\t\t\t{\"id\":\"title\",\"name\":\"标题\",\"type\":\"string\",\"writable\":\"true\"}\r\n\t\t\t]\r\n\t\t},\r\n\t\t{\"id\":\"user_task_3\",\"name\":\"用户任务3\",\"assignee\":\"winjean\",\"formProperties\":\r\n\t\t\t[\r\n\t\t\t\t{\"id\":\"title\",\"name\":\"标题\",\"type\":\"string\",\"writable\":\"true\"}\r\n\t\t\t]\r\n\t\t}\r\n\t],\r\n\t\"sequenceFlows\":[\r\n\t\t{\"id\":\"sequence_flow_1\",\"from\":\"start\",\"to\":\"user_task_1\"},\r\n\t\t{\"id\":\"sequence_flow_2\",\"from\":\"user_task_1\",\"to\":\"user_task_2\"},\r\n\t\t{\"id\":\"sequence_flow_3\",\"from\":\"user_task_2\",\"to\":\"user_task_3\"},\r\n\t\t{\"id\":\"sequence_flow_4\",\"from\":\"user_task_3\",\"to\":\"end\"}\r\n\t]\r\n}\r\n\r\n"
+						},
+						"url": {
+							"raw": "localhost:8081/activiti/establishModel",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"activiti",
+								"establishModel"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "queryModel",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}\r\n\r\n"
+						},
+						"url": {
+							"raw": "localhost:8081/activiti/queryModel",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"activiti",
+								"queryModel"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deployWithModelId",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"modelId\":\"7503\"\r\n}\r\n\r\n"
+						},
+						"url": {
+							"raw": "localhost:8081/activiti/deployWithModelId",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"activiti",
+								"deployWithModelId"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "startProcessByFormService",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"userId\":\"7503\",\r\n\t\"processDefinitionId\":\"process:1:20004\",\r\n\t\"name\":\"7503\",\r\n\t\"age\":\"7503\",\r\n\t\"date\":\"7503\",\r\n\t\"processName\":\"processName\"\r\n\t\r\n}\r\n\r\n"
+						},
+						"url": {
+							"raw": "localhost:8081/activiti/startProcessByFormService",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"activiti",
+								"startProcessByFormService"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "startProcessByRuntimeService",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"userId\":\"7503\",\r\n\t\"processDefinitionKey\":\"process\",\r\n\t\"name\":\"7503\",\r\n\t\"age\":\"7503\",\r\n\t\"date\":\"7503\",\r\n\t\"processName\":\"processName\"\r\n}\r\n\r\n"
+						},
+						"url": {
+							"raw": "localhost:8081/activiti/startProcessByRuntimeService",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"activiti",
+								"startProcessByRuntimeService"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "completeTaskByFormService",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"processInstanceId\":\"35027\"\r\n}\t\r\n\r\n"
+						},
+						"url": {
+							"raw": "localhost:8081/activiti/completeTaskByFormService",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"activiti",
+								"completeTaskByFormService"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "quartz",
+			"item": [
+				{
+					"name": "pause",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1NTEyMDM3MjMsInVzZXJfbmFtZSI6eyJ1c2VyIjp7InN0YXR1cyI6MCwiY3JlYXRlVXNlciI6bnVsbCwiY3JlYXRlVGltZSI6bnVsbCwidXBkYXRlVXNlciI6bnVsbCwidXBkYXRlVGltZSI6bnVsbCwiY3JlYXRlVXNlcm5hbWUiOm51bGwsImlEaXNwbGF5U3RhcnQiOm51bGwsImlEaXNwbGF5TGVuZ3RoIjpudWxsLCJzb3J0IjpudWxsLCJjdXJyZW50IjpudWxsLCJzaXplIjpudWxsLCJpZCI6IjFERjc4ODU3MzRCQTRGQzc4QjJBRUZBRTRGQjkxQ0UzIiwidXNlcm5hbWUiOiJ5c3Rlc3QiLCJwd2RaZXJvIjpudWxsLCJwd2RPbmUiOm51bGwsInB3ZFR3byI6bnVsbCwicHR5cGUiOm51bGwsImVtYWlsIjoiMzQ2QTM5NzA3NDQ3NDk1NjY2NzQ1MjJGNkI1NzYzMkYyQjYyNzg2MjZGN0EzNTY2NDI2QjRFNEI2QTMyNTc0OTRDNjI0NDVBNzk1QTU2NTU0OTU1NEY2MjMyNzY3NTQxMzM0QzU3NjY3NjZFNjI3ODc1Nzk0RDJGMzM2RTc2NDEyRjM0NkY3ODZBNkMzMjY2NTc0RTM2NTU2RDUyNkI0RTMyNTQ0MzM1NkEzNDM2NkQ0Rjc2NjU3OTY1NTU1MDM5Nzk1NzM2NkU2OTRDNTc3NzU4NEM0NzQ4NTE3NjY1Nzc2NDM3NDM2NDJCNEM1NTc3NDgzMjM2NEY2QTY4MzU3MyIsInRlbGVwaG9uZSI6IjMzNzkyRjRCNjY2NzYyNjk0QjM3MzQ2NjRFNTA3NzM4N0E0NzUxMzEzNzQyNzQ3MTRDNjk2NDMyNEI2ODMwN0E1NzY1Nzg3QTQzNjM2RjcyNEQ0QzM3NDYzODY5NzA3NjMzMzE1MjVBNzIzNTZENzU3NTRDNjg0RDYxNjU2QzMzNjk2Rjc0NkM0OTQ4NTc0QTU5NjY1MjcyNjQ0NTY2MkY2ODQyNDE3NTY1NDEzRDNEIiwiZW50TmFtZSI6IuWNl-S6rOiBlOaIkOenkeaKgOWPkeWxleiCoeS7veaciemZkOWFrOWPuCIsImxhc3RUaW1lIjpudWxsLCJyb2xlSWRzIjpudWxsLCJhcHBJZHMiOm51bGwsImVudElkIjoiOEM1QkEzNjI4NEQ1NDcyMUIyQjZGQjNDRDMxRURCNjEiLCJhcHBJZCI6bnVsbCwiZnVsbE5hbWUiOiJ5cyIsImhlYWRJbWciOm51bGwsInNleCI6MSwiZGVwYXJ0SWRzIjpudWxsLCJuZXdQYXNzd29yZCI6bnVsbCwib2xkUGFzc3dvcmQiOm51bGwsImR0eXBlIjpudWxsfSwiYXV0aG9yaXRpZXMiOlt7ImF1dGhvcml0eSI6bnVsbH1dLCJhY2NvdW50Tm9uRXhwaXJlZCI6dHJ1ZSwiYWNjb3VudE5vbkxvY2tlZCI6dHJ1ZSwiY3JlZGVudGlhbHNOb25FeHBpcmVkIjp0cnVlLCJ1c2VybmFtZSI6IjFERjc4ODU3MzRCQTRGQzc4QjJBRUZBRTRGQjkxQ0UzIiwiZW5hYmxlZCI6dHJ1ZSwicGFzc3dvcmQiOm51bGx9LCJhdXRob3JpdGllcyI6W251bGxdLCJqdGkiOiJhN2EwODUyYS0wMjBhLTQ3MzUtOGZhMS04YWZkNjY5MWQxZDIiLCJjbGllbnRfaWQiOiJhdmF0YXItZ2F0ZXdheSIsInNjb3BlIjpbImFsbCIsInJlYWQiLCJ3cml0ZSJdfQ.bOLbtHKwlRPZ6jqNAu73sN7NzPyvVDykR-Hs9jCdYnLkCJF3kefTFi7oVB2a-3mMvkbK4eXMjvI7Ckg2isoksN-1GTAXhy0lz7rfxlnyp-W09T6aqvl-WBMjUCcg_h2fDMUCTqoU8M5zGPHSlV62uCAYYA451BWyJF2spNXjk8Br3fbNQB_CrGZDR1P_r4YGqumICGelZmwNZ6BIQZ7DFH7ntvmTzzUlZlUgj9NzsA92tLqgYnRgj7tP8bFPb5etNkNS_BwHGz5u5URUzWfW9QSvohFbLs3OBoe8tq-LCUd8B-CthiJzLZ220dPAne9yTzQxtlduYytrf5e6eYV7LA"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "jobName",
+									"value": "11",
+									"type": "text"
+								},
+								{
+									"key": "jobGroup",
+									"value": "11",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:9000/avatar-bpm-rest/quartztest/pause",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"avatar-bpm-rest",
+								"quartztest",
+								"pause"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add-task",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1NTEzNjMxMDIsInVzZXJfbmFtZSI6eyJ1c2VyIjp7InN0YXR1cyI6MCwiY3JlYXRlVXNlciI6bnVsbCwiY3JlYXRlVGltZSI6bnVsbCwidXBkYXRlVXNlciI6bnVsbCwidXBkYXRlVGltZSI6bnVsbCwiY3JlYXRlVXNlcm5hbWUiOm51bGwsImlEaXNwbGF5U3RhcnQiOm51bGwsImlEaXNwbGF5TGVuZ3RoIjpudWxsLCJzb3J0IjpudWxsLCJjdXJyZW50IjpudWxsLCJzaXplIjpudWxsLCJpZCI6IjFERjc4ODU3MzRCQTRGQzc4QjJBRUZBRTRGQjkxQ0UzIiwidXNlcm5hbWUiOiJ5c3Rlc3QiLCJwd2RaZXJvIjpudWxsLCJwd2RPbmUiOm51bGwsInB3ZFR3byI6bnVsbCwicHR5cGUiOm51bGwsImVtYWlsIjoiMzQ2QTM5NzA3NDQ3NDk1NjY2NzQ1MjJGNkI1NzYzMkYyQjYyNzg2MjZGN0EzNTY2NDI2QjRFNEI2QTMyNTc0OTRDNjI0NDVBNzk1QTU2NTU0OTU1NEY2MjMyNzY3NTQxMzM0QzU3NjY3NjZFNjI3ODc1Nzk0RDJGMzM2RTc2NDEyRjM0NkY3ODZBNkMzMjY2NTc0RTM2NTU2RDUyNkI0RTMyNTQ0MzM1NkEzNDM2NkQ0Rjc2NjU3OTY1NTU1MDM5Nzk1NzM2NkU2OTRDNTc3NzU4NEM0NzQ4NTE3NjY1Nzc2NDM3NDM2NDJCNEM1NTc3NDgzMjM2NEY2QTY4MzU3MyIsInRlbGVwaG9uZSI6IjMzNzkyRjRCNjY2NzYyNjk0QjM3MzQ2NjRFNTA3NzM4N0E0NzUxMzEzNzQyNzQ3MTRDNjk2NDMyNEI2ODMwN0E1NzY1Nzg3QTQzNjM2RjcyNEQ0QzM3NDYzODY5NzA3NjMzMzE1MjVBNzIzNTZENzU3NTRDNjg0RDYxNjU2QzMzNjk2Rjc0NkM0OTQ4NTc0QTU5NjY1MjcyNjQ0NTY2MkY2ODQyNDE3NTY1NDEzRDNEIiwiZW50TmFtZSI6IuWNl-S6rOiBlOaIkOenkeaKgOWPkeWxleiCoeS7veaciemZkOWFrOWPuCIsImxhc3RUaW1lIjpudWxsLCJyb2xlSWRzIjpudWxsLCJhcHBJZHMiOm51bGwsImVudElkIjoiOEM1QkEzNjI4NEQ1NDcyMUIyQjZGQjNDRDMxRURCNjEiLCJhcHBJZCI6bnVsbCwiZnVsbE5hbWUiOiJ5cyIsImhlYWRJbWciOm51bGwsInNleCI6MSwiZGVwYXJ0SWRzIjpudWxsLCJuZXdQYXNzd29yZCI6bnVsbCwib2xkUGFzc3dvcmQiOm51bGwsImR0eXBlIjpudWxsfSwiYXV0aG9yaXRpZXMiOlt7ImF1dGhvcml0eSI6bnVsbH1dLCJhY2NvdW50Tm9uRXhwaXJlZCI6dHJ1ZSwiYWNjb3VudE5vbkxvY2tlZCI6dHJ1ZSwiY3JlZGVudGlhbHNOb25FeHBpcmVkIjp0cnVlLCJ1c2VybmFtZSI6IjFERjc4ODU3MzRCQTRGQzc4QjJBRUZBRTRGQjkxQ0UzIiwiZW5hYmxlZCI6dHJ1ZSwicGFzc3dvcmQiOm51bGx9LCJhdXRob3JpdGllcyI6W251bGxdLCJqdGkiOiIyOTU5ZTc4Yy1jNGVhLTQzMDEtYjdkYS05MzMwYmViMzIzM2YiLCJjbGllbnRfaWQiOiJhdmF0YXItZ2F0ZXdheSIsInNjb3BlIjpbImFsbCIsInJlYWQiLCJ3cml0ZSJdfQ.odJFq3FeOE7pSm0gGLvAGGp1diF98JqM1y-bw42t-fA7QM1xAOMdD80ldfCEgg-3a0mVLZ6teRTQRGyvK1HP6-dwamHIHQ-B0FUGDGfPp4dCjsHNFXddH0uI2HyddCEUPE5-N7xzU97bij_k4bHUn-bi6f95XgI6I9Wte5aa7h41Yol6f6yNkn0BPazvLxc5dLeQ2qoaE8sgXTNNYhr4aaG7qbnhoDqXwsxDGOkkhiGvQdLHAv9OWEukxV1APFgq95r5ea1lLuXa6YljW5jXhckGLZJr9FWr-XYxCzJzN_eiOHuqlEsUkeebEisJ-sLyL0GUHNijSFoz2wQzEvoWew",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"jobName\":\"ss\",\n\t\"jobGroup\":\"ss\"\n}"
+						},
+						"url": {
+							"raw": "127.0.0.1:8088/add",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8088",
+							"path": [
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "resume",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1NTEyMDM3MjMsInVzZXJfbmFtZSI6eyJ1c2VyIjp7InN0YXR1cyI6MCwiY3JlYXRlVXNlciI6bnVsbCwiY3JlYXRlVGltZSI6bnVsbCwidXBkYXRlVXNlciI6bnVsbCwidXBkYXRlVGltZSI6bnVsbCwiY3JlYXRlVXNlcm5hbWUiOm51bGwsImlEaXNwbGF5U3RhcnQiOm51bGwsImlEaXNwbGF5TGVuZ3RoIjpudWxsLCJzb3J0IjpudWxsLCJjdXJyZW50IjpudWxsLCJzaXplIjpudWxsLCJpZCI6IjFERjc4ODU3MzRCQTRGQzc4QjJBRUZBRTRGQjkxQ0UzIiwidXNlcm5hbWUiOiJ5c3Rlc3QiLCJwd2RaZXJvIjpudWxsLCJwd2RPbmUiOm51bGwsInB3ZFR3byI6bnVsbCwicHR5cGUiOm51bGwsImVtYWlsIjoiMzQ2QTM5NzA3NDQ3NDk1NjY2NzQ1MjJGNkI1NzYzMkYyQjYyNzg2MjZGN0EzNTY2NDI2QjRFNEI2QTMyNTc0OTRDNjI0NDVBNzk1QTU2NTU0OTU1NEY2MjMyNzY3NTQxMzM0QzU3NjY3NjZFNjI3ODc1Nzk0RDJGMzM2RTc2NDEyRjM0NkY3ODZBNkMzMjY2NTc0RTM2NTU2RDUyNkI0RTMyNTQ0MzM1NkEzNDM2NkQ0Rjc2NjU3OTY1NTU1MDM5Nzk1NzM2NkU2OTRDNTc3NzU4NEM0NzQ4NTE3NjY1Nzc2NDM3NDM2NDJCNEM1NTc3NDgzMjM2NEY2QTY4MzU3MyIsInRlbGVwaG9uZSI6IjMzNzkyRjRCNjY2NzYyNjk0QjM3MzQ2NjRFNTA3NzM4N0E0NzUxMzEzNzQyNzQ3MTRDNjk2NDMyNEI2ODMwN0E1NzY1Nzg3QTQzNjM2RjcyNEQ0QzM3NDYzODY5NzA3NjMzMzE1MjVBNzIzNTZENzU3NTRDNjg0RDYxNjU2QzMzNjk2Rjc0NkM0OTQ4NTc0QTU5NjY1MjcyNjQ0NTY2MkY2ODQyNDE3NTY1NDEzRDNEIiwiZW50TmFtZSI6IuWNl-S6rOiBlOaIkOenkeaKgOWPkeWxleiCoeS7veaciemZkOWFrOWPuCIsImxhc3RUaW1lIjpudWxsLCJyb2xlSWRzIjpudWxsLCJhcHBJZHMiOm51bGwsImVudElkIjoiOEM1QkEzNjI4NEQ1NDcyMUIyQjZGQjNDRDMxRURCNjEiLCJhcHBJZCI6bnVsbCwiZnVsbE5hbWUiOiJ5cyIsImhlYWRJbWciOm51bGwsInNleCI6MSwiZGVwYXJ0SWRzIjpudWxsLCJuZXdQYXNzd29yZCI6bnVsbCwib2xkUGFzc3dvcmQiOm51bGwsImR0eXBlIjpudWxsfSwiYXV0aG9yaXRpZXMiOlt7ImF1dGhvcml0eSI6bnVsbH1dLCJhY2NvdW50Tm9uRXhwaXJlZCI6dHJ1ZSwiYWNjb3VudE5vbkxvY2tlZCI6dHJ1ZSwiY3JlZGVudGlhbHNOb25FeHBpcmVkIjp0cnVlLCJ1c2VybmFtZSI6IjFERjc4ODU3MzRCQTRGQzc4QjJBRUZBRTRGQjkxQ0UzIiwiZW5hYmxlZCI6dHJ1ZSwicGFzc3dvcmQiOm51bGx9LCJhdXRob3JpdGllcyI6W251bGxdLCJqdGkiOiJhN2EwODUyYS0wMjBhLTQ3MzUtOGZhMS04YWZkNjY5MWQxZDIiLCJjbGllbnRfaWQiOiJhdmF0YXItZ2F0ZXdheSIsInNjb3BlIjpbImFsbCIsInJlYWQiLCJ3cml0ZSJdfQ.bOLbtHKwlRPZ6jqNAu73sN7NzPyvVDykR-Hs9jCdYnLkCJF3kefTFi7oVB2a-3mMvkbK4eXMjvI7Ckg2isoksN-1GTAXhy0lz7rfxlnyp-W09T6aqvl-WBMjUCcg_h2fDMUCTqoU8M5zGPHSlV62uCAYYA451BWyJF2spNXjk8Br3fbNQB_CrGZDR1P_r4YGqumICGelZmwNZ6BIQZ7DFH7ntvmTzzUlZlUgj9NzsA92tLqgYnRgj7tP8bFPb5etNkNS_BwHGz5u5URUzWfW9QSvohFbLs3OBoe8tq-LCUd8B-CthiJzLZ220dPAne9yTzQxtlduYytrf5e6eYV7LA"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "jobName",
+									"value": "11",
+									"type": "text"
+								},
+								{
+									"key": "jobGroup",
+									"value": "11",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:9000/avatar-bpm-rest/quartztest/resume",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"avatar-bpm-rest",
+								"quartztest",
+								"resume"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete-task",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1NTEzNjMxMDIsInVzZXJfbmFtZSI6eyJ1c2VyIjp7InN0YXR1cyI6MCwiY3JlYXRlVXNlciI6bnVsbCwiY3JlYXRlVGltZSI6bnVsbCwidXBkYXRlVXNlciI6bnVsbCwidXBkYXRlVGltZSI6bnVsbCwiY3JlYXRlVXNlcm5hbWUiOm51bGwsImlEaXNwbGF5U3RhcnQiOm51bGwsImlEaXNwbGF5TGVuZ3RoIjpudWxsLCJzb3J0IjpudWxsLCJjdXJyZW50IjpudWxsLCJzaXplIjpudWxsLCJpZCI6IjFERjc4ODU3MzRCQTRGQzc4QjJBRUZBRTRGQjkxQ0UzIiwidXNlcm5hbWUiOiJ5c3Rlc3QiLCJwd2RaZXJvIjpudWxsLCJwd2RPbmUiOm51bGwsInB3ZFR3byI6bnVsbCwicHR5cGUiOm51bGwsImVtYWlsIjoiMzQ2QTM5NzA3NDQ3NDk1NjY2NzQ1MjJGNkI1NzYzMkYyQjYyNzg2MjZGN0EzNTY2NDI2QjRFNEI2QTMyNTc0OTRDNjI0NDVBNzk1QTU2NTU0OTU1NEY2MjMyNzY3NTQxMzM0QzU3NjY3NjZFNjI3ODc1Nzk0RDJGMzM2RTc2NDEyRjM0NkY3ODZBNkMzMjY2NTc0RTM2NTU2RDUyNkI0RTMyNTQ0MzM1NkEzNDM2NkQ0Rjc2NjU3OTY1NTU1MDM5Nzk1NzM2NkU2OTRDNTc3NzU4NEM0NzQ4NTE3NjY1Nzc2NDM3NDM2NDJCNEM1NTc3NDgzMjM2NEY2QTY4MzU3MyIsInRlbGVwaG9uZSI6IjMzNzkyRjRCNjY2NzYyNjk0QjM3MzQ2NjRFNTA3NzM4N0E0NzUxMzEzNzQyNzQ3MTRDNjk2NDMyNEI2ODMwN0E1NzY1Nzg3QTQzNjM2RjcyNEQ0QzM3NDYzODY5NzA3NjMzMzE1MjVBNzIzNTZENzU3NTRDNjg0RDYxNjU2QzMzNjk2Rjc0NkM0OTQ4NTc0QTU5NjY1MjcyNjQ0NTY2MkY2ODQyNDE3NTY1NDEzRDNEIiwiZW50TmFtZSI6IuWNl-S6rOiBlOaIkOenkeaKgOWPkeWxleiCoeS7veaciemZkOWFrOWPuCIsImxhc3RUaW1lIjpudWxsLCJyb2xlSWRzIjpudWxsLCJhcHBJZHMiOm51bGwsImVudElkIjoiOEM1QkEzNjI4NEQ1NDcyMUIyQjZGQjNDRDMxRURCNjEiLCJhcHBJZCI6bnVsbCwiZnVsbE5hbWUiOiJ5cyIsImhlYWRJbWciOm51bGwsInNleCI6MSwiZGVwYXJ0SWRzIjpudWxsLCJuZXdQYXNzd29yZCI6bnVsbCwib2xkUGFzc3dvcmQiOm51bGwsImR0eXBlIjpudWxsfSwiYXV0aG9yaXRpZXMiOlt7ImF1dGhvcml0eSI6bnVsbH1dLCJhY2NvdW50Tm9uRXhwaXJlZCI6dHJ1ZSwiYWNjb3VudE5vbkxvY2tlZCI6dHJ1ZSwiY3JlZGVudGlhbHNOb25FeHBpcmVkIjp0cnVlLCJ1c2VybmFtZSI6IjFERjc4ODU3MzRCQTRGQzc4QjJBRUZBRTRGQjkxQ0UzIiwiZW5hYmxlZCI6dHJ1ZSwicGFzc3dvcmQiOm51bGx9LCJhdXRob3JpdGllcyI6W251bGxdLCJqdGkiOiIyOTU5ZTc4Yy1jNGVhLTQzMDEtYjdkYS05MzMwYmViMzIzM2YiLCJjbGllbnRfaWQiOiJhdmF0YXItZ2F0ZXdheSIsInNjb3BlIjpbImFsbCIsInJlYWQiLCJ3cml0ZSJdfQ.odJFq3FeOE7pSm0gGLvAGGp1diF98JqM1y-bw42t-fA7QM1xAOMdD80ldfCEgg-3a0mVLZ6teRTQRGyvK1HP6-dwamHIHQ-B0FUGDGfPp4dCjsHNFXddH0uI2HyddCEUPE5-N7xzU97bij_k4bHUn-bi6f95XgI6I9Wte5aa7h41Yol6f6yNkn0BPazvLxc5dLeQ2qoaE8sgXTNNYhr4aaG7qbnhoDqXwsxDGOkkhiGvQdLHAv9OWEukxV1APFgq95r5ea1lLuXa6YljW5jXhckGLZJr9FWr-XYxCzJzN_eiOHuqlEsUkeebEisJ-sLyL0GUHNijSFoz2wQzEvoWew"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"jobName\":\"ss\",\n\t\"jobGroup\":\"ss\"\n}"
+						},
+						"url": {
+							"raw": "127.0.0.1:8082/quartz/delete",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8082",
+							"path": [
+								"quartz",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list-task",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1NTEzNjMxMDIsInVzZXJfbmFtZSI6eyJ1c2VyIjp7InN0YXR1cyI6MCwiY3JlYXRlVXNlciI6bnVsbCwiY3JlYXRlVGltZSI6bnVsbCwidXBkYXRlVXNlciI6bnVsbCwidXBkYXRlVGltZSI6bnVsbCwiY3JlYXRlVXNlcm5hbWUiOm51bGwsImlEaXNwbGF5U3RhcnQiOm51bGwsImlEaXNwbGF5TGVuZ3RoIjpudWxsLCJzb3J0IjpudWxsLCJjdXJyZW50IjpudWxsLCJzaXplIjpudWxsLCJpZCI6IjFERjc4ODU3MzRCQTRGQzc4QjJBRUZBRTRGQjkxQ0UzIiwidXNlcm5hbWUiOiJ5c3Rlc3QiLCJwd2RaZXJvIjpudWxsLCJwd2RPbmUiOm51bGwsInB3ZFR3byI6bnVsbCwicHR5cGUiOm51bGwsImVtYWlsIjoiMzQ2QTM5NzA3NDQ3NDk1NjY2NzQ1MjJGNkI1NzYzMkYyQjYyNzg2MjZGN0EzNTY2NDI2QjRFNEI2QTMyNTc0OTRDNjI0NDVBNzk1QTU2NTU0OTU1NEY2MjMyNzY3NTQxMzM0QzU3NjY3NjZFNjI3ODc1Nzk0RDJGMzM2RTc2NDEyRjM0NkY3ODZBNkMzMjY2NTc0RTM2NTU2RDUyNkI0RTMyNTQ0MzM1NkEzNDM2NkQ0Rjc2NjU3OTY1NTU1MDM5Nzk1NzM2NkU2OTRDNTc3NzU4NEM0NzQ4NTE3NjY1Nzc2NDM3NDM2NDJCNEM1NTc3NDgzMjM2NEY2QTY4MzU3MyIsInRlbGVwaG9uZSI6IjMzNzkyRjRCNjY2NzYyNjk0QjM3MzQ2NjRFNTA3NzM4N0E0NzUxMzEzNzQyNzQ3MTRDNjk2NDMyNEI2ODMwN0E1NzY1Nzg3QTQzNjM2RjcyNEQ0QzM3NDYzODY5NzA3NjMzMzE1MjVBNzIzNTZENzU3NTRDNjg0RDYxNjU2QzMzNjk2Rjc0NkM0OTQ4NTc0QTU5NjY1MjcyNjQ0NTY2MkY2ODQyNDE3NTY1NDEzRDNEIiwiZW50TmFtZSI6IuWNl-S6rOiBlOaIkOenkeaKgOWPkeWxleiCoeS7veaciemZkOWFrOWPuCIsImxhc3RUaW1lIjpudWxsLCJyb2xlSWRzIjpudWxsLCJhcHBJZHMiOm51bGwsImVudElkIjoiOEM1QkEzNjI4NEQ1NDcyMUIyQjZGQjNDRDMxRURCNjEiLCJhcHBJZCI6bnVsbCwiZnVsbE5hbWUiOiJ5cyIsImhlYWRJbWciOm51bGwsInNleCI6MSwiZGVwYXJ0SWRzIjpudWxsLCJuZXdQYXNzd29yZCI6bnVsbCwib2xkUGFzc3dvcmQiOm51bGwsImR0eXBlIjpudWxsfSwiYXV0aG9yaXRpZXMiOlt7ImF1dGhvcml0eSI6bnVsbH1dLCJhY2NvdW50Tm9uRXhwaXJlZCI6dHJ1ZSwiYWNjb3VudE5vbkxvY2tlZCI6dHJ1ZSwiY3JlZGVudGlhbHNOb25FeHBpcmVkIjp0cnVlLCJ1c2VybmFtZSI6IjFERjc4ODU3MzRCQTRGQzc4QjJBRUZBRTRGQjkxQ0UzIiwiZW5hYmxlZCI6dHJ1ZSwicGFzc3dvcmQiOm51bGx9LCJhdXRob3JpdGllcyI6W251bGxdLCJqdGkiOiIyOTU5ZTc4Yy1jNGVhLTQzMDEtYjdkYS05MzMwYmViMzIzM2YiLCJjbGllbnRfaWQiOiJhdmF0YXItZ2F0ZXdheSIsInNjb3BlIjpbImFsbCIsInJlYWQiLCJ3cml0ZSJdfQ.odJFq3FeOE7pSm0gGLvAGGp1diF98JqM1y-bw42t-fA7QM1xAOMdD80ldfCEgg-3a0mVLZ6teRTQRGyvK1HP6-dwamHIHQ-B0FUGDGfPp4dCjsHNFXddH0uI2HyddCEUPE5-N7xzU97bij_k4bHUn-bi6f95XgI6I9Wte5aa7h41Yol6f6yNkn0BPazvLxc5dLeQ2qoaE8sgXTNNYhr4aaG7qbnhoDqXwsxDGOkkhiGvQdLHAv9OWEukxV1APFgq95r5ea1lLuXa6YljW5jXhckGLZJr9FWr-XYxCzJzN_eiOHuqlEsUkeebEisJ-sLyL0GUHNijSFoz2wQzEvoWew"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8080/quartz/list",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"quartz",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add-timedtask",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1NTE0NDYzODcsInVzZXJfbmFtZSI6eyJ1c2VyIjp7InN0YXR1cyI6MCwiY3JlYXRlVXNlciI6bnVsbCwiY3JlYXRlVGltZSI6bnVsbCwidXBkYXRlVXNlciI6bnVsbCwidXBkYXRlVGltZSI6bnVsbCwiY3JlYXRlVXNlcm5hbWUiOm51bGwsImlEaXNwbGF5U3RhcnQiOm51bGwsImlEaXNwbGF5TGVuZ3RoIjpudWxsLCJzb3J0IjpudWxsLCJjdXJyZW50IjpudWxsLCJzaXplIjpudWxsLCJpZCI6IjcyMjhDOEQ0QzY4OTQwQUE4NTUyQzhENzVGM0NBNDJFIiwidXNlcm5hbWUiOiJ3aiIsInB3ZFplcm8iOm51bGwsInB3ZE9uZSI6bnVsbCwicHdkVHdvIjpudWxsLCJwdHlwZSI6bnVsbCwiZW1haWwiOiIxOTU0ODkwMUBxcS5jb20iLCJ0ZWxlcGhvbmUiOiIxMzg1MTk0Nzg2MCIsImVudE5hbWUiOiLljZfkuqzogZTmiJDnp5HmioDlj5HlsZXogqHku73mnInpmZDlhazlj7giLCJsYXN0VGltZSI6bnVsbCwicm9sZUlkcyI6bnVsbCwiYXBwSWRzIjpudWxsLCJlbnRJZCI6IjhDNUJBMzYyODRENTQ3MjFCMkI2RkIzQ0QzMUVEQjYxIiwiYXBwSWQiOm51bGwsImZ1bGxOYW1lIjoid2FuZ2ppYW4iLCJoZWFkSW1nIjpudWxsLCJzZXgiOjEsImRlcGFydElkcyI6bnVsbCwibmV3UGFzc3dvcmQiOm51bGwsIm9sZFBhc3N3b3JkIjpudWxsLCJkdHlwZSI6bnVsbH0sImF1dGhvcml0aWVzIjpbeyJhdXRob3JpdHkiOm51bGx9XSwiYWNjb3VudE5vbkV4cGlyZWQiOnRydWUsImFjY291bnROb25Mb2NrZWQiOnRydWUsImNyZWRlbnRpYWxzTm9uRXhwaXJlZCI6dHJ1ZSwidXNlcm5hbWUiOiI3MjI4QzhENEM2ODk0MEFBODU1MkM4RDc1RjNDQTQyRSIsImVuYWJsZWQiOnRydWUsInBhc3N3b3JkIjpudWxsfSwiYXV0aG9yaXRpZXMiOltudWxsXSwianRpIjoiOWZkYjE5MzMtMWQ0Mi00YjEwLTg5NWUtNGY1ZWZlYjk4OTQ0IiwiY2xpZW50X2lkIjoiYXZhdGFyLWdhdGV3YXkiLCJzY29wZSI6WyJhbGwiLCJyZWFkIiwid3JpdGUiXX0.Ka69NPYYp7VyEP2XsfJZzljOj8PnYF9geOqG5wsiW0wWnlanTY54GOZMBb1nJ0FjsoPZpf0Jc5ZmXpf3NrXx9H8LZp8rkvsXFhorJ4N7UqsMOAoOJ8WqacRDEDyPaN2Ov71x0iVpqiMyKkwNGFyqnFaKo9CIiBLlzF7TmnaBY1wff03qTQWUkQhZ8mXIPvtgPNLMb0jnA1ePMYKRGtHTD4MK-E9w7RQsyj-BNq_jBmpeveN1CD95ZflTq5of3iHENFX1FeAWW3NtMsYv5C5kZcVNWDFwpX-7DGrHuV0zgoBuAryTkiaOIF2QDcmWqoOuJmaoLODcF80idVIVEZ0MVA"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"procDefId\":\"11\",\n\t\"timeout\":15,\n\t\"triggerInterval\":22\n}"
+						},
+						"url": {
+							"raw": "localhost:9000/avatar-bpm-rest/api/timedTask/add",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"avatar-bpm-rest",
+								"api",
+								"timedTask",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete-timedtask",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1NTE0NDYzODcsInVzZXJfbmFtZSI6eyJ1c2VyIjp7InN0YXR1cyI6MCwiY3JlYXRlVXNlciI6bnVsbCwiY3JlYXRlVGltZSI6bnVsbCwidXBkYXRlVXNlciI6bnVsbCwidXBkYXRlVGltZSI6bnVsbCwiY3JlYXRlVXNlcm5hbWUiOm51bGwsImlEaXNwbGF5U3RhcnQiOm51bGwsImlEaXNwbGF5TGVuZ3RoIjpudWxsLCJzb3J0IjpudWxsLCJjdXJyZW50IjpudWxsLCJzaXplIjpudWxsLCJpZCI6IjcyMjhDOEQ0QzY4OTQwQUE4NTUyQzhENzVGM0NBNDJFIiwidXNlcm5hbWUiOiJ3aiIsInB3ZFplcm8iOm51bGwsInB3ZE9uZSI6bnVsbCwicHdkVHdvIjpudWxsLCJwdHlwZSI6bnVsbCwiZW1haWwiOiIxOTU0ODkwMUBxcS5jb20iLCJ0ZWxlcGhvbmUiOiIxMzg1MTk0Nzg2MCIsImVudE5hbWUiOiLljZfkuqzogZTmiJDnp5HmioDlj5HlsZXogqHku73mnInpmZDlhazlj7giLCJsYXN0VGltZSI6bnVsbCwicm9sZUlkcyI6bnVsbCwiYXBwSWRzIjpudWxsLCJlbnRJZCI6IjhDNUJBMzYyODRENTQ3MjFCMkI2RkIzQ0QzMUVEQjYxIiwiYXBwSWQiOm51bGwsImZ1bGxOYW1lIjoid2FuZ2ppYW4iLCJoZWFkSW1nIjpudWxsLCJzZXgiOjEsImRlcGFydElkcyI6bnVsbCwibmV3UGFzc3dvcmQiOm51bGwsIm9sZFBhc3N3b3JkIjpudWxsLCJkdHlwZSI6bnVsbH0sImF1dGhvcml0aWVzIjpbeyJhdXRob3JpdHkiOm51bGx9XSwiYWNjb3VudE5vbkV4cGlyZWQiOnRydWUsImFjY291bnROb25Mb2NrZWQiOnRydWUsImNyZWRlbnRpYWxzTm9uRXhwaXJlZCI6dHJ1ZSwidXNlcm5hbWUiOiI3MjI4QzhENEM2ODk0MEFBODU1MkM4RDc1RjNDQTQyRSIsImVuYWJsZWQiOnRydWUsInBhc3N3b3JkIjpudWxsfSwiYXV0aG9yaXRpZXMiOltudWxsXSwianRpIjoiOWZkYjE5MzMtMWQ0Mi00YjEwLTg5NWUtNGY1ZWZlYjk4OTQ0IiwiY2xpZW50X2lkIjoiYXZhdGFyLWdhdGV3YXkiLCJzY29wZSI6WyJhbGwiLCJyZWFkIiwid3JpdGUiXX0.Ka69NPYYp7VyEP2XsfJZzljOj8PnYF9geOqG5wsiW0wWnlanTY54GOZMBb1nJ0FjsoPZpf0Jc5ZmXpf3NrXx9H8LZp8rkvsXFhorJ4N7UqsMOAoOJ8WqacRDEDyPaN2Ov71x0iVpqiMyKkwNGFyqnFaKo9CIiBLlzF7TmnaBY1wff03qTQWUkQhZ8mXIPvtgPNLMb0jnA1ePMYKRGtHTD4MK-E9w7RQsyj-BNq_jBmpeveN1CD95ZflTq5of3iHENFX1FeAWW3NtMsYv5C5kZcVNWDFwpX-7DGrHuV0zgoBuAryTkiaOIF2QDcmWqoOuJmaoLODcF80idVIVEZ0MVA"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"procDefId\":\"11\"\n}"
+						},
+						"url": {
+							"raw": "localhost:9000/avatar-bpm-rest/api/timedTask/delete",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"avatar-bpm-rest",
+								"api",
+								"timedTask",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-timedtask",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1NTEyOTYwNDAsInVzZXJfbmFtZSI6eyJ1c2VyIjp7InN0YXR1cyI6MCwiY3JlYXRlVXNlciI6bnVsbCwiY3JlYXRlVGltZSI6bnVsbCwidXBkYXRlVXNlciI6bnVsbCwidXBkYXRlVGltZSI6bnVsbCwiY3JlYXRlVXNlcm5hbWUiOm51bGwsImlEaXNwbGF5U3RhcnQiOm51bGwsImlEaXNwbGF5TGVuZ3RoIjpudWxsLCJzb3J0IjpudWxsLCJjdXJyZW50IjpudWxsLCJzaXplIjpudWxsLCJpZCI6IjFERjc4ODU3MzRCQTRGQzc4QjJBRUZBRTRGQjkxQ0UzIiwidXNlcm5hbWUiOiJ5c3Rlc3QiLCJwd2RaZXJvIjpudWxsLCJwd2RPbmUiOm51bGwsInB3ZFR3byI6bnVsbCwicHR5cGUiOm51bGwsImVtYWlsIjoiMzQ2QTM5NzA3NDQ3NDk1NjY2NzQ1MjJGNkI1NzYzMkYyQjYyNzg2MjZGN0EzNTY2NDI2QjRFNEI2QTMyNTc0OTRDNjI0NDVBNzk1QTU2NTU0OTU1NEY2MjMyNzY3NTQxMzM0QzU3NjY3NjZFNjI3ODc1Nzk0RDJGMzM2RTc2NDEyRjM0NkY3ODZBNkMzMjY2NTc0RTM2NTU2RDUyNkI0RTMyNTQ0MzM1NkEzNDM2NkQ0Rjc2NjU3OTY1NTU1MDM5Nzk1NzM2NkU2OTRDNTc3NzU4NEM0NzQ4NTE3NjY1Nzc2NDM3NDM2NDJCNEM1NTc3NDgzMjM2NEY2QTY4MzU3MyIsInRlbGVwaG9uZSI6IjMzNzkyRjRCNjY2NzYyNjk0QjM3MzQ2NjRFNTA3NzM4N0E0NzUxMzEzNzQyNzQ3MTRDNjk2NDMyNEI2ODMwN0E1NzY1Nzg3QTQzNjM2RjcyNEQ0QzM3NDYzODY5NzA3NjMzMzE1MjVBNzIzNTZENzU3NTRDNjg0RDYxNjU2QzMzNjk2Rjc0NkM0OTQ4NTc0QTU5NjY1MjcyNjQ0NTY2MkY2ODQyNDE3NTY1NDEzRDNEIiwiZW50TmFtZSI6IuWNl-S6rOiBlOaIkOenkeaKgOWPkeWxleiCoeS7veaciemZkOWFrOWPuCIsImxhc3RUaW1lIjpudWxsLCJyb2xlSWRzIjpudWxsLCJhcHBJZHMiOm51bGwsImVudElkIjoiOEM1QkEzNjI4NEQ1NDcyMUIyQjZGQjNDRDMxRURCNjEiLCJhcHBJZCI6bnVsbCwiZnVsbE5hbWUiOiJ5cyIsImhlYWRJbWciOm51bGwsInNleCI6MSwiZGVwYXJ0SWRzIjpudWxsLCJuZXdQYXNzd29yZCI6bnVsbCwib2xkUGFzc3dvcmQiOm51bGwsImR0eXBlIjpudWxsfSwiYXV0aG9yaXRpZXMiOlt7ImF1dGhvcml0eSI6bnVsbH1dLCJhY2NvdW50Tm9uRXhwaXJlZCI6dHJ1ZSwiYWNjb3VudE5vbkxvY2tlZCI6dHJ1ZSwiY3JlZGVudGlhbHNOb25FeHBpcmVkIjp0cnVlLCJ1c2VybmFtZSI6IjFERjc4ODU3MzRCQTRGQzc4QjJBRUZBRTRGQjkxQ0UzIiwiZW5hYmxlZCI6dHJ1ZSwicGFzc3dvcmQiOm51bGx9LCJhdXRob3JpdGllcyI6W251bGxdLCJqdGkiOiI5M2VlMGY4MS05MDZkLTRhYTUtODE1NS1lMDQ2YTI4OWFjZTAiLCJjbGllbnRfaWQiOiJhdmF0YXItZ2F0ZXdheSIsInNjb3BlIjpbImFsbCIsInJlYWQiLCJ3cml0ZSJdfQ.dvkWPCmI_f7gcb9h-JTz9wsgB9bImF7JAqsvQ1KrvMZmHZRjRN7jMurAjMlKOqLoLs50x56muKfbvxGPy9EA1gxfQdkyZErwpQHEFm5Hh-2q7rWE0RkZjN_vGE7r3aH09DMLqrN6EaU264OEh5Pl14epEL25HIlbfghBkW5_J_6RIoQrJ1h6XQlj4PXB9tvEIGXwJLFxAVEg7hqwqWpuLmUL9TOGz9felrrCavy5YAt0z1HYu2d2PDDnZXH624oczNwClLJwio2avwpYbcQerscZL2xF9kuiqlFMkjrL5Y6KC6aGmTV-MDbmao5lZxNs5SGg8JEci-20HUpZuuiK8w"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"procDefId\":\"11\",\n\t\"timeout\":15,\n\t\"triggerInterval\":1\n}"
+						},
+						"url": {
+							"raw": "localhost:9000/avatar-bpm-rest/api/timedTask/update",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"avatar-bpm-rest",
+								"api",
+								"timedTask",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "query-timedtask",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1NTE0NDYzODcsInVzZXJfbmFtZSI6eyJ1c2VyIjp7InN0YXR1cyI6MCwiY3JlYXRlVXNlciI6bnVsbCwiY3JlYXRlVGltZSI6bnVsbCwidXBkYXRlVXNlciI6bnVsbCwidXBkYXRlVGltZSI6bnVsbCwiY3JlYXRlVXNlcm5hbWUiOm51bGwsImlEaXNwbGF5U3RhcnQiOm51bGwsImlEaXNwbGF5TGVuZ3RoIjpudWxsLCJzb3J0IjpudWxsLCJjdXJyZW50IjpudWxsLCJzaXplIjpudWxsLCJpZCI6IjcyMjhDOEQ0QzY4OTQwQUE4NTUyQzhENzVGM0NBNDJFIiwidXNlcm5hbWUiOiJ3aiIsInB3ZFplcm8iOm51bGwsInB3ZE9uZSI6bnVsbCwicHdkVHdvIjpudWxsLCJwdHlwZSI6bnVsbCwiZW1haWwiOiIxOTU0ODkwMUBxcS5jb20iLCJ0ZWxlcGhvbmUiOiIxMzg1MTk0Nzg2MCIsImVudE5hbWUiOiLljZfkuqzogZTmiJDnp5HmioDlj5HlsZXogqHku73mnInpmZDlhazlj7giLCJsYXN0VGltZSI6bnVsbCwicm9sZUlkcyI6bnVsbCwiYXBwSWRzIjpudWxsLCJlbnRJZCI6IjhDNUJBMzYyODRENTQ3MjFCMkI2RkIzQ0QzMUVEQjYxIiwiYXBwSWQiOm51bGwsImZ1bGxOYW1lIjoid2FuZ2ppYW4iLCJoZWFkSW1nIjpudWxsLCJzZXgiOjEsImRlcGFydElkcyI6bnVsbCwibmV3UGFzc3dvcmQiOm51bGwsIm9sZFBhc3N3b3JkIjpudWxsLCJkdHlwZSI6bnVsbH0sImF1dGhvcml0aWVzIjpbeyJhdXRob3JpdHkiOm51bGx9XSwiYWNjb3VudE5vbkV4cGlyZWQiOnRydWUsImFjY291bnROb25Mb2NrZWQiOnRydWUsImNyZWRlbnRpYWxzTm9uRXhwaXJlZCI6dHJ1ZSwidXNlcm5hbWUiOiI3MjI4QzhENEM2ODk0MEFBODU1MkM4RDc1RjNDQTQyRSIsImVuYWJsZWQiOnRydWUsInBhc3N3b3JkIjpudWxsfSwiYXV0aG9yaXRpZXMiOltudWxsXSwianRpIjoiOWZkYjE5MzMtMWQ0Mi00YjEwLTg5NWUtNGY1ZWZlYjk4OTQ0IiwiY2xpZW50X2lkIjoiYXZhdGFyLWdhdGV3YXkiLCJzY29wZSI6WyJhbGwiLCJyZWFkIiwid3JpdGUiXX0.Ka69NPYYp7VyEP2XsfJZzljOj8PnYF9geOqG5wsiW0wWnlanTY54GOZMBb1nJ0FjsoPZpf0Jc5ZmXpf3NrXx9H8LZp8rkvsXFhorJ4N7UqsMOAoOJ8WqacRDEDyPaN2Ov71x0iVpqiMyKkwNGFyqnFaKo9CIiBLlzF7TmnaBY1wff03qTQWUkQhZ8mXIPvtgPNLMb0jnA1ePMYKRGtHTD4MK-E9w7RQsyj-BNq_jBmpeveN1CD95ZflTq5of3iHENFX1FeAWW3NtMsYv5C5kZcVNWDFwpX-7DGrHuV0zgoBuAryTkiaOIF2QDcmWqoOuJmaoLODcF80idVIVEZ0MVA"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"procDefId\":\"11\"\n}"
+						},
+						"url": {
+							"raw": "localhost:9000/avatar-bpm-rest/api/timedTask/query",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"avatar-bpm-rest",
+								"api",
+								"timedTask",
+								"query"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
