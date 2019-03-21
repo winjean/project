@@ -10,11 +10,11 @@ import org.apache.commons.lang3.ObjectUtils;
  * @modified By：
  * @version: $version$
  */
-public class UsersFormType extends AbstractFormType {
+public class CustomFormType extends AbstractFormType {
 
     @Override
     public String getName() {
-        return "customUser";
+        return "customFormType";
     }
 
     @Override

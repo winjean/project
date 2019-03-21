@@ -1,4 +1,4 @@
-package com.winjean.listener.global;
+package com.winjean.listener.event;
 
 import lombok.extern.slf4j.Slf4j;
 import org.activiti.engine.delegate.event.ActivitiEntityEvent;
@@ -6,8 +6,6 @@ import org.activiti.engine.delegate.event.ActivitiEvent;
 import org.activiti.engine.delegate.event.ActivitiEventListener;
 import org.activiti.engine.delegate.event.ActivitiEventType;
 import org.activiti.engine.impl.persistence.entity.TaskEntity;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 
@@ -24,15 +22,31 @@ public class CustomEventListener implements ActivitiEventListener {
     public void onEvent(ActivitiEvent event) {
         log.debug("Event received: " + event.getType());
 
-        if (event.getType() == ActivitiEventType.TASK_CREATED
-                || event.getType() == ActivitiEventType.TASK_ASSIGNED
-                || event.getType() == ActivitiEventType.TASK_COMPLETED) {
+        if (event.getType() == ActivitiEventType.TASK_CREATED) {
+            ActivitiEntityEvent entityEvent = (ActivitiEntityEvent) event;
+            TaskEntity taskEntity = (TaskEntity) entityEvent.getEntity();
+            log.debug(" taskEntity: {} " + taskEntity);
+            log.info(" =============== TASK_CREATED ================== ");
+        }
+
+        if (event.getType() == ActivitiEventType.TASK_ASSIGNED) {
+            ActivitiEntityEvent entityEvent = (ActivitiEntityEvent) event;
+            TaskEntity taskEntity = (TaskEntity) entityEvent.getEntity();
+            log.debug(" taskEntity: {} " + taskEntity);
+            log.info(" =============== TASK_ASSIGNED ================== ");
+        }
+
+        if (event.getType() == ActivitiEventType.TASK_COMPLETED) {
 
             ActivitiEntityEvent entityEvent = (ActivitiEntityEvent) event;
             TaskEntity taskEntity = (TaskEntity) entityEvent.getEntity();
             log.debug(" taskEntity: {} " + taskEntity);
+            log.info(" =============== TASK_COMPLETED ================== ");
         }
 
+        if (event.getType() == ActivitiEventType.PROCESS_COMPLETED){
+            log.info(" =============== PROCESS_COMPLETED ================== ");
+        }
     }
 
     /**

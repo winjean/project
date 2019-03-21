@@ -62,30 +62,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
 ////        registry.addInterceptor(new UserLoginInterceptor()).addPathPatterns("/user/*").excludePathPatterns("/user/loginVerify");
 //    }
 
-//    @Bean
-//    public BeanPostProcessor activitiConfigurer11() {
-//        return new BeanPostProcessor() {
-//
-//            @Override
-//            public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-//                if (bean instanceof SpringProcessEngineConfiguration) {
-//                    List<AbstractFormType> customFormTypes = Arrays.asList(new UsersFormType());
-//                    ((SpringProcessEngineConfiguration)bean).setCustomFormTypes(customFormTypes);
-//                }
-//                return bean;
-//            }
-//
-//            @Override
-//            public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-//                if (bean instanceof SpringProcessEngineConfiguration) {
-//                    List<AbstractFormType> customFormTypes = Arrays.asList(new UsersFormType());
-//                    ((SpringProcessEngineConfiguration)bean).setCustomFormTypes(customFormTypes);
-//                }
-//                return bean;
-//            }
-//        };
-//    }
-
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");

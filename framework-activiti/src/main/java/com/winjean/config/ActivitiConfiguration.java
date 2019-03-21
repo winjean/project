@@ -1,9 +1,8 @@
 package com.winjean.config;
 
-import com.winjean.form.UsersFormType;
-import org.activiti.engine.*;
-import org.activiti.engine.delegate.event.ActivitiEventListener;
-import org.activiti.spring.ProcessEngineFactoryBean;
+import com.winjean.form.CustomFormType;
+import com.winjean.listener.event.CustomEventListener;
+import org.activiti.engine.impl.bpmn.parser.factory.DefaultListenerFactory;
 import org.activiti.spring.SpringProcessEngineConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -12,7 +11,6 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
 import java.util.Arrays;
-import java.util.List;
 
 @Configuration
 public class ActivitiConfiguration {
@@ -32,11 +30,11 @@ public class ActivitiConfiguration {
 
         spec.setActivityFontName("宋体").setLabelFontName("宋体").setAnnotationFontName("宋体");
 
-        spec.setCustomFormTypes(Arrays.asList(new UsersFormType()));
+        spec.setCustomFormTypes(Arrays.asList(new CustomFormType()));
+//        spec.setCustomEventHandlers(Arrays.asList(new CustomEventHandler()));
 
-        List<ActivitiEventListener> list = null;
-        spec.setEventListeners(list);
-        spec.setListenerFactory(null);
+        spec.setEventListeners(Arrays.asList(new CustomEventListener()));
+        spec.setListenerFactory(new DefaultListenerFactory());
 
         //记录的历史的详细级别
 //        spec.setHistoryLevel(HistoryLevel.FULL);
@@ -52,16 +50,16 @@ public class ActivitiConfiguration {
         return spec;
     }
 
-    @Bean
+    /*@Bean
     public ProcessEngineFactoryBean processEngine(){
 //        ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
 
         ProcessEngineFactoryBean processEngineFactoryBean = new ProcessEngineFactoryBean();
         processEngineFactoryBean.setProcessEngineConfiguration(springProcessEngineConfiguration());
         return processEngineFactoryBean;
-    }
+    }*/
 
-    @Bean
+    /*@Bean
     public RepositoryService repositoryService() throws Exception{
         return processEngine().getObject().getRepositoryService();
     }
@@ -89,29 +87,6 @@ public class ActivitiConfiguration {
     @Bean
     public FormService formService() throws Exception{
         return processEngine().getObject().getFormService();
-    }
+    }*/
 
-//    @Bean
-//    public BeanPostProcessor activitiConfigurer() {
-//        return new BeanPostProcessor() {
-//
-//            @Override
-//            public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-//                if (bean instanceof SpringProcessEngineConfiguration) {
-//                    List<AbstractFormType> customFormTypes = Arrays.asList(new UsersFormType());
-//                    ((SpringProcessEngineConfiguration)bean).setCustomFormTypes(customFormTypes);
-//                }
-//                return bean;
-//            }
-//
-//            @Override
-//            public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-//                if (bean instanceof SpringProcessEngineConfiguration) {
-//                    List<AbstractFormType> customFormTypes = Arrays.asList(new UsersFormType());
-//                    ((SpringProcessEngineConfiguration)bean).setCustomFormTypes(customFormTypes);
-//                }
-//                return bean;
-//            }
-//        };
-//    }
 }

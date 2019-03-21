@@ -57,32 +57,27 @@ public class ActivitiService {
     private ProcessEngineConfiguration processEngineConfiguration;
 
     public ProcessInstance startProcessByRuntimeService(JSONObject json) {
-        identityService.setAuthenticatedUserId(json.getString("authenticatedUserId"));
-        Map<String, Object> vars = new HashMap<>(4);
-        vars.put("name", "wina");
-        vars.put("age", "11");
-        vars.put("applyUser", "winjean");
-        ProcessDefinition pd =repositoryService.createProcessDefinitionQuery().processDefinitionKey(json.getString("processDefinitionKey")).singleResult();
+        identityService.setAuthenticatedUserId(json.getString("userId"));
+        Map<String, Object> vars = json;
+        ProcessDefinition pd =repositoryService.createProcessDefinitionQuery()
+                .processDefinitionKey(json.getString("processDefinitionKey"))
+                .latestVersion().singleResult();
         ProcessInstance pi = runtimeService.startProcessInstanceById(pd.getId(),vars);
-        System.out.println(pi.getId() +" "+ pi.getName());
+        runtimeService.setProcessInstanceName(pi.getProcessInstanceId(),json.getString("processName"));
 
-        log.info("processInstance Id：{}, processInstance name：{}", pi.getId(),pi.getName());
-
-//        ProcessDefinitionEntity processDefinition = (ProcessDefinitionEntity) ((RepositoryServiceImpl) repositoryService)
-//                .getDeployedProcessDefinition("");
+        log.info("processInstance Id：{}", pi.getId());
 
         return pi;
     }
 
     public ProcessInstance startProcessByFormService(JSONObject json) {
-        identityService.setAuthenticatedUserId(json.getString("authenticatedUserId"));
-        Map<String, String> vars = new HashMap<>(4);
-        vars.put("name", "win");
-        vars.put("age", "11");
-        vars.put("applyUser", "winjean");
-        ProcessDefinition pd =repositoryService.createProcessDefinitionQuery().processDefinitionId(json.getString("processDefinitionId")).singleResult();
-        ProcessInstance pi = formService.submitStartFormData(pd.getId(),vars);
-        log.info(pi.getId() +" "+ pi.getName());
+        identityService.setAuthenticatedUserId(json.getString("userId"));
+        Map vars = json;
+
+        ProcessInstance pi = formService.submitStartFormData(json.getString("processDefinitionId"),vars);
+        runtimeService.setProcessInstanceName(pi.getProcessInstanceId(),json.getString("processName"));
+
+        log.info(pi.getId());
 
         return pi;
     }
