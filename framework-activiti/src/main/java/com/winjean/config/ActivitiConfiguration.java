@@ -2,7 +2,6 @@ package com.winjean.config;
 
 import com.winjean.form.CustomFormType;
 import com.winjean.listener.event.CustomEventListener;
-import org.activiti.engine.impl.bpmn.parser.factory.DefaultListenerFactory;
 import org.activiti.spring.SpringProcessEngineConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -34,7 +33,7 @@ public class ActivitiConfiguration {
 //        spec.setCustomEventHandlers(Arrays.asList(new CustomEventHandler()));
 
         spec.setEventListeners(Arrays.asList(new CustomEventListener()));
-        spec.setListenerFactory(new DefaultListenerFactory());
+//        spec.setListenerFactory(new DefaultListenerFactory());
 
         //记录的历史的详细级别
 //        spec.setHistoryLevel(HistoryLevel.FULL);
