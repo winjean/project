@@ -2,6 +2,7 @@ package com.winjean.config;
 
 import com.winjean.form.UsersFormType;
 import org.activiti.engine.*;
+import org.activiti.engine.delegate.event.ActivitiEventListener;
 import org.activiti.spring.ProcessEngineFactoryBean;
 import org.activiti.spring.SpringProcessEngineConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
 import java.util.Arrays;
+import java.util.List;
 
 @Configuration
 public class ActivitiConfiguration {
@@ -31,6 +33,10 @@ public class ActivitiConfiguration {
         spec.setActivityFontName("宋体").setLabelFontName("宋体").setAnnotationFontName("宋体");
 
         spec.setCustomFormTypes(Arrays.asList(new UsersFormType()));
+
+        List<ActivitiEventListener> list = null;
+        spec.setEventListeners(list);
+        spec.setListenerFactory(null);
 
         //记录的历史的详细级别
 //        spec.setHistoryLevel(HistoryLevel.FULL);
