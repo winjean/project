@@ -27,11 +27,23 @@ public interface UserMapper {
             "</script>")
     int insertUsers(@Param("users") List<JSONObject> users);
 
-    @Update("update t_user set " +
-                "user_name=#{name},birthday= #{birthday},sex=#{sex}," +
-                "telephone=#{telephone},email=#{email},state=#{state}," +
-                "update_user=#{updateUser},update_time=#{updateTime} " +
-            "where id =#{id}")
+    @Update({"update t_user set ",
+            "<trim prefix=\"set\" suffixOverrides=\",\">",
+
+            "<when test='name != null'> name = #{name}, </when>",
+            "<when test='birthday != null'> birthday = #{birthday}, </when>",
+            "<when test='sex != null'> sex = #{sex}, </when>",
+            "<when test='telephone != null'> telephone = #{telephone}, </when>",
+            "<when test='email != null'> email = #{email}, </when>",
+            "<when test='state != null'> state = #{state}, </when>",
+            "<when test='update_user != null'> update_user = #{update_user}, </when>",
+            "<when test='update_time != null'> update_time = #{update_time}, </when>",
+
+            "</trim>",
+
+            "where id =#{id}",
+            "</script>"
+    })
     int update(JSONObject user);
 
     @Delete("delete from t_user where id=#{id}")
