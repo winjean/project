@@ -25,8 +25,8 @@ public class UserServiceImpl implements UserService{
     @Override
     @Transactional
     public void save(UserEntity entity) {
-        UserEntity module = userRepository.save(entity);
-        log.info("module saved id = {}",module.getId());
+        UserEntity user = userRepository.save(entity);
+        log.info("user saved id = {}",user.getId());
     }
 
     @Override
@@ -35,11 +35,11 @@ public class UserServiceImpl implements UserService{
     public void delete(Long id) {
         Optional<UserEntity> optional =  userRepository.findById(id);
         if (optional.isPresent()){
-            UserEntity module =  optional.get();
-            userRepository.delete(module);
-            log.info("module deleted id = {}",id);
+            UserEntity user =  optional.get();
+            userRepository.delete(user);
+            log.info("user deleted id = {}",id);
         }else{
-            log.info("no module exist, id = {}",id);
+            log.info("no user exist, id = {}",id);
         }
     }
 
@@ -50,11 +50,11 @@ public class UserServiceImpl implements UserService{
         Long id = entity.getId();
         Optional<UserEntity> optional =  userRepository.findById(id);
         if(optional.isPresent()){
-            UserEntity module = userRepository.findById(id).get();
-            module.setName(entity.getName());
-            log.info("module updated id = {},name = {}", id, module.getName());
+            UserEntity user = userRepository.findById(id).get();
+            user.setName(entity.getName());
+            log.info("user updated id = {},name = {}", id, user.getName());
         }else{
-            log.info("no module exist, id = {}", id);
+            log.info("no user exist, id = {}", id);
         }
     }
 

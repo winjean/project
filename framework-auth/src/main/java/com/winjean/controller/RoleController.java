@@ -2,10 +2,13 @@ package com.winjean.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.winjean.model.entity.RoleEntity;
+import com.winjean.model.entity.RoleResourceEntity;
 import com.winjean.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("role")
@@ -55,4 +58,27 @@ public class RoleController {
         Page<RoleEntity> modules = roleService.findAll(pageNo, pageSize);
         return modules;
     }
+
+    /***** 以下处理 Resources 和 Role 的关系******/
+
+    @PostMapping("saveRoleResource")
+    public Object saveRoleResource(@RequestBody List<RoleResourceEntity> entities){
+        roleService.save(entities);
+        return "save success";
+    }
+
+    @PostMapping("deleteRoleResource")
+    public Object deleteRoleResource(@RequestBody List<Long> ids){
+        roleService.deleteRoleResource(ids);
+        return "save success";
+    }
+
+
+//    @GetMapping("findResourcesByRole")
+//    public Object findResourceByRole(@RequestBody JSONObject json){
+//        int pageNo = json.getInteger("pageNo");
+//        int pageSize = json.getInteger("pageSize");
+//        Page<RoleEntity> modules = roleService.findAll(pageNo, pageSize);
+//        return modules;
+//    }
 }

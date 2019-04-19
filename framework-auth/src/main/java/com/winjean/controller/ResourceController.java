@@ -37,24 +37,22 @@ public class ResourceController {
     public Object findModuleById(@RequestBody JSONObject json){
         Long id = json.getLong("id");
 
-        ResourceEntity module =  resourceService.findById(id);
-        return module;
+        ResourceEntity entity =  resourceService.findById(id);
+        return entity;
     }
 
     @PostMapping("findByName")
     public Object findModuleByName(@RequestBody JSONObject json){
         String name = json.getString("name");
-        ResourceEntity module = resourceService.findByName(name);
-        return module;
+        ResourceEntity entity = resourceService.findByName(name);
+        return entity;
     }
 
     @PostMapping("findAll")
     public Object findAll(@RequestBody JSONObject json){
         int pageNo = json.getInteger("pageNo");
         int pageSize = json.getInteger("pageSize");
-        Page<ResourceEntity> modules = resourceService.findAll(pageNo, pageSize);
-        return modules;
+        Page<ResourceEntity> entitys = resourceService.findAll(pageNo, pageSize);
+        return entitys;
     }
-
-
 }

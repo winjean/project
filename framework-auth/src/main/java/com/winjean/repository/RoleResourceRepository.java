@@ -1,6 +1,6 @@
 package com.winjean.repository;
 
-import com.winjean.model.entity.RoleEntity;
+import com.winjean.model.entity.RoleResourceEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,10 +15,9 @@ import java.util.List;
  * @version: $version$
  */
 
-public interface RoleRepository extends JpaRepository<RoleEntity, Long> {
+public interface RoleResourceRepository extends JpaRepository<RoleResourceEntity, Long> {
 
-    RoleEntity findRoleByName(String name);
-
-
+    @Query(value="delete from t_role_resource e where e.id in (:ids) ")
+    int deleteByIds(@Param("ids") List<Long> ids);
 
 }
