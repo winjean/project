@@ -1,5 +1,6 @@
 package com.winjean.common;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
@@ -8,8 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Data
-@Entity(name = "t_base_entity")
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@MappedSuperclass
 public abstract class BaseEntity implements Serializable {
 
     @Id

@@ -1,5 +1,6 @@
 package com.winjean.model.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.winjean.common.BaseEntity;
@@ -40,7 +41,7 @@ public class UserEntity extends BaseEntity {
     /**
      * 出生日期
      */
-    @JsonFormat(/*locale="zh", timezone="GMT+8",*/ pattern="yyyy-MM-dd")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private Date birthday;
 
     /**
@@ -63,6 +64,9 @@ public class UserEntity extends BaseEntity {
      */
     private boolean enable = true;
 
+    /**
+     * 部门
+     */
     @ManyToOne
     @JoinColumn(name = "dept_id")
     @JsonBackReference
