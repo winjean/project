@@ -1,5 +1,6 @@
 package com.winjean.service.impl;
 
+import com.winjean.model.entity.ResourceEntity;
 import com.winjean.model.entity.RoleEntity;
 import com.winjean.model.entity.RoleResourceEntity;
 import com.winjean.repository.RoleRepository;
@@ -112,4 +113,9 @@ public class RoleServiceImpl implements RoleService {
         return roleRepository.findAll(page);
     }
 
+    @Override
+    public Page<RoleEntity> findRoleByUser(Long userId, int pageNo, int pageSize) {
+        PageRequest page= PageRequest.of(pageNo, pageSize, Sort.by(Sort.Order.asc("id")));
+        return roleRepository.findRoleByUser(userId, page);
+    }
 }

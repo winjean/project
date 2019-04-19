@@ -1,7 +1,6 @@
 package com.winjean.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.winjean.model.entity.ResourceEntity;
 import com.winjean.model.entity.RoleEntity;
 import com.winjean.model.entity.RoleResourceEntity;
 import com.winjean.service.RoleService;
@@ -74,6 +73,13 @@ public class RoleController {
         return "save success";
     }
 
-
+    @PostMapping("findRoleByUser")
+    public Object findRoleByUser(@RequestBody JSONObject json){
+        int pageNo = json.getInteger("pageNo");
+        int pageSize = json.getInteger("pageSize");
+        Long userId = json.getLong("userId");
+        Page<RoleEntity> entities = roleService.findRoleByUser(userId,pageNo, pageSize);
+        return entities;
+    }
 
 }

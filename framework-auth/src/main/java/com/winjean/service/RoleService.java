@@ -1,6 +1,5 @@
 package com.winjean.service;
 
-import com.winjean.model.entity.ResourceEntity;
 import com.winjean.model.entity.RoleEntity;
 import com.winjean.model.entity.RoleResourceEntity;
 import org.springframework.data.domain.Page;
@@ -26,5 +25,5 @@ public interface RoleService {
 
     void update(RoleEntity entity);
 
-
+    Page<RoleEntity> findRoleByUser(Long userId, int pageNo, int pageSize);
 }
