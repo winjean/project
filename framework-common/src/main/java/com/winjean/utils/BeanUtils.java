@@ -1,6 +1,7 @@
 package com.winjean.utils;
 
 import com.alibaba.fastjson.JSONObject;
+import com.winjean.common.BaseEntity;
 import com.winjean.enums.DateTimeEnum;
 import org.apache.commons.lang3.StringUtils;
 
@@ -128,27 +129,23 @@ public final class BeanUtils {
         }
     }
 
-    public static JSONObject appendBeanInfo(Object object, String user) {
-        JSONObject json = BeanUtils.convertToJson(object);
+    public static void appendEntityCreateInfo(Object object, String user) {
+        if(object instanceof BaseEntity){
+            Date date =DateUtils.getDateTime();
+            ((BaseEntity) object).setCreateTime(date);
+            ((BaseEntity) object).setCreateUser(user);
+            ((BaseEntity) object).setUpdateTime(date);
+            ((BaseEntity) object).setUpdateUser(user);
+        }
 
-        json.put("id", com.winjean.utils.StringUtils.getUUID());
-        Date date =DateUtils.getDateTime();
-        json.put("createTime", date);
-        json.put("createUser", user);
-        json.put("updateTime", date);
-        json.put("updateUser", user);
-
-        return json;
     }
 
-    public static JSONObject updateBeanInfo(Object object, String user) {
-        JSONObject json = BeanUtils.convertToJson(object);
-
-        Date date =DateUtils.getDateTime();
-        json.put("updateTime", date);
-        json.put("updateUser", user);
-
-        return json;
+    public static void updateEntityUpdateInfo(Object object, String user) {
+        if(object instanceof BaseEntity){
+            Date date =DateUtils.getDateTime();
+            ((BaseEntity) object).setUpdateTime(date);
+            ((BaseEntity) object).setUpdateUser(user);
+        }
     }
 
 }

@@ -20,7 +20,7 @@ public class ResourceController {
         return "save success";
     }
 
-    @PostMapping("delete")
+    @GetMapping("delete")
     public Object delete(@RequestParam Long id){
         resourceService.delete(id);
         return "delete success";
@@ -55,4 +55,6 @@ public class ResourceController {
         Page<ResourceEntity> modules = resourceService.findAll(pageNo, pageSize);
         return modules;
     }
+
+
 }

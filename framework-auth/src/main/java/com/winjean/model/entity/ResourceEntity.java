@@ -1,10 +1,9 @@
 package com.winjean.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.winjean.common.BaseEntity;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Date;
 
 /**
  * @author ：winjean
@@ -15,13 +14,13 @@ import java.util.Date;
  */
 @Data
 @Entity(name = "t_resource")
-public class ResourceEntity {
+public class ResourceEntity extends BaseEntity {
 
     /**
      * 主键Id
      */
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name="resource_id")
     private Long id;
 
@@ -34,6 +33,11 @@ public class ResourceEntity {
      * 菜单名称，按钮名称,目录名称
      */
     private String name;
+
+    /**
+     * 是否叶子节点
+     */
+    private boolean leaf = true;
 
     /**
      * 样式标签
@@ -59,7 +63,7 @@ public class ResourceEntity {
      * 父类ID
      */
     @Column(name="parent_id")
-    private String parentId;
+    private Long parentId;
 
     /**
      * 排序序号
@@ -72,34 +76,12 @@ public class ResourceEntity {
     private int level;
 
     /**
+     * 是否可见
+     */
+    private boolean visible;
+
+    /**
      * 是否可用
      */
     private boolean enable;
-
-    /**
-     * 创建人
-     */
-    @Column(name = "create_user")
-    private String createUser;
-
-    /**
-     * 创建时间
-     */
-    @Column(name = "create_time")
-    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
-    private Date createTime;
-
-    /**
-     * 修改人
-     */
-    @Column(name = "update_user")
-    private String updateUser;
-
-    /**
-     * 创建时间
-     */
-    @Column(name = "update_time")
-    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
-    private Date updateTime;
-
 }

@@ -8,12 +8,12 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Data
-@Entity
+@Entity(name = "t_base_entity")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class BaseEntity implements Serializable {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
 
     @Column(name = "create_user")

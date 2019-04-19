@@ -3,6 +3,7 @@ package com.winjean.service.impl;
 import com.winjean.model.entity.ResourceEntity;
 import com.winjean.repository.ResourceRepository;
 import com.winjean.service.ResourceService;
+import com.winjean.utils.BeanUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -11,6 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.util.Optional;
 
@@ -26,8 +28,20 @@ public class ResourceServiceImpl implements ResourceService {
     @Override
     @Transactional
     public void save(ResourceEntity entity) {
-        ResourceEntity module = resourceRepository.save(entity);
-        log.info("module saved id = {}",module.getId());
+        BeanUtils.appendEntityCreateInfo(entity,"winjean");
+
+        ResourceEntity resource = resourceRepository.save(entity);
+        Long parentId = resource.getParentId();
+        if(! StringUtils.isEmpty(parentId)){
+            ResourceEntity parent = resourceRepository.findResourceById(parentId);
+            if(null != parent && parent.isLeaf()){
+                parent.setLeaf(false);
+                resourceRepository.save(parent);
+                log.info(" set resource id = {}, leaf = {}",parent.getId(), parent.isLeaf());
+            }
+        }
+
+        log.info("resource saved id = {}",resource.getId());
     }
 
     @Override
@@ -35,12 +49,22 @@ public class ResourceServiceImpl implements ResourceService {
     @Modifying //定义事务为修改
     public void delete(Long id) {
         Optional<ResourceEntity> optional =  resourceRepository.findById(id);
+
         if (optional.isPresent()){
-            ResourceEntity module =  optional.get();
-            resourceRepository.delete(module);
-            log.info("module deleted id = {}",id);
+            ResourceEntity resource =  optional.get();
+            Long pid = resource.getParentId();
+            resourceRepository.delete(resource);
+
+            Long count = resourceRepository.countByParentId(pid);
+            if(count == 0){
+                ResourceEntity parent = resourceRepository.findResourceById(pid);
+                parent.setLeaf(true);
+                resourceRepository.save(parent);
+            }
+
+            log.info("resource deleted id = {}",id);
         }else{
-            log.info("no module exist, id = {}",id);
+            log.info("no resource exist, id = {}",id);
         }
     }
 
@@ -67,7 +91,7 @@ public class ResourceServiceImpl implements ResourceService {
 
     @Override
     public ResourceEntity findByName(String name) {
-        return resourceRepository.findModuleByName(name);
+        return resourceRepository.findResourceByName(name);
     }
 
     @Override

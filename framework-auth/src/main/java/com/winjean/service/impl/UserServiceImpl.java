@@ -66,7 +66,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public UserEntity findByName(String name) {
-        return userRepository.findModuleByName(name);
+        return userRepository.findUserEntitiesByName(name);
     }
 
     @Override
