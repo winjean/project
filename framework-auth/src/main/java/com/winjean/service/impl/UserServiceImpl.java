@@ -1,7 +1,9 @@
 package com.winjean.service.impl;
 
+import com.winjean.model.entity.DeptEntity;
 import com.winjean.model.entity.UserEntity;
 import com.winjean.model.entity.UserRoleEntity;
+import com.winjean.repository.DeptRepository;
 import com.winjean.repository.UserRepository;
 import com.winjean.repository.UserRoleRepository;
 import com.winjean.service.UserService;
@@ -32,12 +34,19 @@ public class UserServiceImpl implements UserService{
     @Autowired
     private UserRoleRepository userRoleRepository;
 
+    @Autowired
+    private DeptRepository deptRepository;
+
     @PersistenceContext
     protected EntityManager entityManager;
 
     @Override
     @Transactional
     public void save(UserEntity entity) {
+        DeptEntity dept = entity.getDepartment();
+        BeanUtils.appendEntityCreateInfo(dept, "winjean");
+        deptRepository.save(dept);
+
         BeanUtils.appendEntityCreateInfo(entity, "winjean");
         UserEntity user = userRepository.save(entity);
         log.info("user saved id = {}",user.getId());

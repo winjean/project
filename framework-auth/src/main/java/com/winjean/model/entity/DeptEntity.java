@@ -25,6 +25,6 @@ public class DeptEntity extends BaseEntity {
     /**
      * 树的深度数
      */
-    private boolean leaf;
+    private boolean leaf = true;
 
 }
