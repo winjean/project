@@ -99,4 +99,10 @@ public class ResourceServiceImpl implements ResourceService {
         PageRequest page= PageRequest.of(pageNo, pageSize, Sort.by(Sort.Order.asc("id")));
         return resourceRepository.findAll(page);
     }
+
+    @Override
+    public Page<ResourceEntity> findResourcesByRole(Long roleId, int pageNo, int pageSize) {
+        PageRequest page= PageRequest.of(pageNo, pageSize, Sort.by(Sort.Order.asc("id")));
+        return resourceRepository.findResources(roleId, page);
+    }
 }

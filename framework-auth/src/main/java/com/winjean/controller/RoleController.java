@@ -1,6 +1,7 @@
 package com.winjean.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.winjean.model.entity.ResourceEntity;
 import com.winjean.model.entity.RoleEntity;
 import com.winjean.model.entity.RoleResourceEntity;
 import com.winjean.service.RoleService;
@@ -55,8 +56,8 @@ public class RoleController {
     public Object findAll(@RequestBody JSONObject json){
         int pageNo = json.getInteger("pageNo");
         int pageSize = json.getInteger("pageSize");
-        Page<RoleEntity> modules = roleService.findAll(pageNo, pageSize);
-        return modules;
+        Page<RoleEntity> entities = roleService.findAll(pageNo, pageSize);
+        return entities;
     }
 
     /***** 以下处理 Resources 和 Role 的关系******/
@@ -74,11 +75,5 @@ public class RoleController {
     }
 
 
-//    @GetMapping("findResourcesByRole")
-//    public Object findResourceByRole(@RequestBody JSONObject json){
-//        int pageNo = json.getInteger("pageNo");
-//        int pageSize = json.getInteger("pageSize");
-//        Page<RoleEntity> modules = roleService.findAll(pageNo, pageSize);
-//        return modules;
-//    }
+
 }

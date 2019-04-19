@@ -55,4 +55,13 @@ public class ResourceController {
         Page<ResourceEntity> entitys = resourceService.findAll(pageNo, pageSize);
         return entitys;
     }
+
+    @PostMapping("findResourcesByRole")
+    public Object findResourceByRole(@RequestBody JSONObject json){
+        int pageNo = json.getInteger("pageNo");
+        int pageSize = json.getInteger("pageSize");
+        Long roleId = json.getLong("roleId");
+        Page<ResourceEntity> entities = resourceService.findResourcesByRole(roleId,pageNo, pageSize);
+        return entities;
+    }
 }

@@ -1,5 +1,6 @@
 package com.winjean.service;
 
+import com.winjean.model.entity.ResourceEntity;
 import com.winjean.model.entity.RoleEntity;
 import com.winjean.model.entity.RoleResourceEntity;
 import org.springframework.data.domain.Page;
@@ -24,5 +25,6 @@ public interface RoleService {
     void deleteRoleResource(List<Long> ids);
 
     void update(RoleEntity entity);
+
 
 }

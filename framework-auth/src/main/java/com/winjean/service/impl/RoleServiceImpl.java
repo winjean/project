@@ -1,5 +1,6 @@
 package com.winjean.service.impl;
 
+import com.winjean.model.entity.ResourceEntity;
 import com.winjean.model.entity.RoleEntity;
 import com.winjean.model.entity.RoleResourceEntity;
 import com.winjean.repository.RoleRepository;
@@ -72,7 +73,7 @@ public class RoleServiceImpl implements RoleService {
     @Transactional
     @Modifying //定义事务为修改
     public void deleteRoleResource(List<Long> ids) {
-        roleResourceRepository.deleteByIds(ids);
+        roleResourceRepository.deleteByIdIn(ids);
         log.info("delete RoleResource id = {}",ids.toArray());
     }
 
@@ -107,4 +108,6 @@ public class RoleServiceImpl implements RoleService {
         PageRequest page= PageRequest.of(pageNo, pageSize, Sort.by(Sort.Order.asc("id")));
         return roleRepository.findAll(page);
     }
+
+
 }

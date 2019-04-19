@@ -18,4 +18,6 @@ public interface ResourceService {
 
     void update(ResourceEntity entity);
 
+    Page<ResourceEntity> findResourcesByRole(Long roleId, int pageNo, int pageSize);
+
 }
