@@ -14,8 +14,7 @@ import java.util.Date;
  * @version: $version$
  */
 @Data
-@Entity
-@Table(name = "t_resource")
+@Entity(name = "t_resource")
 public class ResourceEntity {
 
     /**

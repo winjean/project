@@ -8,7 +8,7 @@ import java.util.Date;
 
 
 @Data
-@Entity
+@Entity(name = "t_role")
 public class RoleEntity {
 
     @Id

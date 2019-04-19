@@ -42,18 +42,6 @@ spring:
       ddl-auto: update
     show-sql: true
 
-# mybatis page helper
-pagehelper:
-  helper-dialect: mysql
-
-# logging config
-logging:
-  config: classpath:config/logback-spring.xml
-  level:
-    com:
-      winjean:
-        mapper: debug
-
 # actuator config
 # http://localhost:8080/actuator
 management:
