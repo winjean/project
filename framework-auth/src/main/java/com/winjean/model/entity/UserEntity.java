@@ -1,7 +1,6 @@
 package com.winjean.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.winjean.common.BaseEntity;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -10,12 +9,12 @@ import java.util.Date;
 
 @Data
 @Entity(name = "t_user")
-public class UserEntity extends BaseEntity {
+public class UserEntity {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name="user_id")
-    private int id;
+    private Long id;
 
     @Column(name = "user_name")
     private String name;

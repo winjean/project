@@ -10,13 +10,13 @@ import javax.persistence.*;
 public class RoleResourceEntity {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name="id")
-    private int id;
+    private Long id;
 
     @Column(name = "role_id")
-    private int roleId;
+    private Long roleId;
 
     @Column(name = "resource_id")
-    private int resourceId;
+    private Long resourceId;
 }

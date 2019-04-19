@@ -12,9 +12,9 @@ import java.util.Date;
 public class RoleEntity {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name="role_id")
-    private int id;
+    private Long id;
 
     @Column(name = "role_name")
     private String name;

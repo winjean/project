@@ -21,9 +21,9 @@ public class ResourceEntity {
      * 主键Id
      */
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name="resource_id")
-    private int id;
+    private Long id;
 
     /**
      * 编码

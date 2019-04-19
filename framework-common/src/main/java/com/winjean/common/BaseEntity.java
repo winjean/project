@@ -13,8 +13,8 @@ import java.util.Date;
 public class BaseEntity implements Serializable {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private String id;
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "create_user")
     private String createUser;

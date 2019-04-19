@@ -10,13 +10,13 @@ import javax.persistence.*;
 public class UserRoleEntity {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
-    private int id;
+    private Long id;
 
     @Column(name = "user_id")
-    private int userId;
+    private Long userId;
 
     @Column(name = "role_id")
-    private int roleId;
+    private Long roleId;
 }
