@@ -5,12 +5,10 @@ import com.winjean.model.entity.ResourceEntity;
 import com.winjean.service.ResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("resource")
 public class ResourceController {
 
     @Autowired
@@ -23,7 +21,7 @@ public class ResourceController {
     }
 
     @PostMapping("delete")
-    public Object delete(@RequestParam int id){
+    public Object delete(@RequestParam Long id){
         resourceService.delete(id);
         return "delete success";
     }
@@ -37,7 +35,7 @@ public class ResourceController {
 
     @PostMapping("findById")
     public Object findModuleById(@RequestBody JSONObject json){
-        int id = json.getInteger("id");
+        Long id = json.getLong("id");
 
         ResourceEntity module =  resourceService.findById(id);
         return module;

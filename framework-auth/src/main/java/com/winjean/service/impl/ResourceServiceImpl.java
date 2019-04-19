@@ -33,7 +33,7 @@ public class ResourceServiceImpl implements ResourceService {
     @Override
     @Transactional
     @Modifying //定义事务为修改
-    public void delete(int id) {
+    public void delete(Long id) {
         Optional<ResourceEntity> optional =  resourceRepository.findById(id);
         if (optional.isPresent()){
             ResourceEntity module =  optional.get();
@@ -48,7 +48,7 @@ public class ResourceServiceImpl implements ResourceService {
     @Transactional
     @Modifying //定义事务为修改
     public void update(ResourceEntity entity) {
-        int id = entity.getId();
+        Long id = entity.getId();
         Optional<ResourceEntity> optional =  resourceRepository.findById(id);
         if(optional.isPresent()){
             ResourceEntity module = resourceRepository.findById(id).get();
@@ -60,7 +60,7 @@ public class ResourceServiceImpl implements ResourceService {
     }
 
     @Override
-    public ResourceEntity findById(int id) {
+    public ResourceEntity findById(Long id) {
         Optional<ResourceEntity> optional =  resourceRepository.findById(id);
         return optional.isPresent() ? optional.get() : null;
     }

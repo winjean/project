@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService{
     @Override
     @Transactional
     @Modifying //定义事务为修改
-    public void delete(int id) {
+    public void delete(Long id) {
         Optional<UserEntity> optional =  userRepository.findById(id);
         if (optional.isPresent()){
             UserEntity module =  optional.get();
@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService{
     @Transactional
     @Modifying //定义事务为修改
     public void update(UserEntity entity) {
-        int id = entity.getId();
+        Long id = entity.getId();
         Optional<UserEntity> optional =  userRepository.findById(id);
         if(optional.isPresent()){
             UserEntity module = userRepository.findById(id).get();
@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public UserEntity findById(int id) {
+    public UserEntity findById(Long id) {
         Optional<UserEntity> optional =  userRepository.findById(id);
         return optional.isPresent() ? optional.get() : null;
     }

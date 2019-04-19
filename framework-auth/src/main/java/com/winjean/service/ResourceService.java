@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 
 public interface ResourceService {
 
-    ResourceEntity findById(int id);
+    ResourceEntity findById(Long id);
 
     ResourceEntity findByName(String name);
 
@@ -14,7 +14,7 @@ public interface ResourceService {
 
     void save(ResourceEntity entity);
 
-    void delete(int id);
+    void delete(Long id);
 
     void update(ResourceEntity entity);
 

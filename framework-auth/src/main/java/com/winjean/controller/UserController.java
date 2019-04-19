@@ -5,12 +5,10 @@ import com.winjean.model.entity.UserEntity;
 import com.winjean.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("user")
 public class UserController {
 
     @Autowired
@@ -23,7 +21,7 @@ public class UserController {
     }
 
     @PostMapping("delete")
-    public Object delete(@RequestParam int id){
+    public Object delete(@RequestParam Long id){
         userService.delete(id);
         return "delete success";
     }
@@ -37,7 +35,7 @@ public class UserController {
 
     @PostMapping("findById")
     public Object findModuleById(@RequestBody JSONObject json){
-        int id = json.getInteger("id");
+        Long id = json.getLong("id");
 
         UserEntity module =  userService.findById(id);
         return module;

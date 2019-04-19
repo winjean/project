@@ -16,7 +16,7 @@ import java.util.List;
  * @version: $version$
  */
 
-public interface RoleRepository extends JpaRepository<RoleEntity, Integer> {
+public interface RoleRepository extends JpaRepository<RoleEntity, Long> {
 
     RoleEntity findModuleByName(String name);
 

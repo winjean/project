@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 
 public interface RoleService {
 
-    RoleEntity findById(int id);
+    RoleEntity findById(Long id);
 
     RoleEntity findByName(String name);
 
@@ -14,7 +14,7 @@ public interface RoleService {
 
     void save(RoleEntity entity);
 
-    void delete(int id);
+    void delete(Long id);
 
     void update(RoleEntity entity);
 

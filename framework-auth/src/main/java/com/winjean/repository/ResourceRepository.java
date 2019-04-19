@@ -16,7 +16,7 @@ import java.util.List;
  * @version: $version$
  */
 
-public interface ResourceRepository extends JpaRepository<ResourceEntity, Integer> {
+public interface ResourceRepository extends JpaRepository<ResourceEntity, Long> {
 
     ResourceEntity findModuleByName(String name);
 

@@ -5,12 +5,10 @@ import com.winjean.model.entity.RoleEntity;
 import com.winjean.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("role")
 public class RoleController {
 
     @Autowired
@@ -23,7 +21,7 @@ public class RoleController {
     }
 
     @PostMapping("delete")
-    public Object delete(@RequestParam int id){
+    public Object delete(@RequestParam Long id){
         roleService.delete(id);
         return "delete success";
     }
@@ -37,7 +35,7 @@ public class RoleController {
 
     @PostMapping("findById")
     public Object findModuleById(@RequestBody JSONObject json){
-        int id = json.getInteger("id");
+        Long id = json.getLong("id");
 
         RoleEntity module =  roleService.findById(id);
         return module;

@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 
 public interface UserService {
 
-    UserEntity findById(int id);
+    UserEntity findById(Long id);
 
     UserEntity findByName(String name);
 
@@ -14,7 +14,7 @@ public interface UserService {
 
     void save(UserEntity entity);
 
-    void delete(int id);
+    void delete(Long id);
 
     void update(UserEntity entity);
 

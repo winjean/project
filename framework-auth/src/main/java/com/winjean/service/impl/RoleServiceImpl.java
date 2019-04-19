@@ -33,7 +33,7 @@ public class RoleServiceImpl implements RoleService {
     @Override
     @Transactional
     @Modifying //定义事务为修改
-    public void delete(int id) {
+    public void delete(Long id) {
         Optional<RoleEntity> optional =  roleRepository.findById(id);
         if (optional.isPresent()){
             RoleEntity module =  optional.get();
@@ -48,7 +48,7 @@ public class RoleServiceImpl implements RoleService {
     @Transactional
     @Modifying //定义事务为修改
     public void update(RoleEntity entity) {
-        int id = entity.getId();
+        Long id = entity.getId();
         Optional<RoleEntity> optional =  roleRepository.findById(id);
         if(optional.isPresent()){
             RoleEntity module = roleRepository.findById(id).get();
@@ -60,7 +60,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public RoleEntity findById(int id) {
+    public RoleEntity findById(Long id) {
         Optional<RoleEntity> optional =  roleRepository.findById(id);
         return optional.isPresent() ? optional.get() : null;
     }
