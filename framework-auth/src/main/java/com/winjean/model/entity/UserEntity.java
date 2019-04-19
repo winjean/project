@@ -15,7 +15,7 @@ public class UserEntity extends BaseEntity {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name="user_id")
-    private String id;
+    private int id;
 
     @Column(name = "user_name")
     private String name;

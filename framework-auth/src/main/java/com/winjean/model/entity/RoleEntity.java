@@ -1,7 +1,6 @@
 package com.winjean.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.winjean.common.BaseEntity;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -15,10 +14,10 @@ public class RoleEntity {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name="role_id")
-    private String id;
+    private int id;
 
     @Column(name = "role_name")
-    private String roleName;
+    private String name;
 
     /**
      * 是否可用

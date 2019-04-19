@@ -1,28 +1,21 @@
 package com.winjean.service;
 
-import com.alibaba.fastjson.JSONObject;
-import com.winjean.common.PageResponse;
 import com.winjean.model.entity.UserEntity;
-import com.winjean.model.request.UserInsertRequest;
-import com.winjean.model.response.UserQueryResponse;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 
 public interface UserService {
 
-    void insert(UserInsertRequest user);
+    UserEntity findById(int id);
 
-    void insert(List<UserInsertRequest> users);
+    UserEntity findByName(String name);
 
-    void update(UserEntity user);
+    Page<UserEntity> findAll(int pageNo, int pageSize);
 
-    void delete(String id);
+    void save(UserEntity entity);
 
-    void delete(List<JSONObject> users);
+    void delete(int id);
 
-    PageResponse<UserQueryResponse> searchUsers(JSONObject req);
-
-    JSONObject searchUser(UserEntity user);
+    void update(UserEntity entity);
 
 }

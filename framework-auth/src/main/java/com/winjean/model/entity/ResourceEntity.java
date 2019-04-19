@@ -24,7 +24,7 @@ public class ResourceEntity {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name="resource_id")
-    private String id;
+    private int id;
 
     /**
      * 编码
