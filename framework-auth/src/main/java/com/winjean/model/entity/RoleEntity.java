@@ -15,11 +15,14 @@ public class RoleEntity extends BaseEntity {
     @Column(name="role_id")
     private Long id;
 
+    /**
+     * 角色名称
+     */
     @Column(name = "role_name")
     private String name;
 
     /**
      * 是否可用
      */
-    private byte enable;
+    private boolean enable = true;
 }

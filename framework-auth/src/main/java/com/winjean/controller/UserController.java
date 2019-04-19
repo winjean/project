@@ -67,7 +67,7 @@ public class UserController {
         return "save success";
     }
 
-    @PostMapping("deleteRoleResource")
+    @PostMapping("deleteUserRole")
     public Object deleteUserRole(@RequestBody List<Long> ids){
         userService.deleteUserRole(ids);
         return "delete success";

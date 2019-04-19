@@ -83,5 +83,5 @@ public class ResourceEntity extends BaseEntity {
     /**
      * 是否可用
      */
-    private boolean enable;
+    private boolean enable = true;
 }

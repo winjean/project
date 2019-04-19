@@ -1,11 +1,11 @@
 package com.winjean.service.impl;
 
-import com.winjean.model.entity.ResourceEntity;
 import com.winjean.model.entity.RoleEntity;
 import com.winjean.model.entity.RoleResourceEntity;
 import com.winjean.repository.RoleRepository;
 import com.winjean.repository.RoleResourceRepository;
 import com.winjean.service.RoleService;
+import com.winjean.utils.BeanUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -38,6 +38,7 @@ public class RoleServiceImpl implements RoleService {
     @Override
     @Transactional
     public void save(RoleEntity entity) {
+        BeanUtils.appendEntityCreateInfo(entity,"winjean");
         RoleEntity role = roleRepository.save(entity);
         log.info("role saved id = {}",role.getId());
     }
@@ -86,6 +87,8 @@ public class RoleServiceImpl implements RoleService {
         if(optional.isPresent()){
             RoleEntity role = roleRepository.findById(id).get();
             role.setName(entity.getName());
+            BeanUtils.updateEntityUpdateInfo(entity,"winjean");
+            roleRepository.save(role);
             log.info("role updated id = {},name = {}", id, role.getName());
         }else{
             log.info("no role exist, id = {}", id);

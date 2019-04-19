@@ -75,11 +75,13 @@ public class ResourceServiceImpl implements ResourceService {
         Long id = entity.getId();
         Optional<ResourceEntity> optional =  resourceRepository.findById(id);
         if(optional.isPresent()){
-            ResourceEntity module = resourceRepository.findById(id).get();
-            module.setName(entity.getName());
-            log.info("module updated id = {},name = {}", id, module.getName());
+            ResourceEntity resource = resourceRepository.findById(id).get();
+            resource.setName(entity.getName());
+            BeanUtils.updateEntityUpdateInfo(resource,"winjean");
+            resourceRepository.save(resource);
+            log.info("resource updated id = {},name = {}", id, entity.getName());
         }else{
-            log.info("no module exist, id = {}", id);
+            log.info("no resource exist, id = {}", id);
         }
     }
 

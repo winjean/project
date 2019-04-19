@@ -17,9 +17,15 @@ public class UserEntity extends BaseEntity {
     @Column(name="user_id")
     private Long id;
 
+    /**
+     * 用户名
+     */
     @Column(name = "user_name")
     private String name;
 
+    /**
+     * 密码
+     */
     private String password;
 
     /**
@@ -27,14 +33,29 @@ public class UserEntity extends BaseEntity {
      */
     private String salt;
 
+    /**
+     * 出生日期
+     */
     @JsonFormat(/*locale="zh", timezone="GMT+8",*/ pattern="yyyy-MM-dd")
     private Date birthday;
 
+    /**
+     * 电话
+     */
     private String telephone;
 
+    /**
+     * 性别
+     */
     private String sex;
 
+    /**
+     * 邮箱
+     */
     private String email;
 
-    private byte enable = 1;
+    /**
+     * 是否可用
+     */
+    private boolean enable = true;
 }

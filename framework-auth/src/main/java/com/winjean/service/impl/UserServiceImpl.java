@@ -5,6 +5,7 @@ import com.winjean.model.entity.UserRoleEntity;
 import com.winjean.repository.UserRepository;
 import com.winjean.repository.UserRoleRepository;
 import com.winjean.service.UserService;
+import com.winjean.utils.BeanUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -37,6 +38,7 @@ public class UserServiceImpl implements UserService{
     @Override
     @Transactional
     public void save(UserEntity entity) {
+        BeanUtils.appendEntityCreateInfo(entity, "winjean");
         UserEntity user = userRepository.save(entity);
         log.info("user saved id = {}",user.getId());
     }
@@ -64,6 +66,8 @@ public class UserServiceImpl implements UserService{
         if(optional.isPresent()){
             UserEntity user = userRepository.findById(id).get();
             user.setName(entity.getName());
+            BeanUtils.updateEntityUpdateInfo(user, "winjean");
+            userRepository.save(user);
             log.info("user updated id = {},name = {}", id, user.getName());
         }else{
             log.info("no user exist, id = {}", id);
