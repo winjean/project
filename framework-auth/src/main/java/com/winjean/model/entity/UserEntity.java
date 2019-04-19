@@ -1,6 +1,5 @@
 package com.winjean.model.entity;
 
-import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.winjean.common.BaseEntity;
