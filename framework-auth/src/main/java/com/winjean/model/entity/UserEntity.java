@@ -12,10 +12,10 @@ import java.util.Date;
 @Entity(name = "t_user")
 public class UserEntity extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    @Column(name="user_id")
-    private Long id;
+//    @Id
+//    @GeneratedValue(strategy= GenerationType.AUTO)
+//    @Column(name="user_id")
+//    private Long id;
 
     /**
      * 用户名

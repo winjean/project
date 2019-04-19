@@ -10,7 +10,7 @@ import java.util.Date;
 @Data
 @Entity(name = "t_base_entity")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class BaseEntity implements Serializable {
+public abstract class BaseEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)

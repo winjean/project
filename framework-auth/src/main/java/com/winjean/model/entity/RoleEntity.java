@@ -10,10 +10,10 @@ import javax.persistence.*;
 @Entity(name = "t_role")
 public class RoleEntity extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    @Column(name="role_id")
-    private Long id;
+//    @Id
+//    @GeneratedValue(strategy= GenerationType.AUTO)
+//    @Column(name="role_id")
+//    private Long id;
 
     /**
      * 角色名称

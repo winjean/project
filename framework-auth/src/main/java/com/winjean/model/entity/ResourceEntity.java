@@ -19,10 +19,10 @@ public class ResourceEntity extends BaseEntity {
     /**
      * 主键Id
      */
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    @Column(name="resource_id")
-    private Long id;
+//    @Id
+//    @GeneratedValue(strategy= GenerationType.AUTO)
+//    @Column(name="resource_id")
+//    private Long id;
 
     /**
      * 编码
