@@ -1,8 +1,8 @@
 package com.winjean.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.winjean.model.entity.UserEntity;
-import com.winjean.service.UserService;
+import com.winjean.model.entity.RoleEntity;
+import com.winjean.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,27 +11,27 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class UserController {
+public class RoleController {
 
     @Autowired
-    private UserService userService;
+    private RoleService roleService;
 
     @PostMapping("save")
-    public Object save(@RequestBody UserEntity entity){
-        userService.save(entity);
+    public Object save(@RequestBody RoleEntity entity){
+        roleService.save(entity);
         return "save success";
     }
 
     @PostMapping("delete")
     public Object delete(@RequestParam int id){
-        userService.delete(id);
+        roleService.delete(id);
         return "delete success";
     }
 
     @PostMapping("update")
-    public Object findModuleById(@RequestBody UserEntity entity){
+    public Object findModuleById(@RequestBody RoleEntity entity){
 
-        userService.update(entity);
+        roleService.update(entity);
         return "update success";
     }
 
@@ -39,14 +39,14 @@ public class UserController {
     public Object findModuleById(@RequestBody JSONObject json){
         int id = json.getInteger("id");
 
-        UserEntity module =  userService.findById(id);
+        RoleEntity module =  roleService.findById(id);
         return module;
     }
 
     @PostMapping("findByName")
     public Object findModuleByName(@RequestBody JSONObject json){
         String name = json.getString("name");
-        UserEntity module = userService.findByName(name);
+        RoleEntity module = roleService.findByName(name);
         return module;
     }
 
@@ -54,7 +54,7 @@ public class UserController {
     public Object findAll(@RequestBody JSONObject json){
         int pageNo = json.getInteger("pageNo");
         int pageSize = json.getInteger("pageSize");
-        Page<UserEntity> modules = userService.findAll(pageNo, pageSize);
+        Page<RoleEntity> modules = roleService.findAll(pageNo, pageSize);
         return modules;
     }
 }
