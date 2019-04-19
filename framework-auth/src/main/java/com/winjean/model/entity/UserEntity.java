@@ -1,10 +1,14 @@
 package com.winjean.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.winjean.common.BaseEntity;
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.util.Date;
 
 
@@ -58,4 +62,9 @@ public class UserEntity extends BaseEntity {
      * 是否可用
      */
     private boolean enable = true;
+
+    @ManyToOne
+    @JoinColumn(name = "dept_id")
+    @JsonBackReference
+    private DeptEntity department;
 }
