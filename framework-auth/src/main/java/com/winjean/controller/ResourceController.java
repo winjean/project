@@ -64,4 +64,13 @@ public class ResourceController {
         Page<ResourceEntity> entities = resourceService.findResourcesByRole(roleId,pageNo, pageSize);
         return entities;
     }
+
+    @PostMapping("findResourcesByUser")
+    public Object findResourceByUser(@RequestBody JSONObject json){
+        int pageNo = json.getInteger("pageNo");
+        int pageSize = json.getInteger("pageSize");
+        Long userId = json.getLong("userId");
+        Page<ResourceEntity> entities = resourceService.findResourcesByUser(userId,pageNo, pageSize);
+        return entities;
+    }
 }

@@ -1,7 +1,10 @@
 package com.winjean.service;
 
 import com.winjean.model.entity.UserEntity;
+import com.winjean.model.entity.UserRoleEntity;
 import org.springframework.data.domain.Page;
+
+import java.util.List;
 
 
 public interface UserService {
@@ -18,4 +21,7 @@ public interface UserService {
 
     void update(UserEntity entity);
 
+    void save(List<UserRoleEntity> entities);
+
+    void deleteUserRole(List<Long> ids);
 }

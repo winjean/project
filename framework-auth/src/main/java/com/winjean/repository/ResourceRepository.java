@@ -24,17 +24,24 @@ public interface ResourceRepository extends JpaRepository<ResourceEntity, Long> 
 
     Long countByParentId(Long parentId);
 
-    @Query(value = "select r.* from t_resource r INNER JOIN t_role_resource rr on r.id =rr.resource_id where rr.role_id = ?1",
-            countQuery = "select count(*) from t_resource r INNER JOIN t_role_resource rr on r.id =rr.resource_id where rr.role_id = ?1",
+    @Query(value = "select r.* from t_resource r " +
+            "INNER JOIN t_role_resource rr on r.id =rr.resource_id " +
+            "where rr.role_id = ?1",
+            countQuery = "select count(*) from t_resource r " +
+                    "INNER JOIN t_role_resource rr on r.id =rr.resource_id " +
+                    "where rr.role_id = ?1",
             nativeQuery = true)
-    Page<ResourceEntity> findResources(Long roleId, Pageable page);
+    Page<ResourceEntity> findResourcesByRole(Long roleId, Pageable page);
 
-//    @Query(value = "select * from t_module where name = ?1",nativeQuery = true)
-//    List<ResourceEntity> find_SQL_Entity(String name);
-
-//    @Query(value = "select * from t_module where name = ?1",
-//            countQuery = "select count(*) from t_module where name = ?1",
-//            nativeQuery = true)
-//    Page<ResourceEntity> find_SQL_Page(String name, Pageable page);
+    @Query(value = "select r.* from t_resource r " +
+            "INNER JOIN t_role_resource rr on r.id =rr.resource_id " +
+            "INNER JOIN t_user_role ur on ur.role_id = rr.role_id " +
+            "where ur.role_id = ?1",
+            countQuery = "select count(*) from t_resource " +
+                    "INNER JOIN t_role_resource rr on r.id =rr.resource_id " +
+                    "INNER JOIN t_user_role ur on ur.role_id = rr.role_id " +
+                    "where ur.role_id = ?1",
+            nativeQuery = true)
+    Page<ResourceEntity> findResourcesByUser(Long userId, Pageable page);
 
 }

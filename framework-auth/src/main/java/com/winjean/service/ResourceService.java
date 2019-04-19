@@ -20,4 +20,6 @@ public interface ResourceService {
 
     Page<ResourceEntity> findResourcesByRole(Long roleId, int pageNo, int pageSize);
 
+    Page<ResourceEntity> findResourcesByUser(Long userId, int pageNo, int pageSize);
+
 }

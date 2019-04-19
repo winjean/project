@@ -1,7 +1,9 @@
 package com.winjean.service.impl;
 
 import com.winjean.model.entity.UserEntity;
+import com.winjean.model.entity.UserRoleEntity;
 import com.winjean.repository.UserRepository;
+import com.winjean.repository.UserRoleRepository;
 import com.winjean.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,15 +14,25 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import java.util.List;
 import java.util.Optional;
 
 
 @Service
 @Slf4j
+@Transactional(readOnly = true)
 public class UserServiceImpl implements UserService{
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private UserRoleRepository userRoleRepository;
+
+    @PersistenceContext
+    protected EntityManager entityManager;
 
     @Override
     @Transactional
@@ -73,5 +85,26 @@ public class UserServiceImpl implements UserService{
     public Page<UserEntity> findAll(int pageNo, int pageSize) {
         PageRequest page= PageRequest.of(pageNo, pageSize, Sort.by(Sort.Order.asc("id")));
         return userRepository.findAll(page);
+    }
+
+    @Override
+    @Transactional
+    public void save(List<UserRoleEntity> entities) {
+        for (int i = 0; i < entities.size(); i++) {
+            entityManager.persist(entities.get(i));
+            if (i % 100 == 0) { //一次一百条插入
+                entityManager.flush();
+                entityManager.clear();
+            }
+        }
+        log.info(" batch save to DB success,list is {}",entities.toString());
+    }
+
+    @Override
+    @Transactional
+    @Modifying //定义事务为修改
+    public void deleteUserRole(List<Long> ids) {
+        userRoleRepository.deleteByIdIn(ids);
+        log.info("delete RoleResource id = {}",ids.toArray());
     }
 }
