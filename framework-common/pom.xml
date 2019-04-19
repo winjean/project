@@ -11,7 +11,7 @@
 
     <parent>
         <groupId>com.winjean</groupId>
-        <artifactId>framework</artifactId>
+        <artifactId>springboot-project</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 

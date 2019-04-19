@@ -4,32 +4,31 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.winjean</groupId>
-    <artifactId>framework</artifactId>
+    <artifactId>springboot-project</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>framework</name>
-    <description>framework project for Spring Boot</description>
+    <name>springboot-project</name>
+    <description>project for Spring Boot</description>
 
     <modules>
-        <module>framework-user</module>
-        <module>framework-activiti</module>
-        <module>framework-quartz</module>
+        <module>framework-auth</module>
+        <!--<module>framework-activiti</module>-->
+        <!--<module>framework-quartz</module>-->
         <module>framework-common</module>
     </modules>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.0.3.RELEASE</version>
-        <relativePath/>
+        <version>2.0.6.RELEASE</version>
+       <!-- <relativePath/>-->
     </parent>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-
     </properties>
 
     <dependencyManagement>
@@ -131,6 +130,11 @@
 
     <dependencies>
         <!-- spring jars start -->
+        <!--<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>-->
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
@@ -176,7 +180,6 @@
             <artifactId>jasypt-spring-boot-starter</artifactId>
             <version>2.1.0</version>
         </dependency>
-
 
     </dependencies>
 
