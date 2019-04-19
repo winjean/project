@@ -86,6 +86,12 @@ public class UserServiceImpl implements UserService{
     @Override
     public UserEntity findById(Long id) {
         Optional<UserEntity> optional =  userRepository.findById(id);
+//        UserEntity userEntity = optional.isPresent() ? optional.get() : null;
+//        DeptEntity dept = userEntity.getDepartment();
+//        if(dept != null){
+//            log.info(dept.getName());
+//        }
+
         return optional.isPresent() ? optional.get() : null;
     }
 
