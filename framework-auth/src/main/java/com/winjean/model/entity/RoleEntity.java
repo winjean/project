@@ -18,7 +18,7 @@ public class RoleEntity extends BaseEntity {
     /**
      * 角色名称
      */
-    @Column(name = "role_name")
+    @Column(name = "role_name", unique = true)
     private String name;
 
     /**

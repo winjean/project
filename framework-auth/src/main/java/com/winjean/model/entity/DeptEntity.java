@@ -14,6 +14,7 @@ public class DeptEntity extends BaseEntity {
     /**
      * 部门名称
      */
+    @Column(unique = true)
     private String name;
 
     /**

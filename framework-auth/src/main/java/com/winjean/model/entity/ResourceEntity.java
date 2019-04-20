@@ -27,6 +27,7 @@ public class ResourceEntity extends BaseEntity {
     /**
      * 编码
      */
+    @Column(unique = true)
     private String code;
 
     /**

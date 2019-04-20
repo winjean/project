@@ -24,7 +24,7 @@ public class UserEntity extends BaseEntity {
     /**
      * 用户名
      */
-    @Column(name = "user_name")
+    @Column(name = "user_name", unique = true)
     private String name;
 
     /**
