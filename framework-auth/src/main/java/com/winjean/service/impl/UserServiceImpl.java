@@ -14,11 +14,16 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,7 +31,7 @@ import java.util.Optional;
 @Service
 @Slf4j
 @Transactional(readOnly = true)
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
@@ -125,5 +130,11 @@ public class UserServiceImpl implements UserService{
     public void deleteUserRole(List<Long> ids) {
         userRoleRepository.deleteByIdIn(ids);
         log.info("delete RoleResource id = {}",ids.toArray());
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        UserEntity entity = userRepository.findUserEntitiesByName(username);
+        return new User("winjean","winjean", Collections.emptyList());
     }
 }

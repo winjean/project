@@ -7,16 +7,14 @@ import com.winjean.utils.DateUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
-import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
-@Aspect
-@Component
+//@Aspect
+//@Component
 @Slf4j
 public class LogAspect {
 //    // ..表示包及子包 该方法代表controller层的所有方法
