@@ -18,9 +18,11 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.Collections;
@@ -44,6 +46,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @PersistenceContext
     protected EntityManager entityManager;
+
+    @Resource
+    private BCryptPasswordEncoder encoder;
 
     @Override
     @Transactional
@@ -135,6 +140,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserEntity entity = userRepository.findUserEntitiesByName(username);
-        return new User("winjean","winjean", Collections.emptyList());
+        return new User("winjean",encoder.encode("winjean"), Collections.emptyList());
     }
 }
