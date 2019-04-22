@@ -2,6 +2,7 @@ package com.winjean.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.winjean.common.BaseEntity;
 import lombok.Data;
 
@@ -14,6 +15,7 @@ import java.util.Date;
 
 @Data
 @Entity(name = "t_user")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserEntity extends BaseEntity {
 
 //    @Id
