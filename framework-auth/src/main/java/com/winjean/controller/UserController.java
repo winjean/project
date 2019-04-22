@@ -4,18 +4,15 @@ import com.alibaba.fastjson.JSONObject;
 import com.winjean.model.entity.UserEntity;
 import com.winjean.model.entity.UserRoleEntity;
 import com.winjean.service.UserService;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
-import java.util.Date;
 import java.util.List;
 
 @RestController
 @RequestMapping("user")
+//@Api()
 public class UserController {
 
     /**
@@ -24,27 +21,10 @@ public class UserController {
     public static final String SIGNING_KEY = "JWTSecret";
 
     @PostMapping("login")
-    public Object login(/*@RequestBody JSONObject json,*/ HttpServletResponse response){
-//        userService.save(entity);
-//        String username = "winjean";
-//        ArrayList<Object> roleList = new ArrayList<>();
-//        String subject = username /*+ "-" + roleList*/;
-//        String token = Jwts.builder()
-//                .setSubject(subject)
-//                .setExpiration(new Date(System.currentTimeMillis() + 365 * 24 * 60 * 60 * 1000)) // 设置过期时间 365 * 24 * 60 * 60秒(这里为了方便测试，所以设置了1年的过期时间，实际项目需要根据自己的情况修改)
-//                .signWith(SignatureAlgorithm.HS512, SIGNING_KEY) //采用什么算法是可以自己选择的，不一定非要采用HS512
-//                .compact();
-
-        String token = Jwts.builder()
-                .setSubject("winjean")
-                .setExpiration(new Date(System.currentTimeMillis() + 30 * 60 * 1000))
-                .signWith(SignatureAlgorithm.HS512, "JWTSecret")
-                .compact();
-
-//        // 登录成功后，返回token到header里面
-        response.addHeader("Authorization", "Bearer " + token);
-//        response.addHeader("Authorization", "Bearer 123456");
-        return "login success " + token;
+//    @ApiOperation(value = "登陆", notes = "登陆成功返回token,测试管理员账号:admin,123456;用户账号：les123,admin")
+//    @ApiImplicitParams({@ApiImplicitParam(name = "Authorization", value = "Authorization token", required = true, dataType = "string", paramType = "header")})
+    public Object login(@RequestBody JSONObject json ){
+        return "login success ";
     }
 
     @Autowired

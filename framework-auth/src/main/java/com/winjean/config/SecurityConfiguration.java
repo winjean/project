@@ -2,12 +2,14 @@ package com.winjean.config;
 
 import com.winjean.filter.JwtAuthenticationFilter;
 import com.winjean.filter.JwtLoginFilter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -23,7 +25,9 @@ import javax.annotation.Resource;
  *
  */
 @Configuration
-@Order(55)
+//@Order(55)
+@EnableWebSecurity
+//@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Resource
@@ -31,6 +35,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Resource
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+	@Autowired
+	private JwtAuthenticationEntryPoint authenticationEntryPoint;
+
+	@Autowired
+	private MyAccessDeniedHandler accessDeniedHandler;
 
 
 	// 该方法是登录的时候会进入
@@ -40,8 +50,30 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
 	@Override
+	protected AuthenticationManager authenticationManager() throws Exception {
+		return super.authenticationManager();
+	}
+
+	@Override
 	public void configure(WebSecurity web) throws Exception {
-		super.configure(web);
+		web.ignoring().antMatchers(
+						"swagger-ui.html",
+						"**/swagger-ui.html",
+						"/favicon.ico",
+						"/**/*.css",
+						"/**/*.js",
+						"/**/*.png",
+						"/**/*.gif",
+						"/swagger-resources/**",
+						"/v2/**",
+						"/**/*.ttf"
+				);
+//
+//		web.ignoring().antMatchers("/v2/api-docs",
+//				"/swagger-resources/configuration/ui",
+//				"/swagger-resources",
+//				"/swagger-resources/configuration/security",
+//				"/swagger-ui.html");
 	}
 
 	@Override
@@ -49,15 +81,32 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         JwtLoginFilter filter = new JwtLoginFilter(authenticationManager());
         filter.setFilterProcessesUrl("/user/login");
 
-		http.cors().and().csrf().disable()
+		http
+				//权限不足处理类
+				.exceptionHandling().accessDeniedHandler(accessDeniedHandler)
+
+				//认证失败处理类
+				.and().exceptionHandling().authenticationEntryPoint(authenticationEntryPoint)
+
+				.and().cors()
+				// 由于使用的是JWT，我们这里不需要csrf
+				.and().csrf().disable()
+
 				.authorizeRequests()
 				.antMatchers("/user/login").permitAll()
 				.anyRequest().authenticated()
-				.and()
-				.addFilter(filter)
+//				.and().formLogin().loginPage("/user/login").permitAll()
+
+				.and().addFilter(filter)
 				.addFilter(new JwtAuthenticationFilter(authenticationManager()))
-				.sessionManagement()
-				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+				// 基于token，所以不需要session
+				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+				// 禁用缓存
+				.and().headers().cacheControl()
+
+
+		;
 	}
 
 	@Bean
