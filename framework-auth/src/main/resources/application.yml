@@ -42,6 +42,13 @@ spring:
       ddl-auto: update
     show-sql: true
 
+jwt:
+  header: Authorization
+  secret: mySecret
+  #token有效期一天
+  expiration: 86400
+  tokenHead: "Bearer "
+
 # actuator config
 # http://localhost:8080/actuator
 management:
